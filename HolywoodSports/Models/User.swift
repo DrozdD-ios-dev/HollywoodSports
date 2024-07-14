@@ -7,32 +7,34 @@
 
 import Foundation
 
-struct User {
-    let gender: Gender
-    let weight: Double
-    let height: Double
-    let points: Int
-    let weightValue: Weight
-    let heightValue: Height
+struct User: Codable {
+    var image: String
+    var gender: Gender
+    var weight: Double
+    var height: Double
+    var points: Int
+    var weightValue: Weight
+    var heightValue: Height
 }
 
-enum Weight {
+enum Weight: Codable {
     case kg
     case lbs
 }
 
-enum Height {
+enum Height: Codable {
     case cm
     case ft
 }
 
 extension User {
     static let mock = User(
-        gender: .male,
-        weight: 80.2,
-        height: 175,
-        points: 0,
+        image: "",
+        gender: .female,
+        weight: 60.0,
+        height: 160,
+        points: 25,
         weightValue: .kg,
-        heightValue: .ft
+        heightValue: .cm
     )
 }

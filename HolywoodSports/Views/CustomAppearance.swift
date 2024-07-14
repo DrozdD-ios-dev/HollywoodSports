@@ -12,12 +12,12 @@ struct CustomAppearance {
         let appearance = UITabBarAppearance()
         
         appearance.stackedLayoutAppearance.selected.titleTextAttributes =
-        [NSAttributedString.Key.foregroundColor: UIColor(named: Colors.purpleDark.rawValue) as Any]
+        [NSAttributedString.Key.foregroundColor: UIColor.purpleDark]
 
         appearance.stackedLayoutAppearance.normal.titlePositionAdjustment = UIOffset(horizontal: 0, vertical: 8)
         
         appearance.stackedLayoutAppearance.normal.iconColor = .white
-        appearance.stackedLayoutAppearance.selected.iconColor = UIColor(named: Colors.purpleDark.rawValue)
+        appearance.stackedLayoutAppearance.selected.iconColor = UIColor.purpleDark
         
         return appearance
     }

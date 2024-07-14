@@ -28,7 +28,7 @@
 		8AAE7C852C41B98B00536B7F /* SportAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AAE7C842C41B98B00536B7F /* SportAssembly.swift */; };
 		8AAE7C872C41B99100536B7F /* SportVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AAE7C862C41B99100536B7F /* SportVC.swift */; };
 		8AAE7C892C41B99D00536B7F /* SportPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AAE7C882C41B99C00536B7F /* SportPresenter.swift */; };
-		8AAE7C8B2C41BA6400536B7F /* BaseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AAE7C8A2C41BA6400536B7F /* BaseButton.swift */; };
+		8AAE7C8B2C41BA6400536B7F /* DefaultButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AAE7C8A2C41BA6400536B7F /* DefaultButton.swift */; };
 		8AAE7C8F2C41C18000536B7F /* Poppins-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8AAE7C8E2C41C18000536B7F /* Poppins-Medium.ttf */; };
 		8AAE7C912C41C1AC00536B7F /* Poppins-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8AAE7C902C41C1AC00536B7F /* Poppins-SemiBold.ttf */; };
 		8AAE7C932C41C1D800536B7F /* Poppins-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8AAE7C922C41C1D800536B7F /* Poppins-Bold.ttf */; };
@@ -39,6 +39,14 @@
 		8AAE7C9D2C41CF9D00536B7F /* Gender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AAE7C9C2C41CF9D00536B7F /* Gender.swift */; };
 		8AAE7C9F2C41D50B00536B7F /* EditButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AAE7C9E2C41D50B00536B7F /* EditButton.swift */; };
 		8AAE7CA12C41D8F100536B7F /* UserDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AAE7CA02C41D8F100536B7F /* UserDataView.swift */; };
+		8AAE7CA32C43B3CA00536B7F /* ProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AAE7CA22C43B3CA00536B7F /* ProgressView.swift */; };
+		8AAE7CA52C43D57A00536B7F /* StringProtocol+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AAE7CA42C43D57A00536B7F /* StringProtocol+Ext.swift */; };
+		8AAE7CA82C43DF5B00536B7F /* EditPhotoAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AAE7CA72C43DF5B00536B7F /* EditPhotoAssembly.swift */; };
+		8AAE7CAA2C43DF6200536B7F /* EditPhotoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AAE7CA92C43DF6200536B7F /* EditPhotoVC.swift */; };
+		8AAE7CAC2C43DF6A00536B7F /* EditPhotoPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AAE7CAB2C43DF6A00536B7F /* EditPhotoPresenter.swift */; };
+		8AAE7CAE2C43E93200536B7F /* CircularBackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AAE7CAD2C43E93200536B7F /* CircularBackButton.swift */; };
+		8AAE7CB12C43F8CF00536B7F /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AAE7CB02C43F8CF00536B7F /* UserService.swift */; };
+		8AAE7CB32C44027F00536B7F /* String+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AAE7CB22C44027F00536B7F /* String+Ext.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -62,7 +70,7 @@
 		8AAE7C842C41B98B00536B7F /* SportAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SportAssembly.swift; sourceTree = "<group>"; };
 		8AAE7C862C41B99100536B7F /* SportVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SportVC.swift; sourceTree = "<group>"; };
 		8AAE7C882C41B99C00536B7F /* SportPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SportPresenter.swift; sourceTree = "<group>"; };
-		8AAE7C8A2C41BA6400536B7F /* BaseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseButton.swift; sourceTree = "<group>"; };
+		8AAE7C8A2C41BA6400536B7F /* DefaultButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultButton.swift; sourceTree = "<group>"; };
 		8AAE7C8E2C41C18000536B7F /* Poppins-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Medium.ttf"; sourceTree = "<group>"; };
 		8AAE7C902C41C1AC00536B7F /* Poppins-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-SemiBold.ttf"; sourceTree = "<group>"; };
 		8AAE7C922C41C1D800536B7F /* Poppins-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Bold.ttf"; sourceTree = "<group>"; };
@@ -73,6 +81,14 @@
 		8AAE7C9C2C41CF9D00536B7F /* Gender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gender.swift; sourceTree = "<group>"; };
 		8AAE7C9E2C41D50B00536B7F /* EditButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditButton.swift; sourceTree = "<group>"; };
 		8AAE7CA02C41D8F100536B7F /* UserDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataView.swift; sourceTree = "<group>"; };
+		8AAE7CA22C43B3CA00536B7F /* ProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ProgressView.swift; path = "../../../../.Trash/HolywoodSports orig/HolywoodSports/Views/ProgressView.swift"; sourceTree = "<group>"; };
+		8AAE7CA42C43D57A00536B7F /* StringProtocol+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StringProtocol+Ext.swift"; sourceTree = "<group>"; };
+		8AAE7CA72C43DF5B00536B7F /* EditPhotoAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPhotoAssembly.swift; sourceTree = "<group>"; };
+		8AAE7CA92C43DF6200536B7F /* EditPhotoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPhotoVC.swift; sourceTree = "<group>"; };
+		8AAE7CAB2C43DF6A00536B7F /* EditPhotoPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPhotoPresenter.swift; sourceTree = "<group>"; };
+		8AAE7CAD2C43E93200536B7F /* CircularBackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularBackButton.swift; sourceTree = "<group>"; };
+		8AAE7CB02C43F8CF00536B7F /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
+		8AAE7CB22C44027F00536B7F /* String+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Ext.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,6 +144,7 @@
 				8AAE7C612C4197E600536B7F /* Home */,
 				8AAE7C622C4197EB00536B7F /* Sport */,
 				8AAE7C632C4197F300536B7F /* Profile */,
+				8AAE7CA62C43DF2300536B7F /* EditPhoto */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -144,6 +161,7 @@
 		8AAE7C5B2C41954D00536B7F /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				8AAE7CB02C43F8CF00536B7F /* UserService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -151,6 +169,10 @@
 		8AAE7C5C2C41955500536B7F /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				8AAE7C782C419C1200536B7F /* Colors.swift */,
+				8AAE7C982C41C31A00536B7F /* Fonts.swift */,
+				8AAE7CA42C43D57A00536B7F /* StringProtocol+Ext.swift */,
+				8AAE7CB22C44027F00536B7F /* String+Ext.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -158,12 +180,12 @@
 		8AAE7C5D2C41956000536B7F /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				8AAE7CAF2C43EB3C00536B7F /* Buttons */,
 				8AAE7C6B2C419A6300536B7F /* ViewControllers */,
 				8AAE7C6E2C419B3D00536B7F /* TabBarItem.swift */,
 				8AAE7C7A2C41A49500536B7F /* CustomAppearance.swift */,
-				8AAE7C8A2C41BA6400536B7F /* BaseButton.swift */,
-				8AAE7C9E2C41D50B00536B7F /* EditButton.swift */,
 				8AAE7CA02C41D8F100536B7F /* UserDataView.swift */,
+				8AAE7CA22C43B3CA00536B7F /* ProgressView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -171,8 +193,6 @@
 		8AAE7C5E2C41956600536B7F /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				8AAE7C782C419C1200536B7F /* Colors.swift */,
-				8AAE7C982C41C31A00536B7F /* Fonts.swift */,
 				8AAE7C9A2C41C45A00536B7F /* User.swift */,
 				8AAE7C9C2C41CF9D00536B7F /* Gender.swift */,
 			);
@@ -252,6 +272,26 @@
 				8AAE7C8E2C41C18000536B7F /* Poppins-Medium.ttf */,
 			);
 			path = Fonts;
+			sourceTree = "<group>";
+		};
+		8AAE7CA62C43DF2300536B7F /* EditPhoto */ = {
+			isa = PBXGroup;
+			children = (
+				8AAE7CA72C43DF5B00536B7F /* EditPhotoAssembly.swift */,
+				8AAE7CA92C43DF6200536B7F /* EditPhotoVC.swift */,
+				8AAE7CAB2C43DF6A00536B7F /* EditPhotoPresenter.swift */,
+			);
+			path = EditPhoto;
+			sourceTree = "<group>";
+		};
+		8AAE7CAF2C43EB3C00536B7F /* Buttons */ = {
+			isa = PBXGroup;
+			children = (
+				8AAE7C9E2C41D50B00536B7F /* EditButton.swift */,
+				8AAE7C8A2C41BA6400536B7F /* DefaultButton.swift */,
+				8AAE7CAD2C43E93200536B7F /* CircularBackButton.swift */,
+			);
+			path = Buttons;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -338,27 +378,35 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8AAE7CA52C43D57A00536B7F /* StringProtocol+Ext.swift in Sources */,
 				8AAE7C852C41B98B00536B7F /* SportAssembly.swift in Sources */,
 				8AAE7C812C41B87900536B7F /* ProfileVC.swift in Sources */,
 				8AAE7C4A2C4193A100536B7F /* TabBarController.swift in Sources */,
 				8AAE7C792C419C1200536B7F /* Colors.swift in Sources */,
+				8AAE7CAE2C43E93200536B7F /* CircularBackButton.swift in Sources */,
 				8AAE7C662C41996A00536B7F /* HomeVC.swift in Sources */,
 				8AAE7C7B2C41A49500536B7F /* CustomAppearance.swift in Sources */,
 				8AAE7C872C41B99100536B7F /* SportVC.swift in Sources */,
 				8AAE7C6F2C419B3D00536B7F /* TabBarItem.swift in Sources */,
 				8AAE7C6D2C419A7100536B7F /* BaseController.swift in Sources */,
 				8AAE7C682C41999300536B7F /* HomeAssembly.swift in Sources */,
+				8AAE7CAA2C43DF6200536B7F /* EditPhotoVC.swift in Sources */,
+				8AAE7CAC2C43DF6A00536B7F /* EditPhotoPresenter.swift in Sources */,
 				8AAE7C6A2C4199AA00536B7F /* HomePresenter.swift in Sources */,
 				8AAE7C462C4193A100536B7F /* AppDelegate.swift in Sources */,
+				8AAE7CB12C43F8CF00536B7F /* UserService.swift in Sources */,
 				8AAE7C7F2C41B87200536B7F /* ProfileAssembly.swift in Sources */,
+				8AAE7CB32C44027F00536B7F /* String+Ext.swift in Sources */,
 				8AAE7C482C4193A100536B7F /* SceneDelegate.swift in Sources */,
 				8AAE7C832C41B88000536B7F /* ProfilePresenter.swift in Sources */,
 				8AAE7CA12C41D8F100536B7F /* UserDataView.swift in Sources */,
-				8AAE7C8B2C41BA6400536B7F /* BaseButton.swift in Sources */,
+				8AAE7C8B2C41BA6400536B7F /* DefaultButton.swift in Sources */,
 				8AAE7C9F2C41D50B00536B7F /* EditButton.swift in Sources */,
+				8AAE7CA82C43DF5B00536B7F /* EditPhotoAssembly.swift in Sources */,
 				8AAE7C9D2C41CF9D00536B7F /* Gender.swift in Sources */,
 				8AAE7C992C41C31A00536B7F /* Fonts.swift in Sources */,
 				8AAE7C892C41B99D00536B7F /* SportPresenter.swift in Sources */,
+				8AAE7CA32C43B3CA00536B7F /* ProgressView.swift in Sources */,
 				8AAE7C9B2C41C45A00536B7F /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -18,7 +18,7 @@ final class HomeVC: BaseController {
     private let characterLabel: UILabel = {
         let label = UILabel()
         label.text = "Characters"
-        label.font = UIFont(name: Fonts.poppins800.rawValue, size: 34)
+        label.font = CustomFont.font(type: .poppins800, size: 34)
         return label
     }()
     
@@ -52,7 +52,7 @@ final class HomeVC: BaseController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor(named: Colors.background.rawValue)
+        view.backgroundColor = .background
         addSubviews()
         makeConstraints()
         

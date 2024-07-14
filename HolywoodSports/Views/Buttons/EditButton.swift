@@ -21,7 +21,7 @@ final class EditButton: UIView {
     private let editLabel: UILabel = {
         let label = UILabel()
         label.text = "Edit photo"
-        label.font = UIFont(name: Fonts.poppins500.rawValue, size: 16)
+        label.font = CustomFont.font(type: .poppins500, size: 16)
         label.isUserInteractionEnabled = true
         return label
     }()
@@ -40,7 +40,7 @@ final class EditButton: UIView {
         addSubviews()
         makeConstraints()
         backgroundColor = .clear
-        layer.borderColor = UIColor(named: Colors.purpleDark.rawValue)?.cgColor
+        layer.borderColor = UIColor.purpleDark.cgColor
         layer.borderWidth = 2
         layer.cornerRadius = 18
     }

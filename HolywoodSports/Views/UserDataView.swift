@@ -14,15 +14,15 @@ final class UserDataView: UIView {
     private let leftLabel: UILabel = {
         let label = UILabel()
         label.text = "Change"
-        label.font = UIFont(name: Fonts.poppins600.rawValue, size: 16)
-        label.textColor = UIColor(named: Colors.gray153.rawValue)
+        label.font = CustomFont.font(type: .poppins600, size: 16)
+        label.textColor = .gray153
         return label
     }()
     
     private let rightLabel: UILabel = {
         let label = UILabel()
         label.text = "Male"
-        label.font = UIFont(name: Fonts.poppins600.rawValue, size: 16)
+        label.font = CustomFont.font(type: .poppins600, size: 16)
         return label
     }()
     
@@ -34,7 +34,7 @@ final class UserDataView: UIView {
         addSubviews()
         makeConstraints()
         leftLabel.text = title
-        backgroundColor = UIColor(named: Colors.gray51.rawValue)
+        backgroundColor = .gray51
         layer.cornerRadius = 12
     }
     

@@ -50,15 +50,15 @@ final class TabBarController: UITabBarController {
         
         viewControllers = [
             UINavigationController(rootViewController: homeVC),
-            sportVC,
-            profileVC,
+            UINavigationController(rootViewController: sportVC),
+            UINavigationController(rootViewController: profileVC),
         ]
     }
     
     private func setupAppearance() {
         let appearance = CustomAppearance.settingsAppearance()
         tabBar.standardAppearance = appearance
-        tabBar.backgroundColor =  UIColor(named: Colors.background.rawValue)
+        tabBar.backgroundColor = .background
         self.additionalSafeAreaInsets.bottom = 5
     }
 }

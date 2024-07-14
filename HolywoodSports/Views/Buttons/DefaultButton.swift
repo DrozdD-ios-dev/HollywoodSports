@@ -1,5 +1,5 @@
 //
-//  BaseButton.swift
+//  DefaultButton.swift
 //  HolywoodSports
 //
 //  Created by Дрозд Денис on 12.07.2024.
@@ -7,15 +7,25 @@
 
 import UIKit
 
-final class LilacButton: UIButton {
-    convenience init(text: String, color: UIColor, tint: UIColor) {
+final class DefaultButton: UIButton {
+    convenience init(text: String) {
         self.init(type: .system)
         
         initEvent()
-        backgroundColor = color
-        tintColor = tint
-        let font = UIFont.systemFont(ofSize: 10)
-        let attributes: [NSAttributedString.Key: Any] = [.font: font]
+        backgroundColor = .purpleDark
+        tintColor = .white
+        let font = CustomFont.font(type: .poppins700, size: 16)
+        
+        let shadow = NSShadow()
+             shadow.shadowColor = UIColor.black
+             shadow.shadowOffset = CGSize(width: 0, height: 2)
+             shadow.shadowBlurRadius = 1
+             
+             let attributes: [NSAttributedString.Key: Any] = [
+                 .font: font as Any,
+                 .shadow: shadow
+             ]
+        
         let attributedString = NSAttributedString(string: text, attributes: attributes)
         setAttributedTitle(attributedString, for: .normal)
         layer.cornerRadius = 28

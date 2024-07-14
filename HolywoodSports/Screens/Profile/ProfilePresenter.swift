@@ -10,9 +10,12 @@ import UIKit
 // MARK: - Protocol
 
 protocol ProfileInput {
-    func viewDidLoad() async
+    func viewDidLoad()
+    func updateUserData()
     
     var rows: [String] { get }
+    var user: User { get set }
+    var userViews: [UserDataView] { get set }
 }
 
 final class ProfilePresenter: ProfileInput {
@@ -21,15 +24,23 @@ final class ProfilePresenter: ProfileInput {
     
     weak var view: ProfileOutput?
     var rows = ["Change your gender", "Change your weigth", "Change your height"]
+    var user = UserService.loadUser(key: "user") ?? User.mock
+    var userViews = [UserDataView]()
     
     
     
     // MARK: - Public Functions
     
-    @MainActor
-    func viewDidLoad() async {
-        await getData()
-//        view?.reload()
+    func viewDidLoad() {
+        updateUserData()
+    }
+    
+    func updateUserData() {
+        user = UserService.loadUser(key: "user") ?? User.mock
+        userViews[0].configure(with: user.gender.rawValue.firstUppercased)
+        userViews[1].configure(with: "\(user.weight) \(user.weightValue)")
+        userViews[2].configure(with: "\(user.height) \(user.heightValue)")
+        view?.updateImage()
     }
 }
 
@@ -37,12 +48,5 @@ final class ProfilePresenter: ProfileInput {
 
 private extension ProfilePresenter {
     
-    @MainActor
-    func getData() async {
-//        do {
-//            characters = try await NetworkService.fetch()?.results
-//        } catch {
-//            print("Failed to fetch: \(error)")
-//        }
-    }
+  
 }
