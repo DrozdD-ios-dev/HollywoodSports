@@ -17,12 +17,12 @@ struct User: Codable {
     var heightValue: Height
 }
 
-enum Weight: Codable {
+enum Weight: String, Codable, CaseIterable {
     case kg
     case lbs
 }
 
-enum Height: Codable {
+enum Height: String, Codable, CaseIterable {
     case cm
     case ft
 }

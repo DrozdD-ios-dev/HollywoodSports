@@ -64,6 +64,7 @@ final class ProfileVC: BaseController {
         makeConstraints()
         createViews()
         presenter.viewDidLoad()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -80,6 +81,9 @@ private extension ProfileVC {
     func createViews() {
         for index in 0...2 {
             let view = UserDataView(title: presenter.rows[index])
+            view.tag = index
+            let gest = UITapGestureRecognizer(target: self, action: #selector(changeValue(_:)))
+            view.addGestureRecognizer(gest)
             presenter.userViews.append(view)
             verticalStack.addArrangedSubview(view)
         }
@@ -90,6 +94,21 @@ private extension ProfileVC {
 
 private extension ProfileVC {
     
+    @objc func changeValue(_ sender: UITapGestureRecognizer) {
+        switch sender.view?.tag {
+        case 0:
+            let vc = GenderAssembly.build(flag: false)
+            navigationController?.present(vc, animated: true)
+        case 1:
+            let vc = WeightAssembly.build(flag: false)
+            navigationController?.present(vc, animated: true)
+        case 2:
+            let vc = HeightAssembly.build(flag: false)
+            navigationController?.present(vc, animated: true)
+        default:
+            break
+        }
+    }
     @objc func editButtonTapped() {
         let vc = EditPhotoAssembly.build()
         navigationController?.pushViewController(vc, animated: true)
@@ -146,7 +165,7 @@ private extension ProfileVC {
         saveChangesButton.snp.makeConstraints { make in
             make.bottom.equalTo(view.safeAreaLayoutGuide).inset(20)
             make.horizontalEdges.equalToSuperview().inset(16)
-            make.height.equalTo(56)
+            make.height.equalTo(saveChangesButton.snp.width).multipliedBy(0.155)
         }
     }
 }

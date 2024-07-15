@@ -21,6 +21,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     private func openVC() {
         let window = UIWindow(frame: UIScreen.main.bounds)
+        let vc = OnboardingAssembly.build()
+        let navController = UINavigationController(rootViewController: vc)
         window.rootViewController = TabBarController()
         window.overrideUserInterfaceStyle = .dark
         window.makeKeyAndVisible()
