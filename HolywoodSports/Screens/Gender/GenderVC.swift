@@ -123,7 +123,6 @@ private extension GenderVC {
             let screen = UIScreen.main.bounds.height
             make.top.equalToSuperview().inset(screen > 851 ? 241 : 150)
             make.horizontalEdges.equalToSuperview()
-            print(UIScreen.main.bounds.height)
         }
         
         buttons[0].snp.makeConstraints { make in

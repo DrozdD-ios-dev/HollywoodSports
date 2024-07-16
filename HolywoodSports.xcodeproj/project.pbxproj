@@ -58,13 +58,9 @@
 		8AAE7CC72C44170300536B7F /* OnboardingPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AAE7CC62C44170300536B7F /* OnboardingPresenter.swift */; };
 		8AAE7CCB2C44582300536B7F /* FirstCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AAE7CCA2C44582300536B7F /* FirstCell.swift */; };
 		8AAE7CCD2C44582C00536B7F /* SecondCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AAE7CCC2C44582C00536B7F /* SecondCell.swift */; };
-		8AAE7CCF2C44583500536B7F /* GenderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AAE7CCE2C44583500536B7F /* GenderCell.swift */; };
-		8AAE7CD12C44583C00536B7F /* WeightCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AAE7CD02C44583C00536B7F /* WeightCell.swift */; };
-		8AAE7CD32C44584400536B7F /* HeightCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AAE7CD22C44584400536B7F /* HeightCell.swift */; };
-		8AAE7CD52C44584D00536B7F /* PhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AAE7CD42C44584D00536B7F /* PhotoCell.swift */; };
-		8AAE7CD92C451C7700536B7F /* LeftWeightCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AAE7CD82C451C7700536B7F /* LeftWeightCell.swift */; };
-		8AAE7CDB2C4522E100536B7F /* CenterWeightCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AAE7CDA2C4522E100536B7F /* CenterWeightCell.swift */; };
-		8AAE7CDD2C4522FA00536B7F /* RightWeightCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AAE7CDC2C4522FA00536B7F /* RightWeightCell.swift */; };
+		8AAE7CD92C451C7700536B7F /* LeftPickerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AAE7CD82C451C7700536B7F /* LeftPickerCell.swift */; };
+		8AAE7CDB2C4522E100536B7F /* CenterPickerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AAE7CDA2C4522E100536B7F /* CenterPickerCell.swift */; };
+		8AAE7CDD2C4522FA00536B7F /* RightPickerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AAE7CDC2C4522FA00536B7F /* RightPickerCell.swift */; };
 		8AAE7CE22C45CDDC00536B7F /* GenderAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AAE7CE12C45CDDC00536B7F /* GenderAssembly.swift */; };
 		8AAE7CE42C45CDE500536B7F /* GenderVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AAE7CE32C45CDE500536B7F /* GenderVC.swift */; };
 		8AAE7CE62C45CDEE00536B7F /* GenderPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AAE7CE52C45CDEE00536B7F /* GenderPresenter.swift */; };
@@ -74,6 +70,7 @@
 		8AAE7CEE2C45CE1800536B7F /* HeightAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AAE7CED2C45CE1800536B7F /* HeightAssembly.swift */; };
 		8AAE7CF02C45CE1D00536B7F /* HeightVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AAE7CEF2C45CE1D00536B7F /* HeightVC.swift */; };
 		8AAE7CF22C45CE2400536B7F /* HeightPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AAE7CF12C45CE2400536B7F /* HeightPresenter.swift */; };
+		8AAE7CF52C4688AB00536B7F /* TrashButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AAE7CF42C4688AB00536B7F /* TrashButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -127,13 +124,9 @@
 		8AAE7CC62C44170300536B7F /* OnboardingPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPresenter.swift; sourceTree = "<group>"; };
 		8AAE7CCA2C44582300536B7F /* FirstCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstCell.swift; sourceTree = "<group>"; };
 		8AAE7CCC2C44582C00536B7F /* SecondCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondCell.swift; sourceTree = "<group>"; };
-		8AAE7CCE2C44583500536B7F /* GenderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenderCell.swift; sourceTree = "<group>"; };
-		8AAE7CD02C44583C00536B7F /* WeightCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightCell.swift; sourceTree = "<group>"; };
-		8AAE7CD22C44584400536B7F /* HeightCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeightCell.swift; sourceTree = "<group>"; };
-		8AAE7CD42C44584D00536B7F /* PhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCell.swift; sourceTree = "<group>"; };
-		8AAE7CD82C451C7700536B7F /* LeftWeightCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftWeightCell.swift; sourceTree = "<group>"; };
-		8AAE7CDA2C4522E100536B7F /* CenterWeightCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CenterWeightCell.swift; sourceTree = "<group>"; };
-		8AAE7CDC2C4522FA00536B7F /* RightWeightCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RightWeightCell.swift; sourceTree = "<group>"; };
+		8AAE7CD82C451C7700536B7F /* LeftPickerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftPickerCell.swift; sourceTree = "<group>"; };
+		8AAE7CDA2C4522E100536B7F /* CenterPickerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CenterPickerCell.swift; sourceTree = "<group>"; };
+		8AAE7CDC2C4522FA00536B7F /* RightPickerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RightPickerCell.swift; sourceTree = "<group>"; };
 		8AAE7CE12C45CDDC00536B7F /* GenderAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenderAssembly.swift; sourceTree = "<group>"; };
 		8AAE7CE32C45CDE500536B7F /* GenderVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenderVC.swift; sourceTree = "<group>"; };
 		8AAE7CE52C45CDEE00536B7F /* GenderPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenderPresenter.swift; sourceTree = "<group>"; };
@@ -143,6 +136,7 @@
 		8AAE7CED2C45CE1800536B7F /* HeightAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeightAssembly.swift; sourceTree = "<group>"; };
 		8AAE7CEF2C45CE1D00536B7F /* HeightVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeightVC.swift; sourceTree = "<group>"; };
 		8AAE7CF12C45CE2400536B7F /* HeightPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeightPresenter.swift; sourceTree = "<group>"; };
+		8AAE7CF42C4688AB00536B7F /* TrashButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrashButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -353,6 +347,7 @@
 				8AAE7C9E2C41D50B00536B7F /* EditButton.swift */,
 				8AAE7C8A2C41BA6400536B7F /* DefaultButton.swift */,
 				8AAE7CAD2C43E93200536B7F /* CircularBackButton.swift */,
+				8AAE7CF42C4688AB00536B7F /* TrashButton.swift */,
 			);
 			path = Buttons;
 			sourceTree = "<group>";
@@ -380,33 +375,10 @@
 		8AAE7CC82C44580A00536B7F /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				8AAE7CD72C451C6300536B7F /* HeightCells */,
-				8AAE7CD62C451C5B00536B7F /* WeightCells */,
 				8AAE7CCA2C44582300536B7F /* FirstCell.swift */,
 				8AAE7CCC2C44582C00536B7F /* SecondCell.swift */,
-				8AAE7CCE2C44583500536B7F /* GenderCell.swift */,
-				8AAE7CD02C44583C00536B7F /* WeightCell.swift */,
-				8AAE7CD22C44584400536B7F /* HeightCell.swift */,
-				8AAE7CD42C44584D00536B7F /* PhotoCell.swift */,
 			);
 			path = Cells;
-			sourceTree = "<group>";
-		};
-		8AAE7CD62C451C5B00536B7F /* WeightCells */ = {
-			isa = PBXGroup;
-			children = (
-				8AAE7CD82C451C7700536B7F /* LeftWeightCell.swift */,
-				8AAE7CDA2C4522E100536B7F /* CenterWeightCell.swift */,
-				8AAE7CDC2C4522FA00536B7F /* RightWeightCell.swift */,
-			);
-			path = WeightCells;
-			sourceTree = "<group>";
-		};
-		8AAE7CD72C451C6300536B7F /* HeightCells */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = HeightCells;
 			sourceTree = "<group>";
 		};
 		8AAE7CDE2C45CD8300536B7F /* Gender */ = {
@@ -422,6 +394,7 @@
 		8AAE7CDF2C45CD8D00536B7F /* Weight */ = {
 			isa = PBXGroup;
 			children = (
+				8AAE7CF32C4682AB00536B7F /* Cells */,
 				8AAE7CE72C45CDFD00536B7F /* WeightAssembly.swift */,
 				8AAE7CE92C45CE0300536B7F /* WeightVC.swift */,
 				8AAE7CEB2C45CE0B00536B7F /* WeightPresenter.swift */,
@@ -437,6 +410,16 @@
 				8AAE7CF12C45CE2400536B7F /* HeightPresenter.swift */,
 			);
 			path = Height;
+			sourceTree = "<group>";
+		};
+		8AAE7CF32C4682AB00536B7F /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				8AAE7CD82C451C7700536B7F /* LeftPickerCell.swift */,
+				8AAE7CDA2C4522E100536B7F /* CenterPickerCell.swift */,
+				8AAE7CDC2C4522FA00536B7F /* RightPickerCell.swift */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -526,21 +509,18 @@
 				8AAE7CEC2C45CE0B00536B7F /* WeightPresenter.swift in Sources */,
 				8AAE7CF22C45CE2400536B7F /* HeightPresenter.swift in Sources */,
 				8AAE7CA52C43D57A00536B7F /* StringProtocol+Ext.swift in Sources */,
-				8AAE7CD52C44584D00536B7F /* PhotoCell.swift in Sources */,
 				8AAE7C852C41B98B00536B7F /* SportAssembly.swift in Sources */,
 				8AAE7C812C41B87900536B7F /* ProfileVC.swift in Sources */,
 				8AAE7C4A2C4193A100536B7F /* TabBarController.swift in Sources */,
 				8AAE7CB72C440E7800536B7F /* StartedAssembly.swift in Sources */,
-				8AAE7CDD2C4522FA00536B7F /* RightWeightCell.swift in Sources */,
+				8AAE7CDD2C4522FA00536B7F /* RightPickerCell.swift in Sources */,
 				8AAE7C792C419C1200536B7F /* Colors.swift in Sources */,
 				8AAE7CAE2C43E93200536B7F /* CircularBackButton.swift in Sources */,
 				8AAE7CC52C4416FC00536B7F /* OnboardingVC.swift in Sources */,
 				8AAE7C662C41996A00536B7F /* HomeVC.swift in Sources */,
 				8AAE7CC12C440EC800536B7F /* SecondPresenter.swift in Sources */,
 				8AAE7CC32C4416F700536B7F /* OnboardingAssembly.swift in Sources */,
-				8AAE7CD12C44583C00536B7F /* WeightCell.swift in Sources */,
 				8AAE7C7B2C41A49500536B7F /* CustomAppearance.swift in Sources */,
-				8AAE7CCF2C44583500536B7F /* GenderCell.swift in Sources */,
 				8AAE7CE22C45CDDC00536B7F /* GenderAssembly.swift in Sources */,
 				8AAE7CE42C45CDE500536B7F /* GenderVC.swift in Sources */,
 				8AAE7C872C41B99100536B7F /* SportVC.swift in Sources */,
@@ -560,8 +540,7 @@
 				8AAE7CB32C44027F00536B7F /* String+Ext.swift in Sources */,
 				8AAE7C482C4193A100536B7F /* SceneDelegate.swift in Sources */,
 				8AAE7CF02C45CE1D00536B7F /* HeightVC.swift in Sources */,
-				8AAE7CD32C44584400536B7F /* HeightCell.swift in Sources */,
-				8AAE7CDB2C4522E100536B7F /* CenterWeightCell.swift in Sources */,
+				8AAE7CDB2C4522E100536B7F /* CenterPickerCell.swift in Sources */,
 				8AAE7CCD2C44582C00536B7F /* SecondCell.swift in Sources */,
 				8AAE7C832C41B88000536B7F /* ProfilePresenter.swift in Sources */,
 				8AAE7CA12C41D8F100536B7F /* UserDataView.swift in Sources */,
@@ -575,8 +554,9 @@
 				8AAE7CCB2C44582300536B7F /* FirstCell.swift in Sources */,
 				8AAE7CBB2C440E9500536B7F /* StartedPresenter.swift in Sources */,
 				8AAE7C992C41C31A00536B7F /* Fonts.swift in Sources */,
-				8AAE7CD92C451C7700536B7F /* LeftWeightCell.swift in Sources */,
+				8AAE7CD92C451C7700536B7F /* LeftPickerCell.swift in Sources */,
 				8AAE7C892C41B99D00536B7F /* SportPresenter.swift in Sources */,
+				8AAE7CF52C4688AB00536B7F /* TrashButton.swift in Sources */,
 				8AAE7CA32C43B3CA00536B7F /* ProgressView.swift in Sources */,
 				8AAE7C9B2C41C45A00536B7F /* User.swift in Sources */,
 				8AAE7CE82C45CDFD00536B7F /* WeightAssembly.swift in Sources */,

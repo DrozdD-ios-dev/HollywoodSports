@@ -18,7 +18,6 @@ final class WeightVC: BaseController {
     private lazy var nextButton: DefaultButton = {
         let button = DefaultButton(text: "Next")
         button.addAction(UIAction { _ in self.nextButtonTapped() }, for: .touchUpInside)
-        buttons.append(button)
         return button
     }()
     
@@ -53,7 +52,7 @@ final class WeightVC: BaseController {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.showsVerticalScrollIndicator = false
         collectionView.isUserInteractionEnabled = true
-        collectionView.register(LeftWeightCell.self, forCellWithReuseIdentifier: LeftWeightCell.identifier)
+        collectionView.register(LeftPickerCell.self, forCellWithReuseIdentifier: LeftPickerCell.identifier)
         collectionView.backgroundColor = .clear
         collectionView.dataSource = self
         collectionView.delegate = self
@@ -69,7 +68,7 @@ final class WeightVC: BaseController {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.showsVerticalScrollIndicator = false
         collectionView.isUserInteractionEnabled = true
-        collectionView.register(CenterWeightCell.self, forCellWithReuseIdentifier: CenterWeightCell.identifier)
+        collectionView.register(CenterPickerCell.self, forCellWithReuseIdentifier: CenterPickerCell.identifier)
         collectionView.backgroundColor = .clear
         collectionView.dataSource = self
         collectionView.delegate = self
@@ -84,7 +83,7 @@ final class WeightVC: BaseController {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.showsVerticalScrollIndicator = false
         collectionView.isUserInteractionEnabled = true
-        collectionView.register(RightWeightCell.self, forCellWithReuseIdentifier: RightWeightCell.identifier)
+        collectionView.register(RightPickerCell.self, forCellWithReuseIdentifier: RightPickerCell.identifier)
         collectionView.backgroundColor = .clear
         collectionView.dataSource = self
         collectionView.delegate = self
@@ -119,30 +118,7 @@ final class WeightVC: BaseController {
     // MARK: - Properties
     
     private var presenter: WeightInput
-    
-    var buttons = [DefaultButton]()
-    var flag: Bool
-    var user = UserService.loadUser(key: "user") ?? User.mock
-    var action: (() -> Void)?
-    let leftValueKg = Array(30...120)
-    var leftValueResult: [Int] {
-        return weightIndex == .kg ? leftValueKg : leftValueKg.map { Int((Double($0) * 2.205 * 10).rounded() / 10) }
-    }
-    
-    var centerValueKg = Array(0...9)
-    var centerValueResult: [Int] {
-        return weightIndex == .kg ? centerValueKg : centerValueKg.map { Int((Double($0) * 2.205 * 10).rounded() / 10) }
-    }
-    
-    let weightElements = ["kg", "lbs", ""]
-    
-    var weightIndex = Weight.kg
-    var result: (Int, Int) = (50, 0) {
-        didSet {
-            #warning("Изменить! Лагает коллекция")
-//            saveValue()
-        }
-    }
+    private var flag: Bool
     
     // MARK: - Init
     
@@ -179,7 +155,12 @@ private extension WeightVC {
             navigationController?.setNavigationBarHidden(false, animated: true)
         }
     }
-  
+    
+    func saveValue() {
+        presenter.user.weight = Double(presenter.result.0) + (Double(presenter.result.1) / 10)
+        presenter.user.weightValue = presenter.weightIndex
+        UserService.saveUser(user: presenter.user, key: "user")
+    }
 }
 
 // MARK: - Actions
@@ -188,10 +169,11 @@ extension WeightVC {
     
     func nextButtonTapped() {
         if flag {
+            saveValue()
             let vc = HeightAssembly.build(flag: true)
             navigationController?.pushViewController(vc, animated: true)
         } else {
-            #warning("Save user")
+            saveValue()
             dismiss(animated: true)
         }
     }
@@ -277,11 +259,11 @@ extension WeightVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSour
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch collectionView {
         case leftVerticalCollectionView:
-            return leftValueKg.count
+            return presenter.leftValueKg.count
         case centerVerticalCollectionView:
-            return centerValueKg.count
+            return presenter.centerValueKg.count
         case rightVerticalCollectionView:
-            return weightElements.count
+            return presenter.weightElements.count
         default:
             return 0
         }
@@ -291,18 +273,18 @@ extension WeightVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSour
         
         switch collectionView {
         case leftVerticalCollectionView:
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: LeftWeightCell.identifier, for: indexPath) as? LeftWeightCell else { return UICollectionViewCell() }
-            cell.configure(text: "\(leftValueResult[indexPath.item])")
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: LeftPickerCell.identifier, for: indexPath) as? LeftPickerCell else { return UICollectionViewCell() }
+            cell.configure(text: "\(presenter.leftValueResult[indexPath.item])")
             return cell
             
         case centerVerticalCollectionView:
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CenterWeightCell.identifier, for: indexPath) as? CenterWeightCell else { return UICollectionViewCell() }
-            cell.configure(text: "\(centerValueResult[indexPath.item])")
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CenterPickerCell.identifier, for: indexPath) as? CenterPickerCell else { return UICollectionViewCell() }
+            cell.configure(text: "\(presenter.centerValueResult[indexPath.item])")
             return cell
             
         case rightVerticalCollectionView:
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RightWeightCell.identifier, for: indexPath) as? RightWeightCell else { return UICollectionViewCell() }
-            cell.configure(text: "\(weightElements[indexPath.item])")
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RightPickerCell.identifier, for: indexPath) as? RightPickerCell else { return UICollectionViewCell() }
+            cell.configure(text: "\(presenter.weightElements[indexPath.item])")
             return cell
             
         default:
@@ -317,27 +299,37 @@ extension WeightVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSour
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         switch scrollView {
         case leftVerticalCollectionView:
-            if let leftCellIndexPath = getCellIndexPath(collectionView: leftVerticalCollectionView) {
-                result.0 = leftValueResult[leftCellIndexPath.item]
-            }
+            getLeftResult(collectionView: leftVerticalCollectionView, resultValue: presenter.leftValueResult)
             
         case centerVerticalCollectionView:
-            if let centerCellIndexPath = getCellIndexPath(collectionView: centerVerticalCollectionView) {
-                result.1 = centerValueResult[centerCellIndexPath.item]
-            }
+            getCenterResult(collectionView: centerVerticalCollectionView, resultValue: presenter.centerValueResult)
             
         case rightVerticalCollectionView:
             if let rightCellIndexPath = getCellIndexPath(collectionView: rightVerticalCollectionView) {
                 if rightCellIndexPath.item == 1 {
-                    weightIndex = .lbs
+                    presenter.weightIndex = .lbs
                 } else {
-                    weightIndex = .kg
+                    presenter.weightIndex = .kg
                 }
+                getLeftResult(collectionView: leftVerticalCollectionView, resultValue: presenter.leftValueResult)
+                getCenterResult(collectionView: centerVerticalCollectionView, resultValue: presenter.centerValueResult)
                 leftVerticalCollectionView.reloadData()
                 centerVerticalCollectionView.reloadData()
             }
         default:
             break
+        }
+    }
+    
+    private func getLeftResult(collectionView: UICollectionView, resultValue: [Int]) {
+        if let leftCellIndexPath = getCellIndexPath(collectionView: collectionView) {
+            presenter.result.0 = resultValue[leftCellIndexPath.item]
+        }
+    }
+    
+    private func getCenterResult(collectionView: UICollectionView, resultValue: [Int]) {
+        if let leftCellIndexPath = getCellIndexPath(collectionView: collectionView) {
+            presenter.result.1 = resultValue[leftCellIndexPath.item]
         }
     }
     

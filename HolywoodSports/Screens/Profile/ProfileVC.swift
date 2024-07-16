@@ -64,7 +64,6 @@ final class ProfileVC: BaseController {
         makeConstraints()
         createViews()
         presenter.viewDidLoad()
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -110,7 +109,7 @@ private extension ProfileVC {
         }
     }
     @objc func editButtonTapped() {
-        let vc = EditPhotoAssembly.build()
+        let vc = EditPhotoAssembly.build(flag: false)
         navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -140,20 +139,21 @@ private extension ProfileVC {
     }
     
     func makeConstraints() {
+        let screen = UIScreen.main.bounds.height
         userPhoto.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide).inset(16)
+            make.top.equalToSuperview().inset(screen > 851 ? 80 : 30)
             make.centerX.equalToSuperview()
             make.size.equalTo(143)
         }
         
         editButton.snp.makeConstraints { make in
-            make.horizontalEdges.equalToSuperview().inset(132)
+            make.horizontalEdges.equalToSuperview().inset(screen > 851 ? 132 : 120)
             make.top.equalTo(userPhoto.snp.bottom).offset(16)
             make.height.equalTo(36)
         }
         
         verticalStack.snp.makeConstraints { make in
-            make.top.equalTo(editButton.snp.bottom).offset(40)
+            make.top.equalTo(editButton.snp.bottom).offset(screen > 851 ? 40 : 16)
             make.horizontalEdges.equalToSuperview().inset(16)
         }
         

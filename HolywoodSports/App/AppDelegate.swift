@@ -19,14 +19,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
     
+    private func setupDefaultUsers() {
+        if UserDefaults.standard.object(forKey: "user") == nil {
+            let user = User.mock
+            UserService.saveUser(user: user, key: "user")
+        }
+    }
+    
     private func openVC() {
-        let window = UIWindow(frame: UIScreen.main.bounds)
-        let vc = OnboardingAssembly.build()
-        let navController = UINavigationController(rootViewController: vc)
-        window.rootViewController = TabBarController()
-        window.overrideUserInterfaceStyle = .dark
-        window.makeKeyAndVisible()
-        self.window = window
+        var vc = UIViewController()
+        if UserDefaults.standard.object(forKey: "user") == nil {
+            let user = User.mock
+            UserService.saveUser(user: user, key: "user")
+            vc = OnboardingAssembly.build()
+        } else {
+            vc = TabBarController()
+            let window = UIWindow(frame: UIScreen.main.bounds)
+            let navController = UINavigationController(rootViewController: vc)
+            window.rootViewController = navController
+            window.overrideUserInterfaceStyle = .dark
+            window.makeKeyAndVisible()
+            self.window = window
+        }
     }
     
 //    private func setupRemoteSettings() {

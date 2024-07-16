@@ -53,6 +53,7 @@ final class HomeVC: BaseController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .background
+//        navigationController?.setNavigationBarHidden(true, animated: true)
         addSubviews()
         makeConstraints()
         

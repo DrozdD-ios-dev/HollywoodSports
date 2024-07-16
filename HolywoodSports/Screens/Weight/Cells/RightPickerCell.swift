@@ -1,5 +1,5 @@
 //
-//  LeftWeightCell.swift
+//  RightPickerCell.swift
 //  HolywoodSports
 //
 //  Created by Дрозд Денис on 15.07.2024.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class LeftWeightCell: UICollectionViewCell {
+final class RightPickerCell: UICollectionViewCell {
     
     // MARK: - Properties
     
@@ -40,7 +40,7 @@ final class LeftWeightCell: UICollectionViewCell {
 
 // MARK: - Public Functions
 
-extension LeftWeightCell {
+extension RightPickerCell {
     
     func configure(text: String) {
         numberLabel.text = text
@@ -49,7 +49,7 @@ extension LeftWeightCell {
 
 // MARK: - Layout
 
-extension LeftWeightCell {
+extension RightPickerCell {
     
     private func addSubviews() {
         contentView.addSubview(numberLabel)

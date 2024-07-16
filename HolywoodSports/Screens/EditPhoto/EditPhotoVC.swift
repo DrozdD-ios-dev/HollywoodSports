@@ -35,7 +35,6 @@ final class EditPhotoVC: BaseController {
     private let descriptionLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
-        label.text = "Change your profile \nphoto"
         label.numberOfLines = 2
         label.font = CustomFont.font(type: .poppins600, size: 28)
         return label
@@ -45,7 +44,35 @@ final class EditPhotoVC: BaseController {
         let button = DefaultButton(text: "Save changes")
         button.addAction(UIAction { _ in self.saveChangesButtonTapped() }, for: .touchUpInside)
         button.isEnabled = false
+        button.isHidden = true
         button.alpha = 0.3
+        return button
+    }()
+    
+    private lazy var nextButton: DefaultButton = {
+        let button = DefaultButton(text: "Next")
+        button.addAction(UIAction { _ in self.nextButtonTapped() }, for: .touchUpInside)
+        button.isHidden = true
+        return button
+    }()
+    
+    private lazy var skipButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.addAction(UIAction { _ in self.nextButtonTapped() }, for: .touchUpInside)
+        let font = CustomFont.font(type: .poppins700, size: 16)
+        let attributes: [NSAttributedString.Key: Any] = [ .font: font as Any ]
+        let attributedString = NSAttributedString(string: "Skip", attributes: attributes)
+        button.tintColor = .white
+        button.setAttributedTitle(attributedString, for: .normal)
+        button.isHidden = true
+        return button
+    }()
+    
+    private lazy var trashButton: TrashButton = {
+        let button = TrashButton()
+        button.tintColor = .redLight
+        button.addAction(UIAction { _ in self.trashButtonTapped() }, for: .touchUpInside)
+        button.isHidden = true
         return button
     }()
     
@@ -54,11 +81,13 @@ final class EditPhotoVC: BaseController {
     // MARK: - Properties
     
     private var presenter: EditPhotoInput
+    private var flag: Bool
     
     // MARK: - Init
     
-    init(presenter: EditPhotoInput) {
+    init(presenter: EditPhotoInput, flag: Bool) {
         self.presenter = presenter
+        self.flag = flag
         super.init()
     }
     
@@ -71,6 +100,7 @@ final class EditPhotoVC: BaseController {
         makeConstraints()
         presenter.viewDidLoad()
         updateImage()
+        updateView()
     }
 }
 
@@ -83,6 +113,18 @@ private extension EditPhotoVC {
         tabBarController?.tabBar.isHidden = true
         let backBarButtonItem = UIBarButtonItem(customView: backButton)
         navigationItem.leftBarButtonItem = backBarButtonItem
+    }
+    
+    func updateView() {
+        if flag {
+            descriptionLabel.text = "Add your profile \nphoto"
+            nextButton.isHidden = false
+            skipButton.isHidden = false
+            trashButton.isHidden = false
+        } else {
+            descriptionLabel.text = "Change your profile \nphoto"
+            saveChangesButton.isHidden = false
+        }
     }
     
     func updateImage() {
@@ -101,6 +143,22 @@ private extension EditPhotoVC {
     
     @objc func backButtonTapped() {
         navigationController?.popViewController(animated: true)
+    }
+    
+    @objc func nextButtonTapped() {
+        UserService.saveUser(user: presenter.user, key: "user")
+        skipButtonTapped()
+    }
+    
+    @objc func skipButtonTapped() {
+        navigationController?.setNavigationBarHidden(true, animated: true)
+        let vc = TabBarController()
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    @objc func trashButtonTapped() {
+        userPhoto.image = UIImage(named: "image")
+        presenter.user.image = ""
     }
     
     @objc private func addPhotoButtonTapped() {
@@ -127,7 +185,8 @@ extension EditPhotoVC: EditPhotoOutput {
 private extension EditPhotoVC {
     
     func addSubviews() {
-        [userPhoto, descriptionLabel, saveChangesButton].forEach { view.addSubview($0) }
+        [userPhoto, descriptionLabel, saveChangesButton, skipButton, nextButton].forEach { view.addSubview($0) }
+        userPhoto.addSubview(trashButton)
     }
     
     func makeConstraints() {
@@ -143,9 +202,26 @@ private extension EditPhotoVC {
         }
         
         saveChangesButton.snp.makeConstraints { make in
-            make.bottom.equalTo(view.safeAreaLayoutGuide)
+            make.bottom.equalTo(view.safeAreaLayoutGuide).inset(20)
             make.horizontalEdges.equalToSuperview().inset(16)
-            make.height.equalTo(56)
+            make.height.equalTo(nextButton.snp.width).multipliedBy(0.155)
+        }
+        
+        skipButton.snp.makeConstraints { make in
+            make.bottom.equalTo(view.safeAreaLayoutGuide).inset(20)
+            make.horizontalEdges.equalToSuperview().inset(16)
+            make.height.equalTo(nextButton.snp.width).multipliedBy(0.155)
+        }
+        
+        nextButton.snp.makeConstraints { make in
+            make.bottom.equalTo(skipButton.snp.top)
+            make.horizontalEdges.equalToSuperview().inset(16)
+            make.height.equalTo(nextButton.snp.width).multipliedBy(0.155)
+        }
+        
+        trashButton.snp.makeConstraints { make in
+            make.top.trailing.equalToSuperview().inset(16)
+            make.size.equalTo(34)
         }
     }
 }

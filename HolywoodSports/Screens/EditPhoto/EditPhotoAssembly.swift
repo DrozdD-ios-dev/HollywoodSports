@@ -9,9 +9,9 @@ import Foundation
 
 struct EditPhotoAssembly {
     
-    static func build() -> EditPhotoVC {
+    static func build(flag: Bool) -> EditPhotoVC {
         let presenter = EditPhotoPresenter()
-        let vc = EditPhotoVC(presenter: presenter)
+        let vc = EditPhotoVC(presenter: presenter, flag: flag)
         presenter.view = vc
         return vc
     }
