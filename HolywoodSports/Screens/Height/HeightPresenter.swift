@@ -27,7 +27,7 @@ final class HeightPresenter: HeightInput {
     // MARK: - Properties
     
     weak var view: HeightOutput?
-    var user = UserService.loadUser(key: "user") ?? User.mock
+    var user = CacheService.loadCache(key: "user") ?? User.mock
     let heightElements = ["cm", "ft/in", ""]
     var heightIndex = Height.cm
     var result: (Int, Int) = (50, 0)

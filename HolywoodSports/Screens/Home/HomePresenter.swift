@@ -10,7 +10,7 @@ import UIKit
 // MARK: - Protocol
 
 protocol HomeInput {
-    func viewDidLoad() async
+    func viewDidLoad()
     
 //    var characters: [Result]? { get }
 }
@@ -26,23 +26,13 @@ final class HomePresenter: HomeInput {
     
     // MARK: - Public Functions
     
-    @MainActor
-    func viewDidLoad() async {
-        await getData()
-        view?.reload()
+    func viewDidLoad() {
+    
     }
 }
 
 // MARK: - Private Functions
 
 private extension HomePresenter {
-    
-    @MainActor
-    func getData() async {
-//        do {
-//            characters = try await NetworkService.fetch()?.results
-//        } catch {
-//            print("Failed to fetch: \(error)")
-//        }
-    }
+
 }

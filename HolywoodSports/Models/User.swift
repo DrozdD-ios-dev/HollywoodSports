@@ -15,6 +15,7 @@ struct User: Codable {
     var points: Int
     var weightValue: Weight
     var heightValue: Height
+    var showEvent: Bool
 }
 
 enum Weight: String, Codable, CaseIterable {
@@ -35,6 +36,7 @@ extension User {
         height: 160,
         points: 25,
         weightValue: .kg,
-        heightValue: .cm
+        heightValue: .cm,
+        showEvent: true
     )
 }

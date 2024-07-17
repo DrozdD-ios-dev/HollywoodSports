@@ -137,7 +137,7 @@ private extension EditPhotoVC {
 private extension EditPhotoVC {
 
     @objc func saveChangesButtonTapped() {
-        UserService.saveUser(user: presenter.user, key: "user")
+        CacheService.saveCache(user: presenter.user, key: "user")
         navigationController?.popViewController(animated: true)
     }
     
@@ -146,7 +146,7 @@ private extension EditPhotoVC {
     }
     
     @objc func nextButtonTapped() {
-        UserService.saveUser(user: presenter.user, key: "user")
+        CacheService.saveCache(user: presenter.user, key: "user")
         skipButtonTapped()
     }
     

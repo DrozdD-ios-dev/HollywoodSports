@@ -20,5 +20,7 @@ extension UIColor {
         case purpleFirstScreen     = "purple-first-Screen"
         case yellowMiddle          = "yellowMiddle"
         case redLight              = "redLight"
+        case purpleBlue            = "purple-blue"
+        case greenDark             = "green-dark"
     }
 }

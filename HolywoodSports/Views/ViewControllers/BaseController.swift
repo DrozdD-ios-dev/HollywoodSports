@@ -22,4 +22,19 @@ class BaseController: UIViewController {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithTransparentBackground()
+        appearance.backgroundColor = UIColor.clear
+        
+        let customFont = CustomFont.font(type: .poppins700, size: 16)
+        appearance.titleTextAttributes = [
+            NSAttributedString.Key.foregroundColor: UIColor.white,
+            NSAttributedString.Key.font: customFont
+        ]
+        
+        navigationController?.navigationBar.standardAppearance = appearance
+    }
 }

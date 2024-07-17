@@ -45,7 +45,7 @@
 		8AAE7CAA2C43DF6200536B7F /* EditPhotoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AAE7CA92C43DF6200536B7F /* EditPhotoVC.swift */; };
 		8AAE7CAC2C43DF6A00536B7F /* EditPhotoPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AAE7CAB2C43DF6A00536B7F /* EditPhotoPresenter.swift */; };
 		8AAE7CAE2C43E93200536B7F /* CircularBackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AAE7CAD2C43E93200536B7F /* CircularBackButton.swift */; };
-		8AAE7CB12C43F8CF00536B7F /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AAE7CB02C43F8CF00536B7F /* UserService.swift */; };
+		8AAE7CB12C43F8CF00536B7F /* CacheService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AAE7CB02C43F8CF00536B7F /* CacheService.swift */; };
 		8AAE7CB32C44027F00536B7F /* String+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AAE7CB22C44027F00536B7F /* String+Ext.swift */; };
 		8AAE7CB72C440E7800536B7F /* StartedAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AAE7CB62C440E7800536B7F /* StartedAssembly.swift */; };
 		8AAE7CB92C440E8C00536B7F /* StartedVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AAE7CB82C440E8C00536B7F /* StartedVC.swift */; };
@@ -71,6 +71,16 @@
 		8AAE7CF02C45CE1D00536B7F /* HeightVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AAE7CEF2C45CE1D00536B7F /* HeightVC.swift */; };
 		8AAE7CF22C45CE2400536B7F /* HeightPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AAE7CF12C45CE2400536B7F /* HeightPresenter.swift */; };
 		8AAE7CF52C4688AB00536B7F /* TrashButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AAE7CF42C4688AB00536B7F /* TrashButton.swift */; };
+		8AAE7CF82C46A68800536B7F /* EventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AAE7CF72C46A68800536B7F /* EventCell.swift */; };
+		8AAE7CFA2C46A6D400536B7F /* TrainingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AAE7CF92C46A6D400536B7F /* TrainingCell.swift */; };
+		8AAE7CFC2C47E59800536B7F /* Cell+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AAE7CFB2C47E59800536B7F /* Cell+Ext.swift */; };
+		8AAE7CFE2C47F20900536B7F /* Trainings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AAE7CFD2C47F20900536B7F /* Trainings.swift */; };
+		8AAE7D002C4812B100536B7F /* UIImage+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AAE7CFF2C4812B100536B7F /* UIImage+Ext.swift */; };
+		8AAE7D032C48253F00536B7F /* DetailAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AAE7D022C48253E00536B7F /* DetailAssembly.swift */; };
+		8AAE7D052C48254D00536B7F /* DetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AAE7D042C48254D00536B7F /* DetailVC.swift */; };
+		8AAE7D072C48255500536B7F /* DetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AAE7D062C48255500536B7F /* DetailPresenter.swift */; };
+		8AAE7D092C4831E800536B7F /* CollectionView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AAE7D082C4831E800536B7F /* CollectionView+Ext.swift */; };
+		8AAE7D0B2C48375C00536B7F /* TodayTextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AAE7D0A2C48375C00536B7F /* TodayTextCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -111,7 +121,7 @@
 		8AAE7CA92C43DF6200536B7F /* EditPhotoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPhotoVC.swift; sourceTree = "<group>"; };
 		8AAE7CAB2C43DF6A00536B7F /* EditPhotoPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPhotoPresenter.swift; sourceTree = "<group>"; };
 		8AAE7CAD2C43E93200536B7F /* CircularBackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularBackButton.swift; sourceTree = "<group>"; };
-		8AAE7CB02C43F8CF00536B7F /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
+		8AAE7CB02C43F8CF00536B7F /* CacheService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheService.swift; sourceTree = "<group>"; };
 		8AAE7CB22C44027F00536B7F /* String+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Ext.swift"; sourceTree = "<group>"; };
 		8AAE7CB62C440E7800536B7F /* StartedAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartedAssembly.swift; sourceTree = "<group>"; };
 		8AAE7CB82C440E8C00536B7F /* StartedVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartedVC.swift; sourceTree = "<group>"; };
@@ -137,6 +147,16 @@
 		8AAE7CEF2C45CE1D00536B7F /* HeightVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeightVC.swift; sourceTree = "<group>"; };
 		8AAE7CF12C45CE2400536B7F /* HeightPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeightPresenter.swift; sourceTree = "<group>"; };
 		8AAE7CF42C4688AB00536B7F /* TrashButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrashButton.swift; sourceTree = "<group>"; };
+		8AAE7CF72C46A68800536B7F /* EventCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCell.swift; sourceTree = "<group>"; };
+		8AAE7CF92C46A6D400536B7F /* TrainingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingCell.swift; sourceTree = "<group>"; };
+		8AAE7CFB2C47E59800536B7F /* Cell+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Cell+Ext.swift"; sourceTree = "<group>"; };
+		8AAE7CFD2C47F20900536B7F /* Trainings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trainings.swift; sourceTree = "<group>"; };
+		8AAE7CFF2C4812B100536B7F /* UIImage+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Ext.swift"; sourceTree = "<group>"; };
+		8AAE7D022C48253E00536B7F /* DetailAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailAssembly.swift; sourceTree = "<group>"; };
+		8AAE7D042C48254D00536B7F /* DetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailVC.swift; sourceTree = "<group>"; };
+		8AAE7D062C48255500536B7F /* DetailPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPresenter.swift; sourceTree = "<group>"; };
+		8AAE7D082C4831E800536B7F /* CollectionView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CollectionView+Ext.swift"; sourceTree = "<group>"; };
+		8AAE7D0A2C48375C00536B7F /* TodayTextCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayTextCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -196,6 +216,7 @@
 				8AAE7C602C41959600536B7F /* TabBar */,
 				8AAE7C612C4197E600536B7F /* Home */,
 				8AAE7C622C4197EB00536B7F /* Sport */,
+				8AAE7D012C48252300536B7F /* Detail */,
 				8AAE7C632C4197F300536B7F /* Profile */,
 				8AAE7CA62C43DF2300536B7F /* EditPhoto */,
 			);
@@ -214,7 +235,7 @@
 		8AAE7C5B2C41954D00536B7F /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				8AAE7CB02C43F8CF00536B7F /* UserService.swift */,
+				8AAE7CB02C43F8CF00536B7F /* CacheService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -226,6 +247,9 @@
 				8AAE7C982C41C31A00536B7F /* Fonts.swift */,
 				8AAE7CA42C43D57A00536B7F /* StringProtocol+Ext.swift */,
 				8AAE7CB22C44027F00536B7F /* String+Ext.swift */,
+				8AAE7CFB2C47E59800536B7F /* Cell+Ext.swift */,
+				8AAE7CFF2C4812B100536B7F /* UIImage+Ext.swift */,
+				8AAE7D082C4831E800536B7F /* CollectionView+Ext.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -248,6 +272,7 @@
 			children = (
 				8AAE7C9A2C41C45A00536B7F /* User.swift */,
 				8AAE7C9C2C41CF9D00536B7F /* Gender.swift */,
+				8AAE7CFD2C47F20900536B7F /* Trainings.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -283,6 +308,7 @@
 		8AAE7C622C4197EB00536B7F /* Sport */ = {
 			isa = PBXGroup;
 			children = (
+				8AAE7CF62C46A67D00536B7F /* Cells */,
 				8AAE7C842C41B98B00536B7F /* SportAssembly.swift */,
 				8AAE7C862C41B99100536B7F /* SportVC.swift */,
 				8AAE7C882C41B99C00536B7F /* SportPresenter.swift */,
@@ -422,6 +448,26 @@
 			path = Cells;
 			sourceTree = "<group>";
 		};
+		8AAE7CF62C46A67D00536B7F /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				8AAE7CF72C46A68800536B7F /* EventCell.swift */,
+				8AAE7CF92C46A6D400536B7F /* TrainingCell.swift */,
+				8AAE7D0A2C48375C00536B7F /* TodayTextCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		8AAE7D012C48252300536B7F /* Detail */ = {
+			isa = PBXGroup;
+			children = (
+				8AAE7D022C48253E00536B7F /* DetailAssembly.swift */,
+				8AAE7D042C48254D00536B7F /* DetailVC.swift */,
+				8AAE7D062C48255500536B7F /* DetailPresenter.swift */,
+			);
+			path = Detail;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -517,16 +563,22 @@
 				8AAE7C792C419C1200536B7F /* Colors.swift in Sources */,
 				8AAE7CAE2C43E93200536B7F /* CircularBackButton.swift in Sources */,
 				8AAE7CC52C4416FC00536B7F /* OnboardingVC.swift in Sources */,
+				8AAE7D052C48254D00536B7F /* DetailVC.swift in Sources */,
 				8AAE7C662C41996A00536B7F /* HomeVC.swift in Sources */,
 				8AAE7CC12C440EC800536B7F /* SecondPresenter.swift in Sources */,
 				8AAE7CC32C4416F700536B7F /* OnboardingAssembly.swift in Sources */,
 				8AAE7C7B2C41A49500536B7F /* CustomAppearance.swift in Sources */,
 				8AAE7CE22C45CDDC00536B7F /* GenderAssembly.swift in Sources */,
 				8AAE7CE42C45CDE500536B7F /* GenderVC.swift in Sources */,
+				8AAE7CF82C46A68800536B7F /* EventCell.swift in Sources */,
 				8AAE7C872C41B99100536B7F /* SportVC.swift in Sources */,
+				8AAE7D0B2C48375C00536B7F /* TodayTextCell.swift in Sources */,
 				8AAE7C6F2C419B3D00536B7F /* TabBarItem.swift in Sources */,
+				8AAE7D072C48255500536B7F /* DetailPresenter.swift in Sources */,
 				8AAE7C6D2C419A7100536B7F /* BaseController.swift in Sources */,
 				8AAE7CEE2C45CE1800536B7F /* HeightAssembly.swift in Sources */,
+				8AAE7D032C48253F00536B7F /* DetailAssembly.swift in Sources */,
+				8AAE7D092C4831E800536B7F /* CollectionView+Ext.swift in Sources */,
 				8AAE7CE62C45CDEE00536B7F /* GenderPresenter.swift in Sources */,
 				8AAE7C682C41999300536B7F /* HomeAssembly.swift in Sources */,
 				8AAE7CAA2C43DF6200536B7F /* EditPhotoVC.swift in Sources */,
@@ -534,12 +586,15 @@
 				8AAE7C6A2C4199AA00536B7F /* HomePresenter.swift in Sources */,
 				8AAE7CBF2C440EC000536B7F /* SecondVC.swift in Sources */,
 				8AAE7C462C4193A100536B7F /* AppDelegate.swift in Sources */,
+				8AAE7CFC2C47E59800536B7F /* Cell+Ext.swift in Sources */,
 				8AAE7CBD2C440EBA00536B7F /* SecondAssembly.swift in Sources */,
-				8AAE7CB12C43F8CF00536B7F /* UserService.swift in Sources */,
+				8AAE7CB12C43F8CF00536B7F /* CacheService.swift in Sources */,
 				8AAE7C7F2C41B87200536B7F /* ProfileAssembly.swift in Sources */,
 				8AAE7CB32C44027F00536B7F /* String+Ext.swift in Sources */,
+				8AAE7CFA2C46A6D400536B7F /* TrainingCell.swift in Sources */,
 				8AAE7C482C4193A100536B7F /* SceneDelegate.swift in Sources */,
 				8AAE7CF02C45CE1D00536B7F /* HeightVC.swift in Sources */,
+				8AAE7CFE2C47F20900536B7F /* Trainings.swift in Sources */,
 				8AAE7CDB2C4522E100536B7F /* CenterPickerCell.swift in Sources */,
 				8AAE7CCD2C44582C00536B7F /* SecondCell.swift in Sources */,
 				8AAE7C832C41B88000536B7F /* ProfilePresenter.swift in Sources */,
@@ -547,6 +602,7 @@
 				8AAE7C8B2C41BA6400536B7F /* DefaultButton.swift in Sources */,
 				8AAE7C9F2C41D50B00536B7F /* EditButton.swift in Sources */,
 				8AAE7CA82C43DF5B00536B7F /* EditPhotoAssembly.swift in Sources */,
+				8AAE7D002C4812B100536B7F /* UIImage+Ext.swift in Sources */,
 				8AAE7CEA2C45CE0300536B7F /* WeightVC.swift in Sources */,
 				8AAE7CB92C440E8C00536B7F /* StartedVC.swift in Sources */,
 				8AAE7C9D2C41CF9D00536B7F /* Gender.swift in Sources */,

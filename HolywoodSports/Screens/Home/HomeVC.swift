@@ -56,10 +56,7 @@ final class HomeVC: BaseController {
 //        navigationController?.setNavigationBarHidden(true, animated: true)
         addSubviews()
         makeConstraints()
-        
-        Task {
-            await presenter.viewDidLoad()
-        }
+        presenter.viewDidLoad()
     }
 }
 

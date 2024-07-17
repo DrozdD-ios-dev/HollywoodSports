@@ -116,6 +116,14 @@ private extension ProfileVC {
     @objc func saveChangesButtonTapped() {
         print("Save")
         progressView.configure(with: presenter.user.points)
+        // for test
+//        var use = CacheService.loadCache(key: "user") ?? User.mock
+//        if use.showEvent {
+//            use.showEvent = false
+//        } else {
+//            use.showEvent = true
+//        }
+//        CacheService.saveCache(user: use, key: "user")
     }
 }
 

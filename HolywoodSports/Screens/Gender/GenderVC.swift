@@ -80,7 +80,7 @@ private extension GenderVC {
         buttons[index].tintColor = .white
 
         presenter.user.gender = Gender.allCases[index]
-        UserService.saveUser(user: presenter.user, key: "user")
+        CacheService.saveCache(user: presenter.user, key: "user")
         
         if flag {
             let vc = WeightAssembly.build(flag: true)

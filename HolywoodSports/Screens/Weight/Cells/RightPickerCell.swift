@@ -10,11 +10,7 @@ import UIKit
 final class RightPickerCell: UICollectionViewCell {
     
     // MARK: - Properties
-    
-    static var identifier: String {
-        String(describing: self)
-    }
-    
+
     // MARK: - Views
 
     private let numberLabel: UILabel = {

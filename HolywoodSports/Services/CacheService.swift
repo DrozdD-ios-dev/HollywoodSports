@@ -1,5 +1,5 @@
 //
-//  UserService.swift
+//  CacheService.swift
 //  HolywoodSports
 //
 //  Created by Дрозд Денис on 14.07.2024.
@@ -7,19 +7,19 @@
 
 import Foundation
 
-struct UserService {
+struct CacheService {
     
-    static func saveUser(user: User, key: String) {
+    static func saveCache<T: Encodable>(user: T, key: String) {
         let encoder = JSONEncoder()
         if let encoded = try? encoder.encode(user) {
             UserDefaults.standard.set(encoded, forKey: key)
         }
     }
     
-    static func loadUser(key: String) -> User? {
+    static func loadCache<T: Decodable>(key: String) -> T? {
         if let savedData = UserDefaults.standard.value(forKey: key) as? Data {
             let decoder = JSONDecoder()
-            let savedUser = try? decoder.decode(User.self, from: savedData)
+            let savedUser = try? decoder.decode(T.self, from: savedData)
             return savedUser
         }
         return nil

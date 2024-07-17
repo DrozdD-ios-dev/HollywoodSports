@@ -10,9 +10,11 @@ import UIKit
 // MARK: - Protocol
 
 protocol SportInput {
-    func viewDidLoad() async
+    func viewDidLoad()
     
-//    var characters: [Result]? { get }
+    var trainingAll: [Trainings] { get }
+    var trainingForOneDay: [Trainings] { get set }
+    var user: User { get set }
 }
 
 final class SportPresenter: SportInput {
@@ -20,29 +22,20 @@ final class SportPresenter: SportInput {
     // MARK: - Properties
     
     weak var view: SportOutput?
-//    var characters: [Result]?
-    
-    
+    var user: User = CacheService.loadCache(key: "user") ?? User.mock
+    let trainingAll = Trainings.mock
+    lazy var trainingForOneDay: [Trainings] = trainingAll.shuffled()
     
     // MARK: - Public Functions
     
-    @MainActor
-    func viewDidLoad() async {
-        await getData()
-        view?.reload()
+    func viewDidLoad() {
+        let userNew = CacheService.loadCache(key: "user") ?? User.mock
+        user = userNew
     }
 }
 
 // MARK: - Private Functions
 
 private extension SportPresenter {
-    
-    @MainActor
-    func getData() async {
-//        do {
-//            characters = try await NetworkService.fetch()?.results
-//        } catch {
-//            print("Failed to fetch: \(error)")
-//        }
-    }
+
 }

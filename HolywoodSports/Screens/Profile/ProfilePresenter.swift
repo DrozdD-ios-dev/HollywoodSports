@@ -24,7 +24,7 @@ final class ProfilePresenter: ProfileInput {
     
     weak var view: ProfileOutput?
     var rows = ["Change your gender", "Change your weigth", "Change your height"]
-    var user = UserService.loadUser(key: "user") ?? User.mock
+    var user = CacheService.loadCache(key: "user") ?? User.mock
     var userViews = [UserDataView]()
     
     
@@ -36,7 +36,7 @@ final class ProfilePresenter: ProfileInput {
     }
     
     func updateUserData() {
-        user = UserService.loadUser(key: "user") ?? User.mock
+        user = CacheService.loadCache(key: "user") ?? User.mock
         userViews[0].configure(with: user.gender.rawValue.firstUppercased)
         userViews[1].configure(with: "\(user.weight) \(user.weightValue)")
         userViews[2].configure(with: "\(user.height) \(user.heightValue)")
