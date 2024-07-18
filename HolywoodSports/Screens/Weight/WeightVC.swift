@@ -159,7 +159,7 @@ private extension WeightVC {
     func saveValue() {
         presenter.user.weight = Double(presenter.result.0) + (Double(presenter.result.1) / 10)
         presenter.user.weightValue = presenter.weightIndex
-        CacheService.saveCache(user: presenter.user, key: "user")
+        CacheService.saveCache(model: presenter.user, key: "user")
     }
 }
 

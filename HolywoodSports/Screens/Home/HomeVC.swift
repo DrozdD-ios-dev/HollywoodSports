@@ -8,32 +8,92 @@
 import UIKit
 
 protocol HomeOutput: AnyObject {
-    func reload()
+    
 }
 
 final class HomeVC: BaseController {
     
     // MARK: - Views
     
-    private let characterLabel: UILabel = {
+    private let welcomeLabel: UILabel = {
         let label = UILabel()
-        label.text = "Characters"
-        label.font = CustomFont.font(type: .poppins800, size: 34)
+        label.text = "Welcome in🔥"
+        label.font = CustomFont.font(type: .poppins600, size: 14)
         return label
     }()
     
-    lazy var characterCollectionView: UICollectionView = {
+    private let hollywoodLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Hollywood"
+        label.font = CustomFont.font(type: .poppins800, size: 24)
+        return label
+    }()
+    
+    private let sportsLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Sports"
+        label.textColor = .yellowMiddle
+        label.font = CustomFont.font(type: .poppins800, size: 24)
+        return label
+    }()
+    
+    private let userImage: UIImageView = {
+        let imageView = UIImageView()
+        imageView.layer.cornerRadius = 24
+        imageView.clipsToBounds = true
+        return imageView
+    }()
+    
+    private lazy var miniHorizontalStack: UIStackView = {
+        let stack = UIStackView(arrangedSubviews: [hollywoodLabel, sportsLabel, UIView()])
+        stack.distribution = .fill
+        stack.spacing = 0
+        return stack
+    }()
+    
+    private lazy var verticalStack: UIStackView = {
+        let stack = UIStackView(arrangedSubviews: [welcomeLabel, miniHorizontalStack])
+        stack.axis = .vertical
+        return stack
+    }()
+    
+    private lazy var horizontalStack = UIStackView(arrangedSubviews: [verticalStack, userImage])
+    
+    private let dateLabel: UILabel = {
+        let label = UILabel()
+        label.text = "July 2024"
+        label.font = CustomFont.font(type: .poppins700, size: 18)
+        return label
+    }()
+    
+    private lazy var weekCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .vertical
-        layout.sectionInset = .init(top: 10, left: 16, bottom: 0, right: 16)
+        layout.scrollDirection = .horizontal
+        layout.minimumLineSpacing = 10
+        layout.sectionInset = .init(top: 0, left: 16, bottom: 0, right: 16)
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.backgroundColor = .clear
-        collectionView.bounces = true
+        collectionView.showsHorizontalScrollIndicator = false
+        collectionView.isScrollEnabled = false
+        collectionView.register(DayCell.self, forCellWithReuseIdentifier: DayCell.identifier)
+        collectionView.dataSource = self
+        collectionView.delegate = self
+        return collectionView
+    }()
+    
+    private lazy var sportCollectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .vertical
+        layout.minimumLineSpacing = 16
+        layout.sectionInset = .init(top: 0, left: 0, bottom: 16, right: 0)
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.backgroundColor = .clear
         collectionView.showsVerticalScrollIndicator = false
-        collectionView.isUserInteractionEnabled = true
-//        collectionView.dataSource = self
-//        collectionView.delegate = self
-//        collectionView.register(CharacterCell.self, forCellWithReuseIdentifier: CharacterCell.identifier)
+        collectionView.register(EventCell.self, forCellWithReuseIdentifier: EventCell.identifier)
+        collectionView.register(TodayFirstCell.self, forCellWithReuseIdentifier: TodayFirstCell.identifier)
+        collectionView.register(TrainingCell.self, forCellWithReuseIdentifier: TrainingCell.identifier)
+        collectionView.dataSource = self
+        collectionView.delegate = self
         return collectionView
     }()
     
@@ -53,10 +113,19 @@ final class HomeVC: BaseController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .background
-//        navigationController?.setNavigationBarHidden(true, animated: true)
         addSubviews()
         makeConstraints()
         presenter.viewDidLoad()
+        setupSettings()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: true)
+        tabBarController?.tabBar.isHidden = false
+        //for test
+        presenter.viewDidLoad()
+        sportCollectionView.reloadData()
     }
 }
 
@@ -64,6 +133,9 @@ final class HomeVC: BaseController {
 
 private extension HomeVC {
     
+    func setupSettings() {
+        userImage.image = presenter.user.image.convertStringToImage()
+    }
 }
 
 // MARK: - Actions
@@ -77,9 +149,7 @@ private extension HomeVC {
 
 extension HomeVC: HomeOutput {
     
-    func reload() {
-        characterCollectionView.reloadData()
-    }
+    
 }
 
 // MARK: - Layout
@@ -87,20 +157,38 @@ extension HomeVC: HomeOutput {
 private extension HomeVC {
     
     func addSubviews() {
-        view.addSubview(characterLabel)
-        view.addSubview(characterCollectionView)
+        view.addSubview(horizontalStack)
+        view.addSubview(dateLabel)
+        view.addSubview(weekCollectionView)
+        view.addSubview(sportCollectionView)
     }
     
     func makeConstraints() {
-        
-        characterLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().inset(100)
-            make.leading.equalToSuperview().inset(16)
+        let screen = UIScreen.main.bounds.height
+        horizontalStack.snp.makeConstraints { make in
+            make.top.equalTo(view.safeAreaLayoutGuide).offset(16)
+            make.horizontalEdges.equalToSuperview().inset(16)
         }
         
-        characterCollectionView.snp.makeConstraints { make in
-            make.top.equalTo(characterLabel.snp.bottom)
-            make.bottom.horizontalEdges.equalToSuperview()
+        userImage.snp.makeConstraints { make in
+            make.size.equalTo(48)
+        }
+        
+        dateLabel.snp.makeConstraints { make in
+            make.leading.equalToSuperview().inset(16)
+            make.top.equalTo(horizontalStack.snp.bottom).offset(screen > 851 ? 28 : 16)
+        }
+        
+        weekCollectionView.snp.makeConstraints { make in
+            make.horizontalEdges.equalToSuperview()
+            make.top.equalTo(dateLabel.snp.bottom).offset(12)
+            make.height.equalTo(55)
+        }
+        
+        sportCollectionView.snp.makeConstraints { make in
+            make.top.equalTo(weekCollectionView.snp.bottom).offset(screen > 851 ? 28 : 16)
+            make.horizontalEdges.equalToSuperview()
+            make.bottom.equalTo(view.safeAreaLayoutGuide)
         }
     }
     
@@ -108,27 +196,95 @@ private extension HomeVC {
 
 // MARK: - CollectionView DataSource / Delegate
 
-//extension HomeVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-//    
-//    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//        return presenter.characters?.count ?? 0
-//    }
-//    
-//    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-//        
-//        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CharacterCell.identifier, for: indexPath) as? CharacterCell else { return UICollectionViewCell() }
-//        cell.configure(with: presenter.characters?[indexPath.item])
-//        return cell
-//    }
-//    
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-//        return CGSize(width: 170, height: 260)
-//    }
-//    
-//    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//        let vc = SecondAssembly.build(character: presenter.characters?[indexPath.item])
-//        navigationController?.pushViewController(vc, animated: true)
-//    }
-//}
-
-
+extension HomeVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        switch collectionView {
+        case weekCollectionView:
+            return 7
+            
+        case sportCollectionView:
+            if presenter.user.showEvent {
+                return 4
+            } else {
+                return 3
+            }
+        default:
+            return 0
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        switch collectionView {
+        case weekCollectionView:
+            let cell = collectionView.dequeueReusableCell(withClass: DayCell.self, for: indexPath)
+            cell.configure(model: presenter.weekDays[indexPath.item])
+            return cell
+            
+        case sportCollectionView:
+            if presenter.user.showEvent {
+                switch indexPath.item {
+                case 0: let cell = collectionView.dequeueReusableCell(withClass: EventCell.self, for: indexPath)
+                    return cell
+                case 1: let cell = collectionView.dequeueReusableCell(withClass: TodayFirstCell.self, for: indexPath)
+                    cell.configure(model: presenter.trainingsOneDay[indexPath.item])
+                    return cell
+                case 2...3: let cell = collectionView.dequeueReusableCell(withClass: TrainingCell.self, for: indexPath)
+                    cell.configure(model: presenter.trainingsOneDay[indexPath.item])
+                    return cell
+                default:
+                    return UICollectionViewCell()
+                }
+                
+            } else {
+                
+                switch indexPath.item {
+                case 0: let cell = collectionView.dequeueReusableCell(withClass: TodayFirstCell.self, for: indexPath)
+                    cell.configure(model: presenter.trainingsOneDay[indexPath.item])
+                    return cell
+                case 1...2: let cell = collectionView.dequeueReusableCell(withClass: TrainingCell.self, for: indexPath)
+                    cell.configure(model: presenter.trainingsOneDay[indexPath.item])
+                    return cell
+                default:
+                    return UICollectionViewCell()
+                }
+            }
+        default:
+            return UICollectionViewCell()
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        switch collectionView {
+        case weekCollectionView:
+            return CGSize(width: 43, height: 54)
+            
+        case sportCollectionView:
+            if presenter.user.showEvent {
+                switch indexPath.item {
+                case 0: return CGSize(width: sportCollectionView.frame.width - 32, height: 180)
+                case 1: return CGSize(width: sportCollectionView.frame.width - 32, height: 160)
+                case 2...3: return CGSize(width: sportCollectionView.frame.width - 32, height: 120)
+                default: return CGSize(width: 50, height: 50)
+                }
+            } else {
+                switch indexPath.item {
+                case 0: return CGSize(width: sportCollectionView.frame.width - 32, height: 160)
+                case 1...2: return CGSize(width: sportCollectionView.frame.width - 32, height: 120)
+                default: return CGSize(width: 50, height: 50)
+                }
+            }
+        default:
+            return CGSize(width: 50, height: 50)
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if collectionView == sportCollectionView {
+            let vc = DetailAssembly.build(training: presenter.trainingsOneDay[indexPath.item])
+            navigationController?.pushViewController(vc, animated: true)
+        }
+    }
+}

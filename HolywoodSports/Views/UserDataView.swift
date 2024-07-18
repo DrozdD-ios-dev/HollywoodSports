@@ -13,7 +13,6 @@ final class UserDataView: UIView {
     
     private let leftLabel: UILabel = {
         let label = UILabel()
-        label.text = "Change"
         label.font = CustomFont.font(type: .poppins600, size: 16)
         label.textColor = .gray153
         return label
@@ -21,7 +20,6 @@ final class UserDataView: UIView {
     
     private let rightLabel: UILabel = {
         let label = UILabel()
-        label.text = "Male"
         label.font = CustomFont.font(type: .poppins600, size: 16)
         return label
     }()

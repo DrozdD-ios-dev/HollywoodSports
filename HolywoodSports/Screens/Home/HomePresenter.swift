@@ -12,7 +12,9 @@ import UIKit
 protocol HomeInput {
     func viewDidLoad()
     
-//    var characters: [Result]? { get }
+    var user: User { get }
+    var trainingsOneDay: [Training] { get set }
+    var weekDays: [Day] { get set }
 }
 
 final class HomePresenter: HomeInput {
@@ -20,14 +22,15 @@ final class HomePresenter: HomeInput {
     // MARK: - Properties
     
     weak var view: HomeOutput?
-//    var characters: [Result]?
-    
-    
+    var user = CacheService.loadCache(key: StringKeys.user.rawValue) ?? User.mock
+    var trainingsOneDay = CacheService.loadCache(key: StringKeys.oneDayTrainings.rawValue) ?? Training.mock
+    var weekDays = Day.mock
     
     // MARK: - Public Functions
     
     func viewDidLoad() {
-    
+        let userNew = CacheService.loadCache(key: "user") ?? User.mock
+        user = userNew
     }
 }
 

@@ -12,8 +12,7 @@ import UIKit
 protocol DetailInput {
     func viewDidLoad()
     
-    var trainingAll: [Trainings] { get }
-    var trainingForOneDay: [Trainings] { get set }
+    var training: Training { get }
 }
 
 final class DetailPresenter: DetailInput {
@@ -21,8 +20,15 @@ final class DetailPresenter: DetailInput {
     // MARK: - Properties
     
     weak var view: DetailOutput?
-    let trainingAll = Trainings.mock
-    lazy var trainingForOneDay: [Trainings] = trainingAll.shuffled()
+    var training: Training
+//    let trainingAll = Training.mock
+//    lazy var trainingForOneDay: [Training] = trainingAll.shuffled()
+    
+    // MARK: - Init
+    
+    init(training: Training) {
+        self.training = training
+    }
     
     // MARK: - Public Functions
     

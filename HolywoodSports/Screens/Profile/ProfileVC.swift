@@ -15,7 +15,7 @@ final class ProfileVC: BaseController {
     
     // MARK: - Views
     
-    private let userPhoto: UIImageView = {
+    private let userImage: UIImageView = {
         let imageView = UIImageView()
         imageView.layer.cornerRadius = 70
         imageView.clipsToBounds = true
@@ -117,13 +117,13 @@ private extension ProfileVC {
         print("Save")
         progressView.configure(with: presenter.user.points)
         // for test
-//        var use = CacheService.loadCache(key: "user") ?? User.mock
-//        if use.showEvent {
-//            use.showEvent = false
-//        } else {
-//            use.showEvent = true
-//        }
-//        CacheService.saveCache(user: use, key: "user")
+        var use = CacheService.loadCache(key: "user") ?? User.mock
+        if use.showEvent {
+            use.showEvent = false
+        } else {
+            use.showEvent = true
+        }
+        CacheService.saveCache(model: use, key: "user")
     }
 }
 
@@ -132,7 +132,8 @@ private extension ProfileVC {
 extension ProfileVC: ProfileOutput {
     
     func updateImage() {
-        userPhoto.image = presenter.user.image.convertToImage()
+//        userPhoto.image = ConverterBase64.convertStringToImage(text: presenter.user.image)
+        userImage.image = presenter.user.image.convertStringToImage()
     }
   
 }
@@ -142,13 +143,13 @@ extension ProfileVC: ProfileOutput {
 private extension ProfileVC {
     
     func addSubviews() {
-        [userPhoto, editButton, verticalStack, progressView,
+        [userImage, editButton, verticalStack, progressView,
          saveChangesButton].forEach { view.addSubview($0) }
     }
     
     func makeConstraints() {
         let screen = UIScreen.main.bounds.height
-        userPhoto.snp.makeConstraints { make in
+        userImage.snp.makeConstraints { make in
             make.top.equalToSuperview().inset(screen > 851 ? 80 : 30)
             make.centerX.equalToSuperview()
             make.size.equalTo(143)
@@ -156,7 +157,7 @@ private extension ProfileVC {
         
         editButton.snp.makeConstraints { make in
             make.horizontalEdges.equalToSuperview().inset(screen > 851 ? 132 : 120)
-            make.top.equalTo(userPhoto.snp.bottom).offset(16)
+            make.top.equalTo(userImage.snp.bottom).offset(16)
             make.height.equalTo(36)
         }
         

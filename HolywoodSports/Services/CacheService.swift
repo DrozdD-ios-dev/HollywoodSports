@@ -9,9 +9,9 @@ import Foundation
 
 struct CacheService {
     
-    static func saveCache<T: Encodable>(user: T, key: String) {
+    static func saveCache<T: Encodable>(model: T, key: String) {
         let encoder = JSONEncoder()
-        if let encoded = try? encoder.encode(user) {
+        if let encoded = try? encoder.encode(model) {
             UserDefaults.standard.set(encoded, forKey: key)
         }
     }

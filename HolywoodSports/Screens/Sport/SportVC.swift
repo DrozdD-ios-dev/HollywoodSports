@@ -24,7 +24,7 @@ final class SportVC: BaseController {
         collectionView.backgroundColor = .clear
         collectionView.showsVerticalScrollIndicator = false
         collectionView.register(EventCell.self, forCellWithReuseIdentifier: EventCell.identifier)
-        collectionView.register(TodayTextCell.self, forCellWithReuseIdentifier: TodayTextCell.identifier)
+        collectionView.register(TodayFirstCell.self, forCellWithReuseIdentifier: TodayFirstCell.identifier)
         collectionView.register(TrainingCell.self, forCellWithReuseIdentifier: TrainingCell.identifier)
         collectionView.dataSource = self
         collectionView.delegate = self
@@ -49,6 +49,7 @@ final class SportVC: BaseController {
         view.backgroundColor = .background
         addSubviews()
         makeConstraints()
+        presenter.viewDidLoad()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -56,8 +57,8 @@ final class SportVC: BaseController {
         navigationController?.setNavigationBarHidden(true, animated: true)
         tabBarController?.tabBar.isHidden = false
         //for test
-//        presenter.viewDidLoad()
-//        sportCollectionView.reloadData()
+        presenter.viewDidLoad()
+        sportCollectionView.reloadData()
     }
 }
 
@@ -103,9 +104,9 @@ extension SportVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSourc
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if presenter.user.showEvent {
-            return 7
-        } else {
             return 6
+        } else {
+            return 5
         }
     }
     
@@ -115,10 +116,11 @@ extension SportVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSourc
             switch indexPath.item {
             case 0: let cell = collectionView.dequeueReusableCell(withClass: EventCell.self, for: indexPath)
                 return cell
-            case 1: let cell = collectionView.dequeueReusableCell(withClass: TodayTextCell.self, for: indexPath)
+            case 1: let cell = collectionView.dequeueReusableCell(withClass: TodayFirstCell.self, for: indexPath)
+                cell.configure(model: presenter.trainingsOneDay[indexPath.item])
                 return cell
-            case 2...6: let cell = collectionView.dequeueReusableCell(withClass: TrainingCell.self, for: indexPath)
-                cell.configure(model: presenter.trainingAll[indexPath.item])
+            case 2...5: let cell = collectionView.dequeueReusableCell(withClass: TrainingCell.self, for: indexPath)
+                cell.configure(model: presenter.trainingsOneDay[indexPath.item])
                 return cell
             default:
                 return UICollectionViewCell()
@@ -127,10 +129,11 @@ extension SportVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSourc
         } else {
             
             switch indexPath.item {
-            case 0: let cell = collectionView.dequeueReusableCell(withClass: TodayTextCell.self, for: indexPath)
+            case 0: let cell = collectionView.dequeueReusableCell(withClass: TodayFirstCell.self, for: indexPath)
+                cell.configure(model: presenter.trainingsOneDay[indexPath.item])
                 return cell
-            case 1...5: let cell = collectionView.dequeueReusableCell(withClass: TrainingCell.self, for: indexPath)
-                cell.configure(model: presenter.trainingAll[indexPath.item])
+            case 1...4: let cell = collectionView.dequeueReusableCell(withClass: TrainingCell.self, for: indexPath)
+                cell.configure(model: presenter.trainingsOneDay[indexPath.item])
                 return cell
             default:
                 return UICollectionViewCell()
@@ -143,21 +146,21 @@ extension SportVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSourc
         if presenter.user.showEvent {
             switch indexPath.item {
             case 0: return CGSize(width: sportCollectionView.frame.width - 32, height: 180)
-            case 1: return CGSize(width: sportCollectionView.frame.width - 32, height: 40)
-            case 2...6: return CGSize(width: sportCollectionView.frame.width - 32, height: 120)
+            case 1: return CGSize(width: sportCollectionView.frame.width - 32, height: 160)
+            case 2...5: return CGSize(width: sportCollectionView.frame.width - 32, height: 120)
             default: return CGSize(width: 50, height: 50)
             }
         } else {
             switch indexPath.item {
-            case 0: return CGSize(width: sportCollectionView.frame.width - 32, height: 40)
-            case 1...5: return CGSize(width: sportCollectionView.frame.width - 32, height: 120)
+            case 0: return CGSize(width: sportCollectionView.frame.width - 32, height: 160)
+            case 1...4: return CGSize(width: sportCollectionView.frame.width - 32, height: 120)
             default: return CGSize(width: 50, height: 50)
             }
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let vc = DetailAssembly.build()
+        let vc = DetailAssembly.build(training: presenter.trainingsOneDay[indexPath.item])
         navigationController?.pushViewController(vc, animated: true)
     }
 }

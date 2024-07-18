@@ -1,27 +1,31 @@
 //
-//  TrainingCell.swift
+//  TodayFirstCell.swift
 //  HolywoodSports
 //
-//  Created by Дрозд Денис on 16.07.2024.
+//  Created by Дрозд Денис on 17.07.2024.
 //
 
 import UIKit
 
-final class TrainingCell: UICollectionViewCell {
-    
-    // MARK: - Properties
+final class TodayFirstCell: UICollectionViewCell {
     
     // MARK: - Views
     
+    private let backgroundGrayView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .gray51
+        view.layer.cornerRadius = 23
+        return view
+    }()
+    
     private let trainingImage: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "training0")
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
         imageView.layer.cornerRadius = 15
         return imageView
     }()
- 
+    
     private let nameTrainingLabel: UILabel = {
         let label = UILabel()
         label.font = CustomFont.font(type: .poppins500, size: 16)
@@ -38,7 +42,7 @@ final class TrainingCell: UICollectionViewCell {
         label.text = "Desc Training"
         return label
     }()
-
+    
     private let backgroundProgressLine: UIView = {
         let view = UIView()
         view.backgroundColor = .background
@@ -70,12 +74,19 @@ final class TrainingCell: UICollectionViewCell {
         return stack
     }()
     
+    private let todayPlanLabel: UILabel = {
+        let label = UILabel()
+        label.font = CustomFont.font(type: .poppins700, size: 18)
+        label.textAlignment = .left
+        label.text = "Today Plan"
+        return label
+    }()
+    
     // MARK: - Init
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = .gray51
-        layer.cornerRadius = 23
+        backgroundColor = .background
         addSubviews()
         makeConstraints()
         
@@ -88,7 +99,7 @@ final class TrainingCell: UICollectionViewCell {
 
 // MARK: - Private Functions
 
-private extension TrainingCell {
+private extension TodayFirstCell {
     
     private func updateProgressLineFrame(number: Int) {
         let normalizedNumber = min(max(number, 0), 100)
@@ -102,7 +113,7 @@ private extension TrainingCell {
 
 // MARK: - Public Functions
 
-extension TrainingCell {
+extension TodayFirstCell {
     
     func configure(model: Training) {
         trainingImage.image = UIImage(named: model.imageName)
@@ -115,15 +126,28 @@ extension TrainingCell {
 
 // MARK: - Layout
 
-extension TrainingCell {
+extension TodayFirstCell {
     
     private func addSubviews() {
-        [trainingImage, verticalStack].forEach { contentView.addSubview($0) }
+        contentView.addSubview(todayPlanLabel)
+        contentView.addSubview(backgroundGrayView)
+        backgroundGrayView.addSubview(trainingImage)
+        backgroundGrayView.addSubview(verticalStack)
         backgroundProgressLine.addSubview(currentProgressLine)
         backgroundProgressLine.addSubview(percentLabel)
     }
     
     private func makeConstraints() {
+        
+        backgroundGrayView.snp.makeConstraints { make in
+            make.bottom.equalToSuperview()
+            make.horizontalEdges.equalToSuperview()
+            make.height.equalTo(120)
+        }
+        
+        todayPlanLabel.snp.makeConstraints { make in
+            make.leading.top.equalToSuperview()
+        }
 
         trainingImage.snp.makeConstraints { make in
             make.verticalEdges.equalToSuperview().inset(10)
@@ -148,3 +172,4 @@ extension TrainingCell {
         }
     }
 }
+

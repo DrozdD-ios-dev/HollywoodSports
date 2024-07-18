@@ -12,8 +12,8 @@ import UIKit
 protocol SportInput {
     func viewDidLoad()
     
-    var trainingAll: [Trainings] { get }
-    var trainingForOneDay: [Trainings] { get set }
+    var trainingAll: [Training] { get }
+    var trainingsOneDay: [Training] { get set }
     var user: User { get set }
 }
 
@@ -23,8 +23,12 @@ final class SportPresenter: SportInput {
     
     weak var view: SportOutput?
     var user: User = CacheService.loadCache(key: "user") ?? User.mock
-    let trainingAll = Trainings.mock
-    lazy var trainingForOneDay: [Trainings] = trainingAll.shuffled()
+    let trainingAll = CacheService.loadCache(key: StringKeys.allTrainings.rawValue) ?? Training.mock
+//    var trainingsOneDayTemp: [Training] {
+//        return trainingAll.shuffled().dropLast(2)
+//    }
+    
+    var trainingsOneDay = CacheService.loadCache(key: StringKeys.oneDayTrainings.rawValue) ?? Training.mock
     
     // MARK: - Public Functions
     

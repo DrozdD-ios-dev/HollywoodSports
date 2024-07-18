@@ -9,8 +9,8 @@ import Foundation
 
 struct DetailAssembly {
     
-    static func build() -> DetailVC {
-        let presenter = DetailPresenter()
+    static func build(training: Training) -> DetailVC {
+        let presenter = DetailPresenter(training: training)
         let vc = DetailVC(presenter: presenter)
         presenter.view = vc
         return vc

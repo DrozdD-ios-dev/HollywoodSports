@@ -110,17 +110,12 @@ final class DetailVC: BaseController {
     private lazy var doneButton: DefaultButton = {
         let button = DefaultButton(text: "Done")
         button.addAction(UIAction { _ in self.doneButtonTapped() }, for: .touchUpInside)
+        button.alpha = 0.3
+        button.isEnabled = false
         return button
     }()
     
-    private lazy var blurView: UIView = {
-        let view = UIView()
-        view.layer.cornerRadius = 15
-        view.layer.borderWidth = 0.5
-        view.clipsToBounds = true
-        view.layer.borderColor = UIColor.greenDark.cgColor
-        return view
-    }()
+    private lazy var blurView = BlurView()
     
     private lazy var backButton: CircularBackButton = {
         let button = CircularBackButton()
@@ -148,12 +143,7 @@ final class DetailVC: BaseController {
         addSubviews()
         makeConstraints()
         presenter.viewDidLoad()
-        test()
-    }
-    
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
-        setupBlurViewSettings()
+        updateView()
     }
 }
 
@@ -169,25 +159,14 @@ private extension DetailVC {
         navigationItem.leftBarButtonItem = backBarButtonItem
     }
     
-    func setupBlurViewSettings() {
-        let blurEffect = UIBlurEffect(style: .prominent)
-        let blurEffectView = UIVisualEffectView(effect: blurEffect)
-        blurEffectView.layer.cornerRadius = 15
-        blurEffectView.frame = blurView.bounds
-        blurEffectView.alpha = 0.8
-        blurEffectView.clipsToBounds = true
-        blurView.addSubview(blurEffectView)
-    }
-    
-    func test() {
-        let training = Trainings.mock
-        titleLabel.text = training[0].title
-        descriptionLabel.text = training[0].description
-        trainingImage.image = training[0].image
-        
-        checkBoxImage.image = training[0].image
-        checkBoxTitleLabel.text = training[0].title
-        checkBoxDescriptionLabel.text = training[0].miniDescription
+    func updateView() {
+        titleLabel.text = presenter.training.title
+        descriptionLabel.text = presenter.training.description
+        trainingImage.image = UIImage(named: presenter.training.imageName)
+        checkBoxImage.image = UIImage(named: presenter.training.imageName)
+        checkBoxTitleLabel.text = presenter.training.title
+        checkBoxDescriptionLabel.text = presenter.training.miniDescription
+        blurView.configure(with: presenter.training)
     }
     
     func activateCheckBoxView() {
@@ -228,12 +207,13 @@ private extension DetailVC {
         checkBoxView.addSubview(checkBoxVerticalStack)
         checkBoxView.addSubview(checkBoxCircleView)
         checkBoxCircleView.addSubview(checkBoxDoneCircleImage)
-        trainingImage.addSubview(blurView)
+        view.addSubview(blurView)
     }
     
     func makeConstraints() {
+        let screen = UIScreen.main.bounds.height
         trainingImage.snp.makeConstraints { make in
-            make.height.equalTo(trainingImage.snp.width).multipliedBy(0.65)
+            make.height.equalTo(screen > 851 ? 250 : 210)
             make.width.equalToSuperview()
         }
         
@@ -243,17 +223,17 @@ private extension DetailVC {
         }
         
         checkBoxView.snp.makeConstraints { make in
-            make.height.equalTo(checkBoxView.snp.width).multipliedBy(0.27)
+            make.height.equalTo(screen > 851 ? 99 : 80)
             make.width.equalToSuperview()
         }
         
         verticalStack.snp.makeConstraints { make in
             make.horizontalEdges.equalToSuperview().inset(16)
-            make.top.equalTo(view.safeAreaLayoutGuide).inset(60)
+            make.top.equalTo(view.safeAreaLayoutGuide).inset(screen > 851 ? 60 : 30)
         }
         
         doneButton.snp.makeConstraints { make in
-            make.bottom.equalTo(view.safeAreaLayoutGuide).inset(20)
+            make.bottom.equalTo(view.safeAreaLayoutGuide).inset(screen > 851 ? 20 : 10)
             make.horizontalEdges.equalToSuperview().inset(16)
             make.height.equalTo(doneButton.snp.width).multipliedBy(0.155)
         }
@@ -281,7 +261,7 @@ private extension DetailVC {
         blurView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.bottom.equalTo(trainingImage.snp.top).offset(32)
-            make.width.equalTo(263)
+            make.width.equalTo(trainingImage.snp.width).multipliedBy(0.73)
             make.height.equalTo(64)
         }
     }

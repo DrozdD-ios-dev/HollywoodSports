@@ -128,7 +128,8 @@ private extension EditPhotoVC {
     }
     
     func updateImage() {
-        userPhoto.image = presenter.user.image.convertToImage()
+//        userPhoto.image = ConverterBase64.convertStringToImage(text: presenter.user.image)   
+        userPhoto.image = presenter.user.image.convertStringToImage()
     }
 }
 
@@ -137,7 +138,7 @@ private extension EditPhotoVC {
 private extension EditPhotoVC {
 
     @objc func saveChangesButtonTapped() {
-        CacheService.saveCache(user: presenter.user, key: "user")
+        CacheService.saveCache(model: presenter.user, key: "user")
         navigationController?.popViewController(animated: true)
     }
     
@@ -146,7 +147,7 @@ private extension EditPhotoVC {
     }
     
     @objc func nextButtonTapped() {
-        CacheService.saveCache(user: presenter.user, key: "user")
+        CacheService.saveCache(model: presenter.user, key: "user")
         skipButtonTapped()
     }
     
@@ -232,13 +233,11 @@ extension EditPhotoVC: UIImagePickerControllerDelegate & UINavigationControllerD
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let selectedImage = info[.editedImage] as? UIImage ?? info[.originalImage] as? UIImage {
-    
-                if let imageData = selectedImage.pngData() {
-                    let imageBase64String = imageData.base64EncodedString()
-                    presenter.user.image = imageBase64String
-                    userPhoto.image = selectedImage
-                    presenter.isChangedPhoto = true
-                }
+            
+            let imageBase64String = selectedImage.convertImageToString()
+            presenter.user.image = imageBase64String ?? "error"
+            userPhoto.image = selectedImage
+            presenter.isChangedPhoto = true
         }
         picker.dismiss(animated: true, completion: nil)
     }
