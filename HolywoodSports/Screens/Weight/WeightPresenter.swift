@@ -27,7 +27,7 @@ final class WeightPresenter: WeightInput {
     // MARK: - Properties
     
     weak var view: WeightOutput?
-    var user = CacheService.loadCache(key: "user") ?? User.mock
+    var user = CacheService.loadCache(key: StringKeys.user.rawValue) ?? User.mock
     let weightElements = ["kg", "lbs", ""]
     var weightIndex = Weight.kg
     var result: (Int, Int) = (50, 0)

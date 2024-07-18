@@ -27,9 +27,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     private func openVC() {
         var vc = UIViewController()
-//        if UserDefaults.standard.object(forKey: "user") == nil {
+//        if UserDefaults.standard.object(forKey: StringKeys.user.rawValue) == nil {
 //            let user = User.mock
-//            CacheService.saveCache(user: user, key: "user")
+//            CacheService.saveCache(user: user, key: StringKeys.user.rawValue)
 //            vc = UINavigationController(rootViewController: OnboardingAssembly.build())
 //        } else {
             vc = TabBarController()

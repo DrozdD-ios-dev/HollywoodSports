@@ -9,11 +9,13 @@ import UIKit
 
 extension String {
     func convertStringToImage() -> UIImage? {
-        var resultImage = UIImage(named: "image")
         guard let imageData = Data(base64Encoded: self, options: .ignoreUnknownCharacters) else {
-            return nil
+            return UIImage(named: "image")
         }
-        resultImage = UIImage(data: imageData)
+        var resultImage = UIImage(data: imageData)
+        if resultImage == nil {
+            resultImage = UIImage(named: "image")
+        }
         return resultImage
     }
 }

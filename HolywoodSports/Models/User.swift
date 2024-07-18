@@ -16,6 +16,7 @@ struct User: Codable {
     var weightValue: Weight
     var heightValue: Height
     var showEvent: Bool
+    var currentDay: Date
 }
 
 enum Weight: String, Codable, CaseIterable {
@@ -29,14 +30,20 @@ enum Height: String, Codable, CaseIterable {
 }
 
 extension User {
-    static let mock = User(
-        image: "",
-        gender: .female,
-        weight: 60.0,
-        height: 160,
-        points: 25,
-        weightValue: .kg,
-        heightValue: .cm,
-        showEvent: true
-    )
+    static let mock: User = {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd.MM.yyyy"
+        let currentDay = dateFormatter.date(from: "01.01.2024") ?? Date()
+        
+        return User(
+            image: "",
+            gender: .female,
+            weight: 60.0,
+            height: 160,
+            points: 0,
+            weightValue: .kg,
+            heightValue: .cm,
+            showEvent: true,
+            currentDay: currentDay)
+    }()
 }

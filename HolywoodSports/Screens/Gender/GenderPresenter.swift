@@ -20,7 +20,7 @@ final class GenderPresenter: GenderInput {
     // MARK: - Properties
     
     weak var view: GenderOutput?
-    var user = CacheService.loadCache(key: "user") ?? User.mock
+    var user = CacheService.loadCache(key: StringKeys.user.rawValue) ?? User.mock
     
     // MARK: - Public Functions
     

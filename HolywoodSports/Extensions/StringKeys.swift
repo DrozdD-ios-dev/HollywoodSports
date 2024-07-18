@@ -11,4 +11,5 @@ enum StringKeys: String {
     case user = "user"
     case allTrainings = "all"
     case oneDayTrainings = "one"
+    case currentWeek = "week"
 }

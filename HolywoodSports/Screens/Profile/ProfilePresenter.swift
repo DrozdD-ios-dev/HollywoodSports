@@ -11,7 +11,7 @@ import UIKit
 
 protocol ProfileInput {
     func viewDidLoad()
-    func updateUserData()
+    func viewWillAppear()
     
     var rows: [String] { get }
     var user: User { get set }
@@ -24,7 +24,7 @@ final class ProfilePresenter: ProfileInput {
     
     weak var view: ProfileOutput?
     var rows = ["Change your gender", "Change your weigth", "Change your height"]
-    var user = CacheService.loadCache(key: "user") ?? User.mock
+    var user = CacheService.loadCache(key: StringKeys.user.rawValue) ?? User.mock
     var userViews = [UserDataView]()
     
     
@@ -32,11 +32,15 @@ final class ProfilePresenter: ProfileInput {
     // MARK: - Public Functions
     
     func viewDidLoad() {
+
+    }
+    
+    func viewWillAppear() {
         updateUserData()
     }
     
     func updateUserData() {
-        user = CacheService.loadCache(key: "user") ?? User.mock
+        user = CacheService.loadCache(key: StringKeys.user.rawValue) ?? User.mock
         userViews[0].configure(with: user.gender.rawValue.firstUppercased)
         userViews[1].configure(with: "\(user.weight) \(user.weightValue)")
         userViews[2].configure(with: "\(user.height) \(user.heightValue)")

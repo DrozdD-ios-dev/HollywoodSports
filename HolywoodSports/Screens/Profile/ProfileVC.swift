@@ -69,7 +69,8 @@ final class ProfileVC: BaseController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tabBarController?.tabBar.isHidden = false
-        presenter.updateUserData()
+        presenter.viewWillAppear()
+        progressView.configure(with: presenter.user.points)
     }
 }
 
@@ -115,15 +116,21 @@ private extension ProfileVC {
     
     @objc func saveChangesButtonTapped() {
         print("Save")
-        progressView.configure(with: presenter.user.points)
         // for test
-        var use = CacheService.loadCache(key: "user") ?? User.mock
-        if use.showEvent {
-            use.showEvent = false
-        } else {
-            use.showEvent = true
-        }
-        CacheService.saveCache(model: use, key: "user")
+//        var use = CacheService.loadCache(key: StringKeys.user.rawValue) ?? User.mock
+//        if use.showEvent {
+//            use.showEvent = false
+//        } else {
+//            use.showEvent = true
+//        }
+//        CacheService.saveCache(model: use, key: StringKeys.user.rawValue)
+        var user = CacheService.loadCache(key: StringKeys.user.rawValue) ?? User.mock
+        var trainingAll = CacheService.loadCache(key: StringKeys.allTrainings.rawValue) ?? Training.mock
+        var trainingsOneDay = CacheService.loadCache(key: StringKeys.oneDayTrainings.rawValue) ?? Training.mock
+        
+        dump(user)
+        dump(trainingAll)
+        dump(trainingsOneDay)
     }
 }
 
@@ -132,7 +139,6 @@ private extension ProfileVC {
 extension ProfileVC: ProfileOutput {
     
     func updateImage() {
-//        userPhoto.image = ConverterBase64.convertStringToImage(text: presenter.user.image)
         userImage.image = presenter.user.image.convertStringToImage()
     }
   

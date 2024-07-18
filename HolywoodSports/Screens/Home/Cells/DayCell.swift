@@ -50,7 +50,7 @@ final class DayCell: UICollectionViewCell {
 extension DayCell {
     func configure(model: Day) {
         characterLabel.text = model.character
-        numberLabel.text = "\(model.number)"
+        numberLabel.text = "\(model.dayNumber)"
         backgroundColor = UIColor(named: "\(model.color )")
     }
 }

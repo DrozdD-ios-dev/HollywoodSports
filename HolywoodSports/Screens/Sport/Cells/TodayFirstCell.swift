@@ -103,7 +103,7 @@ private extension TodayFirstCell {
     
     private func updateProgressLineFrame(number: Int) {
         let normalizedNumber = min(max(number, 0), 100)
-        let maxWeight = 213
+        let maxWeight = 215
         let result = normalizedNumber * maxWeight / 100
         
         let frame = CGRect(x: 0, y: 0, width: result, height: 16)

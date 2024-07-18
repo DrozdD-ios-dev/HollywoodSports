@@ -8,7 +8,7 @@
 import UIKit
 
 protocol HomeOutput: AnyObject {
-    
+    func updateImage()
 }
 
 final class HomeVC: BaseController {
@@ -61,7 +61,6 @@ final class HomeVC: BaseController {
     
     private let dateLabel: UILabel = {
         let label = UILabel()
-        label.text = "July 2024"
         label.font = CustomFont.font(type: .poppins700, size: 18)
         return label
     }()
@@ -123,8 +122,7 @@ final class HomeVC: BaseController {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: true)
         tabBarController?.tabBar.isHidden = false
-        //for test
-        presenter.viewDidLoad()
+        presenter.viewWillAppear()
         sportCollectionView.reloadData()
     }
 }
@@ -134,7 +132,7 @@ final class HomeVC: BaseController {
 private extension HomeVC {
     
     func setupSettings() {
-        userImage.image = presenter.user.image.convertStringToImage()
+        dateLabel.text = CheckDateService.currentMonthYear()
     }
 }
 
@@ -149,7 +147,9 @@ private extension HomeVC {
 
 extension HomeVC: HomeOutput {
     
-    
+    func updateImage() {
+        userImage.image = presenter.user.image.convertStringToImage()
+    }
 }
 
 // MARK: - Layout
@@ -283,7 +283,7 @@ extension HomeVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == sportCollectionView {
-            let vc = DetailAssembly.build(training: presenter.trainingsOneDay[indexPath.item])
+            let vc = DetailAssembly.build(training: presenter.trainingsOneDay[indexPath.item], index: indexPath.item)
             navigationController?.pushViewController(vc, animated: true)
         }
     }

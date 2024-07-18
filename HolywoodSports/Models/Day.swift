@@ -7,20 +7,20 @@
 
 import Foundation
 
-struct Day {
+struct Day: Codable {
     var color: String
-    var number: Int
+    var dayNumber: String
     var character: String
 }
 
 extension Day {
     static let mock: [Day] = [
-        Day(color: "purple-dark", number: 1, character: "M"),
-        Day(color: "gray51", number: 2, character: "T"),
-        Day(color: "purple-dark", number: 3, character: "W"),
-        Day(color: "gray51", number: 4, character: "T"),
-        Day(color: "gray51", number: 5, character: "F"),
-        Day(color: "gray51", number: 6, character: "S"),
-        Day(color: "gray51", number: 7, character: "S"),
+        Day(color: "gray51", dayNumber: "1", character: "M"),
+        Day(color: "gray51", dayNumber: "2", character: "T"),
+        Day(color: "gray51", dayNumber: "3", character: "W"),
+        Day(color: "gray51", dayNumber: "4", character: "T"),
+        Day(color: "gray51", dayNumber: "5", character: "F"),
+        Day(color: "gray51", dayNumber: "6", character: "S"),
+        Day(color: "gray51", dayNumber: "7", character: "S"),
     ]
 }

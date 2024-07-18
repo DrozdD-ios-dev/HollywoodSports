@@ -56,8 +56,7 @@ final class SportVC: BaseController {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: true)
         tabBarController?.tabBar.isHidden = false
-        //for test
-        presenter.viewDidLoad()
+        presenter.viewWillAppear()
         sportCollectionView.reloadData()
     }
 }
@@ -160,7 +159,7 @@ extension SportVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSourc
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let vc = DetailAssembly.build(training: presenter.trainingsOneDay[indexPath.item])
+        let vc = DetailAssembly.build(training: presenter.trainingsOneDay[indexPath.item], index: indexPath.item)
         navigationController?.pushViewController(vc, animated: true)
     }
 }

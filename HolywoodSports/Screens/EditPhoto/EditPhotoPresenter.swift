@@ -21,7 +21,7 @@ final class EditPhotoPresenter: EditPhotoInput {
     // MARK: - Properties
     
     weak var view: EditPhotoOutput?
-    var user = CacheService.loadCache(key: "user") ?? User.mock
+    var user = CacheService.loadCache(key: StringKeys.user.rawValue) ?? User.mock
     var isChangedPhoto = false {
         didSet {
             view?.activateButton()

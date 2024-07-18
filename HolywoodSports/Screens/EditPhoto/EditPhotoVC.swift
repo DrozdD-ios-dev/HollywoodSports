@@ -21,11 +21,11 @@ final class EditPhotoVC: BaseController {
         return button
     }()
     
-    private lazy var userPhoto: UIImageView = {
+    private lazy var userImage: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "image")
         imageView.clipsToBounds = true
         imageView.layer.cornerRadius = 25
+        imageView.contentMode = .scaleAspectFill
         imageView.isUserInteractionEnabled = true
         let gesture = UITapGestureRecognizer(target: self, action: #selector(addPhotoButtonTapped))
         imageView.addGestureRecognizer(gesture)
@@ -128,8 +128,7 @@ private extension EditPhotoVC {
     }
     
     func updateImage() {
-//        userPhoto.image = ConverterBase64.convertStringToImage(text: presenter.user.image)   
-        userPhoto.image = presenter.user.image.convertStringToImage()
+        userImage.image = presenter.user.image.convertStringToImage()
     }
 }
 
@@ -138,7 +137,7 @@ private extension EditPhotoVC {
 private extension EditPhotoVC {
 
     @objc func saveChangesButtonTapped() {
-        CacheService.saveCache(model: presenter.user, key: "user")
+        CacheService.saveCache(model: presenter.user, key: StringKeys.user.rawValue)
         navigationController?.popViewController(animated: true)
     }
     
@@ -147,7 +146,7 @@ private extension EditPhotoVC {
     }
     
     @objc func nextButtonTapped() {
-        CacheService.saveCache(model: presenter.user, key: "user")
+        CacheService.saveCache(model: presenter.user, key: StringKeys.user.rawValue)
         skipButtonTapped()
     }
     
@@ -158,7 +157,7 @@ private extension EditPhotoVC {
     }
     
     @objc func trashButtonTapped() {
-        userPhoto.image = UIImage(named: "image")
+        userImage.image = UIImage(named: "image")
         presenter.user.image = ""
     }
     
@@ -186,12 +185,12 @@ extension EditPhotoVC: EditPhotoOutput {
 private extension EditPhotoVC {
     
     func addSubviews() {
-        [userPhoto, descriptionLabel, saveChangesButton, skipButton, nextButton].forEach { view.addSubview($0) }
-        userPhoto.addSubview(trashButton)
+        [userImage, descriptionLabel, saveChangesButton, skipButton, nextButton].forEach { view.addSubview($0) }
+        userImage.addSubview(trashButton)
     }
     
     func makeConstraints() {
-        userPhoto.snp.makeConstraints { make in
+        userImage.snp.makeConstraints { make in
             make.horizontalEdges.equalToSuperview().inset(88)
             make.center.equalToSuperview()
             make.height.equalTo(214)
@@ -199,7 +198,7 @@ private extension EditPhotoVC {
         
         descriptionLabel.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.bottom.equalTo(userPhoto.snp.top).offset(-25)
+            make.bottom.equalTo(userImage.snp.top).offset(-25)
         }
         
         saveChangesButton.snp.makeConstraints { make in
@@ -236,7 +235,7 @@ extension EditPhotoVC: UIImagePickerControllerDelegate & UINavigationControllerD
             
             let imageBase64String = selectedImage.convertImageToString()
             presenter.user.image = imageBase64String ?? "error"
-            userPhoto.image = selectedImage
+            userImage.image = selectedImage
             presenter.isChangedPhoto = true
         }
         picker.dismiss(animated: true, completion: nil)

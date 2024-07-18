@@ -17,8 +17,6 @@
 		8AAE7C6A2C4199AA00536B7F /* HomePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AAE7C692C4199AA00536B7F /* HomePresenter.swift */; };
 		8AAE7C6D2C419A7100536B7F /* BaseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AAE7C6C2C419A7100536B7F /* BaseController.swift */; };
 		8AAE7C6F2C419B3D00536B7F /* TabBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AAE7C6E2C419B3D00536B7F /* TabBarItem.swift */; };
-		8AAE7C722C419BBF00536B7F /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 8AAE7C712C419BBF00536B7F /* SnapKit */; };
-		8AAE7C742C419BBF00536B7F /* SnapKit-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 8AAE7C732C419BBF00536B7F /* SnapKit-Dynamic */; };
 		8AAE7C772C419BCA00536B7F /* SFSafeSymbols in Frameworks */ = {isa = PBXBuildFile; productRef = 8AAE7C762C419BCA00536B7F /* SFSafeSymbols */; };
 		8AAE7C792C419C1200536B7F /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AAE7C782C419C1200536B7F /* Colors.swift */; };
 		8AAE7C7B2C41A49500536B7F /* CustomAppearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AAE7C7A2C41A49500536B7F /* CustomAppearance.swift */; };
@@ -45,7 +43,7 @@
 		8AAE7CAA2C43DF6200536B7F /* EditPhotoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AAE7CA92C43DF6200536B7F /* EditPhotoVC.swift */; };
 		8AAE7CAC2C43DF6A00536B7F /* EditPhotoPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AAE7CAB2C43DF6A00536B7F /* EditPhotoPresenter.swift */; };
 		8AAE7CAE2C43E93200536B7F /* CircularBackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AAE7CAD2C43E93200536B7F /* CircularBackButton.swift */; };
-		8AAE7CB12C43F8CF00536B7F /* CacheService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AAE7CB02C43F8CF00536B7F /* CacheService.swift */; };
+		8AAE7CB12C43F8CF00536B7F /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AAE7CB02C43F8CF00536B7F /* Cache.swift */; };
 		8AAE7CB32C44027F00536B7F /* ConverterBase64+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AAE7CB22C44027F00536B7F /* ConverterBase64+Ext.swift */; };
 		8AAE7CB72C440E7800536B7F /* StartedAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AAE7CB62C440E7800536B7F /* StartedAssembly.swift */; };
 		8AAE7CB92C440E8C00536B7F /* StartedVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AAE7CB82C440E8C00536B7F /* StartedVC.swift */; };
@@ -85,6 +83,8 @@
 		8AAE7D112C49301D00536B7F /* ImageKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AAE7D102C49301D00536B7F /* ImageKeys.swift */; };
 		8AAE7D142C4947BA00536B7F /* DayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AAE7D132C4947BA00536B7F /* DayCell.swift */; };
 		8AAE7D162C49490D00536B7F /* Day.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AAE7D152C49490D00536B7F /* Day.swift */; };
+		8AAE7D242C495B6B00536B7F /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 8AAE7D232C495B6B00536B7F /* SnapKit */; };
+		8AAE7D262C49647000536B7F /* CheckDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AAE7D252C49647000536B7F /* CheckDate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -125,7 +125,7 @@
 		8AAE7CA92C43DF6200536B7F /* EditPhotoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPhotoVC.swift; sourceTree = "<group>"; };
 		8AAE7CAB2C43DF6A00536B7F /* EditPhotoPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPhotoPresenter.swift; sourceTree = "<group>"; };
 		8AAE7CAD2C43E93200536B7F /* CircularBackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularBackButton.swift; sourceTree = "<group>"; };
-		8AAE7CB02C43F8CF00536B7F /* CacheService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheService.swift; sourceTree = "<group>"; };
+		8AAE7CB02C43F8CF00536B7F /* Cache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cache.swift; sourceTree = "<group>"; };
 		8AAE7CB22C44027F00536B7F /* ConverterBase64+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ConverterBase64+Ext.swift"; sourceTree = "<group>"; };
 		8AAE7CB62C440E7800536B7F /* StartedAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartedAssembly.swift; sourceTree = "<group>"; };
 		8AAE7CB82C440E8C00536B7F /* StartedVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartedVC.swift; sourceTree = "<group>"; };
@@ -165,6 +165,7 @@
 		8AAE7D102C49301D00536B7F /* ImageKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageKeys.swift; sourceTree = "<group>"; };
 		8AAE7D132C4947BA00536B7F /* DayCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayCell.swift; sourceTree = "<group>"; };
 		8AAE7D152C49490D00536B7F /* Day.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day.swift; sourceTree = "<group>"; };
+		8AAE7D252C49647000536B7F /* CheckDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckDate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -173,8 +174,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8AAE7C772C419BCA00536B7F /* SFSafeSymbols in Frameworks */,
-				8AAE7C722C419BBF00536B7F /* SnapKit in Frameworks */,
-				8AAE7C742C419BBF00536B7F /* SnapKit-Dynamic in Frameworks */,
+				8AAE7D242C495B6B00536B7F /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -243,7 +243,8 @@
 		8AAE7C5B2C41954D00536B7F /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				8AAE7CB02C43F8CF00536B7F /* CacheService.swift */,
+				8AAE7CB02C43F8CF00536B7F /* Cache.swift */,
+				8AAE7D252C49647000536B7F /* CheckDate.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -505,9 +506,8 @@
 			);
 			name = HolywoodSports;
 			packageProductDependencies = (
-				8AAE7C712C419BBF00536B7F /* SnapKit */,
-				8AAE7C732C419BBF00536B7F /* SnapKit-Dynamic */,
 				8AAE7C762C419BCA00536B7F /* SFSafeSymbols */,
+				8AAE7D232C495B6B00536B7F /* SnapKit */,
 			);
 			productName = HolywoodSports;
 			productReference = 8AAE7C422C4193A100536B7F /* HolywoodSports.app */;
@@ -538,8 +538,8 @@
 			);
 			mainGroup = 8AAE7C392C4193A100536B7F;
 			packageReferences = (
-				8AAE7C702C419BBF00536B7F /* XCRemoteSwiftPackageReference "SnapKit" */,
 				8AAE7C752C419BCA00536B7F /* XCRemoteSwiftPackageReference "SFSafeSymbols" */,
+				8AAE7D222C495B6B00536B7F /* XCRemoteSwiftPackageReference "SnapKit" */,
 			);
 			productRefGroup = 8AAE7C432C4193A100536B7F /* Products */;
 			projectDirPath = "";
@@ -612,7 +612,7 @@
 				8AAE7C462C4193A100536B7F /* AppDelegate.swift in Sources */,
 				8AAE7CFC2C47E59800536B7F /* Cell+Ext.swift in Sources */,
 				8AAE7CBD2C440EBA00536B7F /* SecondAssembly.swift in Sources */,
-				8AAE7CB12C43F8CF00536B7F /* CacheService.swift in Sources */,
+				8AAE7CB12C43F8CF00536B7F /* Cache.swift in Sources */,
 				8AAE7C7F2C41B87200536B7F /* ProfileAssembly.swift in Sources */,
 				8AAE7CB32C44027F00536B7F /* ConverterBase64+Ext.swift in Sources */,
 				8AAE7CFA2C46A6D400536B7F /* TrainingCell.swift in Sources */,
@@ -638,6 +638,7 @@
 				8AAE7C892C41B99D00536B7F /* SportPresenter.swift in Sources */,
 				8AAE7CF52C4688AB00536B7F /* TrashButton.swift in Sources */,
 				8AAE7CA32C43B3CA00536B7F /* ProgressView.swift in Sources */,
+				8AAE7D262C49647000536B7F /* CheckDate.swift in Sources */,
 				8AAE7C9B2C41C45A00536B7F /* User.swift in Sources */,
 				8AAE7CE82C45CDFD00536B7F /* WeightAssembly.swift in Sources */,
 			);
@@ -866,14 +867,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		8AAE7C702C419BBF00536B7F /* XCRemoteSwiftPackageReference "SnapKit" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 5.7.1;
-			};
-		};
 		8AAE7C752C419BCA00536B7F /* XCRemoteSwiftPackageReference "SFSafeSymbols" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SFSafeSymbols/SFSafeSymbols";
@@ -882,23 +875,26 @@
 				minimumVersion = 5.3.0;
 			};
 		};
+		8AAE7D222C495B6B00536B7F /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.7.1;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		8AAE7C712C419BBF00536B7F /* SnapKit */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 8AAE7C702C419BBF00536B7F /* XCRemoteSwiftPackageReference "SnapKit" */;
-			productName = SnapKit;
-		};
-		8AAE7C732C419BBF00536B7F /* SnapKit-Dynamic */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 8AAE7C702C419BBF00536B7F /* XCRemoteSwiftPackageReference "SnapKit" */;
-			productName = "SnapKit-Dynamic";
-		};
 		8AAE7C762C419BCA00536B7F /* SFSafeSymbols */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 8AAE7C752C419BCA00536B7F /* XCRemoteSwiftPackageReference "SFSafeSymbols" */;
 			productName = SFSafeSymbols;
+		};
+		8AAE7D232C495B6B00536B7F /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8AAE7D222C495B6B00536B7F /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

@@ -160,7 +160,7 @@ private extension HeightVC {
     func saveValue() {
         presenter.user.height = Double(presenter.result.0) + (Double(presenter.result.1) / 10)
         presenter.user.heightValue = presenter.heightIndex
-        CacheService.saveCache(model: presenter.user, key: "user")
+        CacheService.saveCache(model: presenter.user, key: StringKeys.user.rawValue)
     }
 }
 

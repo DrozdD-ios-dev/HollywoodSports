@@ -8,7 +8,7 @@
 import UIKit
 
 protocol DetailOutput: AnyObject {
-    
+    func activateCheckBoxView()
 }
 
 final class DetailVC: BaseController {
@@ -168,12 +168,6 @@ private extension DetailVC {
         checkBoxDescriptionLabel.text = presenter.training.miniDescription
         blurView.configure(with: presenter.training)
     }
-    
-    func activateCheckBoxView() {
-        checkBoxCircleView.backgroundColor = .purpleBlue
-        checkBoxCircleView.layer.borderWidth = 0
-        checkBoxDoneCircleImage.isHidden = false
-    }
 }
 
 // MARK: - Actions
@@ -181,20 +175,33 @@ private extension DetailVC {
 private extension DetailVC {
     
     @objc func backButtonTapped() {
-//        navigationController?.setNavigationBarHidden(true, animated: true)
-        navigationController?.popViewController(animated: true)
+        presenter.backToScreen()
+        if presenter.backToScreenFlag {
+            navigationController?.popViewController(animated: true)
+        }
     }
     
     @objc func doneButtonTapped() {
         print("Done")
-        activateCheckBoxView()
+#warning("Сделать алерт и +50 поинтов")
+        presenter.user.points += 50
+        CacheService.saveCache(model: presenter.user, key: StringKeys.user.rawValue)
+        presenter.removeProgress()
+        navigationController?.popViewController(animated: true)
     }
 }
 
 // MARK: - Output
 
 extension DetailVC: DetailOutput {
-  
+    
+    func activateCheckBoxView() {
+        checkBoxCircleView.backgroundColor = .purpleBlue
+        checkBoxCircleView.layer.borderWidth = 0
+        checkBoxDoneCircleImage.isHidden = false
+        doneButton.isEnabled = true
+        doneButton.alpha = 1
+    }
 }
 
 // MARK: - Layout
