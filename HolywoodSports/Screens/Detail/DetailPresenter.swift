@@ -27,6 +27,7 @@ final class DetailPresenter: DetailInput {
     var training: Training
     var user = CacheService.loadCache(key: StringKeys.user.rawValue) ?? User.mock
     var trainingAll = CacheService.loadCache(key: StringKeys.allTrainings.rawValue) ?? Training.mock
+    var currentWeek = CacheService.loadCache(key: StringKeys.currentWeek.rawValue) ?? Day.mock
     var index: Int
     var startTime: DispatchTime?
     var backToScreenFlag = true
@@ -43,6 +44,7 @@ final class DetailPresenter: DetailInput {
     func viewDidLoad() {
         startTimer()
         updateEventData()
+        updateWeek()
     }
     
     func backToScreen() {
@@ -71,9 +73,8 @@ private extension DetailPresenter {
         let timeInterval = Double(nanoTime) / 1_000_000_000
         let resultSeconds = timeInterval + trainingAll[training.index].seconds
         
-        #warning("5 of 60!!!")
-        if resultSeconds > 5.0 {
-            let timeInMinute = Int((resultSeconds / 5.0).rounded())
+        if resultSeconds > 60.0 {
+            let timeInMinute = Int((resultSeconds / 60.0).rounded())
             trainingAll[training.index].progress += timeInMinute
             checkProgress(progress: trainingAll[training.index].progress)
         } else {
@@ -88,9 +89,8 @@ private extension DetailPresenter {
         if index == 0, user.showEvent {
             user.showEvent = false
             user.currentDay = CheckDateService.currentDay()
-            #warning("Сделать алерт и +50 поинтов")
-            user.points += 50
             CacheService.saveCache(model: user, key: StringKeys.user.rawValue)
+            view?.callAlertVC()
         }
     }
     
@@ -99,5 +99,18 @@ private extension DetailPresenter {
             backToScreenFlag = false
             view?.activateCheckBoxView()
         }
+    }
+    
+    func updateWeek() {
+        let currentDay = CheckDateService.currentDay()
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "d"
+        for (index, value) in currentWeek.enumerated() {
+            if value.dayNumber == dateFormatter.string(from: currentDay) {
+                currentWeek[index].color = "purple-dark"
+                currentWeek[index].opacity = 0
+            }
+        }
+        CacheService.saveCache(model: currentWeek, key: StringKeys.currentWeek.rawValue)
     }
 }

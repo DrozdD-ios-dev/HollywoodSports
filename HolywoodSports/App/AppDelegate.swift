@@ -16,24 +16,33 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         openVC()
+        setupCountApp()
         return true
     }
     
-//    private func setupDefaultUsers() {
-//        if UserDefaults.standard.object(forKey: "firstSetup") == nil {
-            
-//        }
-//    }
+    func setupCountApp() {
+        if UserDefaults.standard.integer(forKey: "first") == 0 {
+            UserDefaults.standard.set(1, forKey: "first")
+        } else {
+            if UserDefaults.standard.integer(forKey: "first") >= 1 {
+                var count = UserDefaults.standard.integer(forKey: "first")
+                count += 1
+                UserDefaults.standard.set("\(count)", forKey: "first")
+            }
+        }
+    }
     
     private func openVC() {
         var vc = UIViewController()
-//        if UserDefaults.standard.object(forKey: StringKeys.user.rawValue) == nil {
+        
+        if UserDefaults.standard.integer(forKey: "first") == 0 {
 //            let user = User.mock
-//            CacheService.saveCache(user: user, key: StringKeys.user.rawValue)
-//            vc = UINavigationController(rootViewController: OnboardingAssembly.build())
-//        } else {
+//            CacheService.saveCache(model: user, key: StringKeys.user.rawValue)
+            vc = UINavigationController(rootViewController: OnboardingAssembly.build())
+        } else {
             vc = TabBarController()
-//        }
+        }
+        
         let window = UIWindow(frame: UIScreen.main.bounds)
         window.rootViewController = vc
         window.overrideUserInterfaceStyle = .dark

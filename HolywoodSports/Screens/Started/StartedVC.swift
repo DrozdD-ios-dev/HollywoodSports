@@ -74,7 +74,7 @@ final class StartedVC: BaseController {
     }
 }
 
-// MARK: - Private Function
+// MARK: - Private Functions
 
 private extension StartedVC {
     

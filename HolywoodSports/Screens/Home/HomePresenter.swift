@@ -38,15 +38,15 @@ final class HomePresenter: HomeInput {
     func viewWillAppear() {
         user = CacheService.loadCache(key: StringKeys.user.rawValue) ?? User.mock
         trainingAll = CacheService.loadCache(key: StringKeys.allTrainings.rawValue) ?? Training.mock
+        weekDays = CacheService.loadCache(key: StringKeys.currentWeek.rawValue) ?? Day.mock
         var newTrainingsOneDay: [Training] = []
-        for valueAll in trainingAll {
-            for valueOne in trainingsOneDay {
+        for valueOne in trainingsOneDay{
+            for valueAll in trainingAll {
                 if valueAll.title == valueOne.title {
                     newTrainingsOneDay.append(valueAll)
                 }
             }
         }
-        
         trainingsOneDay = newTrainingsOneDay
         CacheService.saveCache(model: trainingsOneDay, key: StringKeys.oneDayTrainings.rawValue)
         view?.updateImage()
@@ -65,9 +65,9 @@ private extension HomePresenter {
             if weekDays[index].dayNumber != dateFormatter.string(from: value) {
                 weekDays[index].dayNumber = dateFormatter.string(from: value)
                 weekDays[index].color = "gray51"
-                CacheService.saveCache(model: weekDays, key: StringKeys.currentWeek.rawValue)
             }
         }
+        CacheService.saveCache(model: weekDays, key: StringKeys.currentWeek.rawValue)
     }
     
     func updateDataForCurrentDay() {
@@ -76,18 +76,14 @@ private extension HomePresenter {
         let currentDay = dateFormatter.string(from: CheckDateService.currentDay())
         let savedDay = dateFormatter.string(from: user.currentDay)
 
-        #warning("!=   !!!")
-        if currentDay == savedDay {
+        if currentDay != savedDay {
             user.showEvent = true
             CacheService.saveCache(model: user, key: StringKeys.user.rawValue)
-            
             let trainingsOneDay: [Training] = {
                 return trainingAll.shuffled().dropLast(2)
             }()
-            
             self.trainingsOneDay = trainingsOneDay
-            dump(trainingsOneDay)
-            CacheService.saveCache(model: trainingsOneDay, key: StringKeys.oneDayTrainings.rawValue)
+            CacheService.saveCache(model: self.trainingsOneDay, key: StringKeys.oneDayTrainings.rawValue)
         }
     }
 }

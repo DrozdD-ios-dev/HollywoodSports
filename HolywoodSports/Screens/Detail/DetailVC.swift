@@ -9,6 +9,7 @@ import UIKit
 
 protocol DetailOutput: AnyObject {
     func activateCheckBoxView()
+    func callAlertVC()
 }
 
 final class DetailVC: BaseController {
@@ -182,12 +183,10 @@ private extension DetailVC {
     }
     
     @objc func doneButtonTapped() {
-        print("Done")
-#warning("Сделать алерт и +50 поинтов")
-        presenter.user.points += 50
-        CacheService.saveCache(model: presenter.user, key: StringKeys.user.rawValue)
+        callAlertVC()
+        presenter.backToScreenFlag = true
+        deActivateCheckBoxView()
         presenter.removeProgress()
-        navigationController?.popViewController(animated: true)
     }
 }
 
@@ -201,6 +200,20 @@ extension DetailVC: DetailOutput {
         checkBoxDoneCircleImage.isHidden = false
         doneButton.isEnabled = true
         doneButton.alpha = 1
+    }
+    
+    func deActivateCheckBoxView() {
+        checkBoxCircleView.backgroundColor = .white
+        checkBoxCircleView.layer.borderWidth = 2
+        checkBoxDoneCircleImage.isHidden = true
+        doneButton.isEnabled = false
+        doneButton.alpha = 0.3
+    }
+    
+    func callAlertVC() {
+        let genderVC = AlertAssembly.build()
+        genderVC.modalPresentationStyle = .custom
+        present(genderVC, animated: true)
     }
 }
 

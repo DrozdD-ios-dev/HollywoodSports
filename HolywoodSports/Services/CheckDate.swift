@@ -43,22 +43,4 @@ final class CheckDateService {
         }
         return dates
     }
-    
-    static func comparisonDay(day: String) -> Bool {
-        var result = false
-        let currentDate = Date()
-        let calendar = Calendar.current
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "d-MM-yyyy"
-        guard let comparedDay = dateFormatter.date(from: day) else { return false }
-        
-        let compareDateComponents = calendar.dateComponents([.day, .month], from: comparedDay)
-        let currentDateComponents = calendar.dateComponents([.day, .month], from: currentDate)
-        if compareDateComponents.day == currentDateComponents.day && compareDateComponents.month == currentDateComponents.month {
-            result = true
-        } else {
-            result = false
-        }
-        return result
-    }
 }

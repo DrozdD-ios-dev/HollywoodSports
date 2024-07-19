@@ -81,6 +81,7 @@ private extension GenderVC {
 
         presenter.user.gender = Gender.allCases[index]
         CacheService.saveCache(model: presenter.user, key: StringKeys.user.rawValue)
+        NotificationCenter.default.post(name: Notification.Name("UpdateUser"), object: nil)
         
         if flag {
             let vc = WeightAssembly.build(flag: true)

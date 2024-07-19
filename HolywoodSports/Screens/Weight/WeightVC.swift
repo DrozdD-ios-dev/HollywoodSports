@@ -160,6 +160,7 @@ private extension WeightVC {
         presenter.user.weight = Double(presenter.result.0) + (Double(presenter.result.1) / 10)
         presenter.user.weightValue = presenter.weightIndex
         CacheService.saveCache(model: presenter.user, key: StringKeys.user.rawValue)
+        NotificationCenter.default.post(name: Notification.Name("UpdateUser"), object: nil)
     }
 }
 

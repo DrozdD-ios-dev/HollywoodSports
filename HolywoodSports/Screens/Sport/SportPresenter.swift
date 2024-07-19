@@ -36,16 +36,14 @@ final class SportPresenter: SportInput {
         user = CacheService.loadCache(key: StringKeys.user.rawValue) ?? User.mock
         trainingAll = CacheService.loadCache(key: StringKeys.allTrainings.rawValue) ?? Training.mock
         var newTrainingsOneDay: [Training] = []
-        for valueAll in trainingAll {
-            for valueOne in trainingsOneDay {
+        for valueOne in trainingsOneDay{
+            for valueAll in trainingAll {
                 if valueAll.title == valueOne.title {
                     newTrainingsOneDay.append(valueAll)
                 }
             }
         }
-        
         trainingsOneDay = newTrainingsOneDay
-        dump(trainingsOneDay)
         CacheService.saveCache(model: trainingsOneDay, key: StringKeys.oneDayTrainings.rawValue)
     }
 }

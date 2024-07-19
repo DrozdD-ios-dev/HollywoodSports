@@ -15,7 +15,7 @@ final class TabBarController: UITabBarController {
     private let sportVC = SportAssembly.build()
     private let profileVC = ProfileAssembly.build()
     
-    // MARK: - LifeCicle
+    // MARK: - View Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,7 +23,7 @@ final class TabBarController: UITabBarController {
         setupAppearance()
     }
     
-    // MARK: - private func
+    // MARK: - Private function
     
     private func createTabBarItems() {
         let itemOne = TabBarItem(

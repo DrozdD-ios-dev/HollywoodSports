@@ -124,6 +124,7 @@ final class HomeVC: BaseController {
         tabBarController?.tabBar.isHidden = false
         presenter.viewWillAppear()
         sportCollectionView.reloadData()
+        weekCollectionView.reloadData()
     }
 }
 

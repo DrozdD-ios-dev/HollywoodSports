@@ -64,6 +64,7 @@ final class ProfileVC: BaseController {
         makeConstraints()
         createViews()
         presenter.viewDidLoad()
+        NotificationCenter.default.addObserver(self, selector: #selector(updateUserNotification), name: Notification.Name("UpdateUser"), object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -115,22 +116,11 @@ private extension ProfileVC {
     }
     
     @objc func saveChangesButtonTapped() {
-        print("Save")
-        // for test
-//        var use = CacheService.loadCache(key: StringKeys.user.rawValue) ?? User.mock
-//        if use.showEvent {
-//            use.showEvent = false
-//        } else {
-//            use.showEvent = true
-//        }
-//        CacheService.saveCache(model: use, key: StringKeys.user.rawValue)
-        var user = CacheService.loadCache(key: StringKeys.user.rawValue) ?? User.mock
-        var trainingAll = CacheService.loadCache(key: StringKeys.allTrainings.rawValue) ?? Training.mock
-        var trainingsOneDay = CacheService.loadCache(key: StringKeys.oneDayTrainings.rawValue) ?? Training.mock
-        
-        dump(user)
-        dump(trainingAll)
-        dump(trainingsOneDay)
+        CacheService.saveCache(model: presenter.user, key: StringKeys.user.rawValue)
+    }
+    
+    @objc func updateUserNotification() {
+        presenter.viewWillAppear()
     }
 }
 
@@ -141,7 +131,7 @@ extension ProfileVC: ProfileOutput {
     func updateImage() {
         userImage.image = presenter.user.image.convertStringToImage()
     }
-  
+    
 }
 
 // MARK: - Layout

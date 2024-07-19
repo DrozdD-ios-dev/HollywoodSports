@@ -31,6 +31,13 @@ final class DayCell: UICollectionViewCell {
         return stack
     }()
     
+    private let opacityView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .background
+        view.alpha = 0.6
+        return view
+    }()
+    
     // MARK: - Init
     
     override init(frame: CGRect) {
@@ -48,10 +55,12 @@ final class DayCell: UICollectionViewCell {
 // MARK: - Public Functions
 
 extension DayCell {
+    
     func configure(model: Day) {
         characterLabel.text = model.character
         numberLabel.text = "\(model.dayNumber)"
         backgroundColor = UIColor(named: "\(model.color )")
+        opacityView.alpha = model.opacity
     }
 }
 
@@ -61,11 +70,16 @@ extension DayCell {
     
     private func addSubviews() {
         contentView.addSubview(verticalStack)
+        contentView.addSubview(opacityView)
     }
     
     private func makeConstraints() {
         verticalStack.snp.makeConstraints { make in
             make.center.equalToSuperview()
+        }
+        
+        opacityView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
         }
     }
 }
