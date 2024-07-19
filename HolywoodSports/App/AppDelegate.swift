@@ -36,9 +36,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         var vc = UIViewController()
         
         if UserDefaults.standard.integer(forKey: "first") == 0 {
-//            let user = User.mock
-//            CacheService.saveCache(model: user, key: StringKeys.user.rawValue)
-            vc = UINavigationController(rootViewController: OnboardingAssembly.build())
+            vc = UINavigationController(rootViewController: StartedAssembly.build())
         } else {
             vc = TabBarController()
         }
@@ -49,37 +47,5 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window.makeKeyAndVisible()
         self.window = window
     }
-    
-//    private func setupRemoteSettings() {
-//        let remoteConfig = RemoteConfig.remoteConfig()
-//        let settings = RemoteConfigSettings()
-//        settings.minimumFetchInterval = 0
-//        remoteConfig.configSettings = settings
-//        remoteConfig.fetchAndActivate { status, error in
-//            if error != nil {
-//                print(error?.localizedDescription as Any)
-//                self.openVC(parameter: false)
-//            } else {
-//                if status != .error {
-//                    let result = remoteConfig.configValue(forKey: "1needForceUpdate")
-//                    self.openVC(parameter: result.boolValue)
-//                }
-//            }
-//        }
-//    }
-    
-//    private func openVC(parameter: Bool) {
-//        var vc = UIViewController()
-//        if parameter {
-////            vc = ThirdAssembly.build()
-//        } else {
-////            vc = TabBarController()
-//        }
-//        let window = UIWindow(frame: UIScreen.main.bounds)
-//        window.rootViewController = vc
-//        window.overrideUserInterfaceStyle = .light
-//        window.makeKeyAndVisible()
-//        self.window = window
-//    }
 }
 
