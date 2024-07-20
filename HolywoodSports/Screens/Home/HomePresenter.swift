@@ -4,6 +4,7 @@
 //
 //  Created by Дрозд Денис on 12.07.2024.
 //
+//swiftlint: disable for_where
 
 import UIKit
 
@@ -40,11 +41,9 @@ final class HomePresenter: HomeInput {
         trainingAll = CacheService.loadCache(key: StringKeys.allTrainings.rawValue) ?? Training.mock
         weekDays = CacheService.loadCache(key: StringKeys.currentWeek.rawValue) ?? Day.mock
         var newTrainingsOneDay: [Training] = []
-        for valueOne in trainingsOneDay{
-            for valueAll in trainingAll {
-                if valueAll.title == valueOne.title {
+        for valueOne in trainingsOneDay {
+            for valueAll in trainingAll where valueAll.title == valueOne.title {
                     newTrainingsOneDay.append(valueAll)
-                }
             }
         }
         trainingsOneDay = newTrainingsOneDay
@@ -58,13 +57,13 @@ final class HomePresenter: HomeInput {
 private extension HomePresenter {
     
     func updateCurrentWeek() {
-        let currentWeekDates = CheckDateService.datesForCurrentWeek()
+        let currentWeekDates = DateService.datesForCurrentWeek()
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "d"
         for (index, value) in currentWeekDates.enumerated() {
             if weekDays[index].dayNumber != dateFormatter.string(from: value) {
                 weekDays[index].dayNumber = dateFormatter.string(from: value)
-                weekDays[index].color = "gray51"
+                weekDays[index].color = "gray-51"
             }
         }
         CacheService.saveCache(model: weekDays, key: StringKeys.currentWeek.rawValue)
@@ -73,7 +72,7 @@ private extension HomePresenter {
     func updateDataForCurrentDay() {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "d"
-        let currentDay = dateFormatter.string(from: CheckDateService.currentDay())
+        let currentDay = dateFormatter.string(from: Date.now)
         let savedDay = dateFormatter.string(from: user.currentDay)
 
         if currentDay != savedDay {

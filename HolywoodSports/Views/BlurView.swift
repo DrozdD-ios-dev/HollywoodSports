@@ -11,66 +11,6 @@ final class BlurView: UIView {
     
     // MARK: - Views
     
-    private let purpleLeftView: UIView = {
-        let view = UIView()
-        view.backgroundColor = .purpleDark
-        return view
-    }()
-    
-    private let leftImage: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(named: "time")
-        return imageView
-    }()
-    
-    private let purpleRightView: UIView = {
-        let view = UIView()
-        view.backgroundColor = .red
-        return view
-    }()
-    
-    private let rightImage: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(named: "burn")
-        return imageView
-    }()
-    
-    private let verticalLineView: UIView = {
-        let view = UIView()
-        view.backgroundColor = .gray153
-        return view
-    }()
-    
-    private let leftTitleLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Time"
-        label.font = CustomFont.font(type: .poppins400, size: 10)
-        label.textColor = .gray153
-        return label
-    }()
-    
-    private let leftDescriptionLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Male"
-        label.font = CustomFont.font(type: .poppins700, size: 12)
-        return label
-    }()
-    
-    private let rightTitleLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Burn"
-        label.font = CustomFont.font(type: .poppins400, size: 10)
-        label.textColor = .gray153
-        return label
-    }()
-    
-    private let rightDescriptionLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Male"
-        label.font = CustomFont.font(type: .poppins700, size: 12)
-        return label
-    }()
-    
     private lazy var horizontalBlurStack: UIStackView = {
         let stack = UIStackView()
         stack.distribution = .equalSpacing
@@ -82,7 +22,7 @@ final class BlurView: UIView {
     
     let blurEffect = UIBlurEffect(style: .prominent)
     lazy var blurEffectView = UIVisualEffectView(effect: blurEffect)
-    let images = ["time", "burn"]
+    let images = [UIImage.Icons.time, UIImage.Icons.burn]
     let systemLabels = ["Time", "Burn"]
     var labels = [UILabel]()
     
@@ -94,7 +34,7 @@ final class BlurView: UIView {
         setupBlurViewSettings()
         addSubviews()
         makeConstraints()
-        createViews() 
+        createViews()
     }
     
     override func layoutSubviews() {
@@ -105,15 +45,28 @@ final class BlurView: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+}
+
+// MARK: - Public Functions
+
+extension BlurView {
     
-    // MARK: - Private Function
+    func configure(with model: Training) {
+        labels[0].text = "\(model.time) min"
+        labels[1].text = "\(model.kcal) kcal"
+    }
+}
+
+// MARK: - Private Function
+
+private extension BlurView {
     
     func setupBlurViewSettings() {
         blurEffectView.layer.cornerRadius = 15
         blurEffectView.alpha = 0.4
         blurEffectView.clipsToBounds = true
         blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        self.addSubview(blurEffectView)
+        addSubview(blurEffectView)
     }
     
     func setupSettings() {
@@ -128,7 +81,7 @@ final class BlurView: UIView {
         var flag = true
         for index in 0...1 {
             let imageView = UIImageView()
-            imageView.image = UIImage(named: images[index])
+            imageView.image = images[index]
             
             let view = UIView()
             view.backgroundColor = .purpleDark
@@ -137,14 +90,18 @@ final class BlurView: UIView {
             imageView.snp.makeConstraints { $0.center.equalToSuperview() }
             view.snp.makeConstraints { $0.size.equalTo(32) }
             
+            let verticalLineView = UIView()
+            verticalLineView.backgroundColor = .gray153
+            verticalLineView.snp.makeConstraints { $0.width.equalTo(1) }
+            
             let titleLabel = UILabel()
             titleLabel.text = systemLabels[index]
-            titleLabel.font = CustomFont.font(type: .poppins400, size: 10)
+            titleLabel.font = .font(type: .poppins400, size: 10)
             titleLabel.textColor = .gray153
             
             let descriptionLabel = UILabel()
             descriptionLabel.text = "20 min"
-            descriptionLabel.font = CustomFont.font(type: .poppins700, size: 12)
+            descriptionLabel.font = .font(type: .poppins700, size: 12)
             
             lazy var verticalStack = UIStackView(arrangedSubviews: [titleLabel, descriptionLabel])
             verticalStack.axis = .vertical
@@ -164,13 +121,6 @@ final class BlurView: UIView {
             }
         }
     }
-    
-    // MARK: - Public Functions
-    
-    func configure(with model: Training) {
-        labels[0].text = "\(model.time) min"
-        labels[1].text = "\(model.kcal) kcal"
-    }
 }
 
 // MARK: - Layout
@@ -182,14 +132,8 @@ private extension BlurView {
     }
     
     func makeConstraints() {
-
         horizontalBlurStack.snp.makeConstraints { make in
             make.edges.equalToSuperview().inset(16)
         }
-        
-        verticalLineView.snp.makeConstraints { make in
-            make.width.equalTo(1)
-        }
     }
 }
-

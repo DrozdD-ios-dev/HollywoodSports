@@ -16,27 +16,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         openVC()
-        setupCountApp()
+        updateCountApp()
         return true
     }
     
-    func setupCountApp() {
-        if UserDefaults.standard.integer(forKey: "first") == 0 {
-            UserDefaults.standard.set(1, forKey: "first")
+    func updateCountApp() {
+        if UserDefaults.standard.integer(forKey: StringKeys.first.rawValue) == 0 {
+            UserDefaults.standard.set(1, forKey: StringKeys.first.rawValue)
         } else {
-            if UserDefaults.standard.integer(forKey: "first") >= 1 {
-                var count = UserDefaults.standard.integer(forKey: "first")
+            if UserDefaults.standard.integer(forKey: StringKeys.first.rawValue) >= 1 {
+                var count = UserDefaults.standard.integer(forKey: StringKeys.first.rawValue)
                 count += 1
-                UserDefaults.standard.set("\(count)", forKey: "first")
+                UserDefaults.standard.set("\(count)", forKey: StringKeys.first.rawValue)
             }
         }
     }
     
     private func openVC() {
-        var vc = UIViewController()
-        
-        if UserDefaults.standard.integer(forKey: "first") == 0 {
-            vc = UINavigationController(rootViewController: StartedAssembly.build())
+        let vc: UIViewController
+        if UserDefaults.standard.integer(forKey: StringKeys.first.rawValue) == 0 {
+            vc = UINavigationController(rootViewController: StartVC())
         } else {
             vc = TabBarController()
         }
@@ -48,4 +47,3 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window = window
     }
 }
-

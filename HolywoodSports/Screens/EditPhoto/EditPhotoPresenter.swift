@@ -10,7 +10,7 @@ import UIKit
 // MARK: - Protocol
 
 protocol EditPhotoInput {
-    func viewDidLoad()
+    func updateView()
 
     var user: User { get set }
     var isChangedPhoto: Bool { get set }
@@ -21,6 +21,7 @@ final class EditPhotoPresenter: EditPhotoInput {
     // MARK: - Properties
     
     weak var view: EditPhotoOutput?
+    private var flag: Bool
     var user = CacheService.loadCache(key: StringKeys.user.rawValue) ?? User.mock
     var isChangedPhoto = false {
         didSet {
@@ -28,15 +29,19 @@ final class EditPhotoPresenter: EditPhotoInput {
         }
     }
     
+    // MARK: - Init
+    
+    init(flag: Bool) {
+        self.flag = flag
+    }
+    
     // MARK: - Public Functions
     
-    func viewDidLoad() {
-        
+    func updateView() {
+        if flag {
+            view?.updateViewForAddPhoto()
+        } else {
+            view?.updateViewForChangePhoto()
+        }
     }
-}
-
-// MARK: - Private Functions
-
-private extension EditPhotoPresenter {
-    
 }

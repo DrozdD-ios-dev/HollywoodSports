@@ -16,4 +16,3 @@ struct ProfileAssembly {
         return vc
     }
 }
-

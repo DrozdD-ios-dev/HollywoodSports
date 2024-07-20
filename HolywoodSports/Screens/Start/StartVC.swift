@@ -1,5 +1,5 @@
 //
-//  StartedVC.swift
+//  StartVC.swift
 //  HolywoodSports
 //
 //  Created by Дрозд Денис on 14.07.2024.
@@ -7,17 +7,13 @@
 
 import UIKit
 
-protocol StartedOutput: AnyObject {
-
-}
-
-final class StartedVC: BaseController {
+final class StartVC: BaseController {
     
     // MARK: - Views
     
     private let ballImage: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "ball")
+        imageView.image = UIImage(named: ImageKeys.ball.rawValue)
         return imageView
     }()
     
@@ -25,7 +21,7 @@ final class StartedVC: BaseController {
         let label = UILabel()
         label.text = "Hollywood"
         label.textAlignment = .center
-        label.font = CustomFont.font(type: .poppins700, size: 47)
+        label.font = .font(type: .poppins700, size: 47)
         return label
     }()
     
@@ -34,7 +30,7 @@ final class StartedVC: BaseController {
         label.text = "sports"
         label.textAlignment = .right
         label.textColor = .yellowMiddle
-        label.font = CustomFont.font(type: .poppins700, size: 47)
+        label.font = .font(type: .poppins700, size: 47)
         return label
     }()
     
@@ -42,7 +38,7 @@ final class StartedVC: BaseController {
         let button = UIButton(type: .system)
         button.backgroundColor = .white
         button.tintColor = .purpleFirstScreen
-        let font = CustomFont.font(type: .poppins700, size: 16)
+        let font = UIFont.font(type: .poppins700, size: 16)
         let attributes: [NSAttributedString.Key: Any] = [ .font: font as Any ]
         let attributedString = NSAttributedString(string: "Get Started",
                                                   attributes: attributes)
@@ -51,18 +47,7 @@ final class StartedVC: BaseController {
         button.addAction(UIAction { _ in self.startedButtonTapped() }, for: .touchUpInside)
         return button
     }()
-    
-    // MARK: - Properties
-    
-    private var presenter: StartedInput
-    
-    // MARK: - Init
-    
-    init(presenter: StartedInput) {
-        self.presenter = presenter
-        super.init()
-    }
-    
+
     // MARK: - View Lifecycle
     
     override func viewDidLoad() {
@@ -70,35 +55,22 @@ final class StartedVC: BaseController {
         view.backgroundColor = .purpleFirstScreen
         addSubviews()
         makeConstraints()
-        presenter.viewDidLoad()
     }
-}
-
-// MARK: - Private Functions
-
-private extension StartedVC {
-    
 }
 
 // MARK: - Actions
 
-private extension StartedVC {
+private extension StartVC {
     
     func startedButtonTapped() {
-        let vc = OnboardingAssembly.build()
+        let vc = OnboardingVC()
         navigationController?.pushViewController(vc, animated: true)
     }
 }
 
-// MARK: - Output
-
-extension StartedVC: StartedOutput {
-
-}
-
 // MARK: - Layout
 
-private extension StartedVC {
+private extension StartVC {
     
     func addSubviews() {
         view.addSubview(ballImage)
@@ -108,7 +80,6 @@ private extension StartedVC {
     }
     
     func makeConstraints() {
-        
         ballImage.snp.makeConstraints { make in
             make.top.equalToSuperview().inset(195)
             make.centerX.equalToSuperview()

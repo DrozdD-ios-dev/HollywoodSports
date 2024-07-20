@@ -9,13 +9,11 @@ import UIKit
 
 final class TrainingCell: UICollectionViewCell {
     
-    // MARK: - Properties
-    
     // MARK: - Views
     
     private let trainingImage: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "training0")
+        imageView.image = UIImage(named: ImageKeys.training0.rawValue)
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
         imageView.layer.cornerRadius = 15
@@ -24,7 +22,7 @@ final class TrainingCell: UICollectionViewCell {
  
     private let nameTrainingLabel: UILabel = {
         let label = UILabel()
-        label.font = CustomFont.font(type: .poppins500, size: 16)
+        label.font = .font(type: .poppins500, size: 16)
         label.textAlignment = .left
         label.text = "Name Training"
         return label
@@ -32,7 +30,7 @@ final class TrainingCell: UICollectionViewCell {
     
     private let descriptionTrainingLabel: UILabel = {
         let label = UILabel()
-        label.font = CustomFont.font(type: .poppins400, size: 13)
+        label.font = .font(type: .poppins400, size: 13)
         label.textAlignment = .left
         label.textColor = .gray153
         label.text = "Desc Training"
@@ -56,7 +54,7 @@ final class TrainingCell: UICollectionViewCell {
     
     private let percentLabel: UILabel = {
         let label = UILabel()
-        label.font = CustomFont.font(type: .poppins700, size: 8)
+        label.font = .font(type: .poppins700, size: 8)
         label.textColor = .white
         label.textAlignment = .left
         return label
@@ -86,6 +84,19 @@ final class TrainingCell: UICollectionViewCell {
     }
 }
 
+// MARK: - Public Functions
+
+extension TrainingCell {
+    
+    func configure(model: Training) {
+        trainingImage.image = UIImage(named: model.imageName)
+        nameTrainingLabel.text = model.title
+        descriptionTrainingLabel.text = model.miniDescription
+        percentLabel.text = "\(model.progress)%"
+        updateProgressLineFrame(number: model.progress)
+    }
+}
+
 // MARK: - Private Functions
 
 private extension TrainingCell {
@@ -97,19 +108,6 @@ private extension TrainingCell {
         
         let frame = CGRect(x: 0, y: 0, width: result, height: 16)
         currentProgressLine.frame = frame
-    }
-}
-
-// MARK: - Public Functions
-
-extension TrainingCell {
-    
-    func configure(model: Training) {
-        trainingImage.image = UIImage(named: model.imageName)
-        nameTrainingLabel.text = model.title
-        descriptionTrainingLabel.text = model.miniDescription
-        percentLabel.text = "\(model.progress)%"
-        updateProgressLineFrame(number: model.progress)
     }
 }
 

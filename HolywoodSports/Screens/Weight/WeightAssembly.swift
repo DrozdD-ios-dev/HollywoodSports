@@ -10,8 +10,8 @@ import Foundation
 struct WeightAssembly {
     
     static func build(flag: Bool) -> WeightVC {
-        let presenter = WeightPresenter()
-        let vc = WeightVC(presenter: presenter, flag: flag)
+        let presenter = WeightPresenter(flag: flag)
+        let vc = WeightVC(presenter: presenter)
         presenter.view = vc
         return vc
     }

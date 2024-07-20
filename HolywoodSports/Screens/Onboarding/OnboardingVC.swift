@@ -7,10 +7,6 @@
 
 import UIKit
 
-protocol OnboardingOutput: AnyObject {
-    
-}
-
 final class OnboardingVC: BaseController {
     
     // MARK: - Views
@@ -43,18 +39,7 @@ final class OnboardingVC: BaseController {
         button.addAction(UIAction { _ in self.nextButtonTapped() }, for: .touchUpInside)
         return button
     }()
-    
-    // MARK: - Properties
-    
-    private var presenter: OnboardingInput
-    
-    // MARK: - Init
-    
-    init(presenter: OnboardingInput) {
-        self.presenter = presenter
-        super.init()
-    }
-    
+
     // MARK: - View Lifecycle
     
     override func viewDidLoad() {
@@ -63,7 +48,6 @@ final class OnboardingVC: BaseController {
         navigationController?.setNavigationBarHidden(true, animated: true)
         addSubviews()
         makeConstraints()
-        presenter.viewDidLoad()
     }
 }
 
@@ -104,12 +88,6 @@ extension OnboardingVC {
     }
 }
 
-// MARK: - Output
-
-extension OnboardingVC: OnboardingOutput {
-    
-}
-
 // MARK: - Layout
 
 private extension OnboardingVC {
@@ -147,18 +125,16 @@ private extension OnboardingVC {
 
 extension OnboardingVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
     
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 2
-    }
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int { return 2 }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         switch indexPath.item {
         case 0:
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FirstCell.identifier, for: indexPath) as? FirstCell else { return UICollectionViewCell() }
+            let cell = collectionView.dequeueReusableCell(withClass: FirstCell.self, for: indexPath)
             return cell
         case 1:
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SecondCell.identifier, for: indexPath) as? SecondCell else { return UICollectionViewCell() }
+            let cell = collectionView.dequeueReusableCell(withClass: SecondCell.self, for: indexPath)
             return cell
             
         default:

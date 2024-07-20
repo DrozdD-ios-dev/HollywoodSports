@@ -13,23 +13,20 @@ final class EditButton: UIView {
     
     private let editImage: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "edit")
-        imageView.isUserInteractionEnabled = true
+        imageView.image = UIImage.Icons.edit
         return imageView
     }()
     
     private let editLabel: UILabel = {
         let label = UILabel()
         label.text = "Edit photo"
-        label.font = CustomFont.font(type: .poppins500, size: 16)
-        label.isUserInteractionEnabled = true
+        label.font = .font(type: .poppins500, size: 16)
         return label
     }()
     
     private lazy var horizontalStack: UIStackView = {
         let stack = UIStackView(arrangedSubviews: [editImage, editLabel])
         stack.spacing = 4
-        stack.isUserInteractionEnabled = true
         return stack
     }()
     
@@ -37,12 +34,12 @@ final class EditButton: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        addSubviews()
-        makeConstraints()
         backgroundColor = .clear
         layer.borderColor = UIColor.purpleDark.cgColor
         layer.borderWidth = 2
         layer.cornerRadius = 18
+        addSubviews()
+        makeConstraints()
     }
     
     required init?(coder: NSCoder) {
@@ -64,4 +61,3 @@ private extension EditButton {
         }
     }
 }
-

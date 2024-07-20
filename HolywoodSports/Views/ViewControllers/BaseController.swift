@@ -29,12 +29,12 @@ class BaseController: UIViewController {
         appearance.configureWithTransparentBackground()
         appearance.backgroundColor = UIColor.clear
         
-        let customFont = CustomFont.font(type: .poppins700, size: 16)
-        appearance.titleTextAttributes = [
-            NSAttributedString.Key.foregroundColor: UIColor.white,
-            NSAttributedString.Key.font: customFont
+        let attributes: [ NSAttributedString.Key: Any] = [
+            .foregroundColor: UIColor.white,
+            .font: UIFont.font(type: .poppins700, size: 16)
         ]
         
+        appearance.titleTextAttributes = attributes
         navigationController?.navigationBar.standardAppearance = appearance
     }
 }

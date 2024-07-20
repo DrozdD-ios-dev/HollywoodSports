@@ -14,7 +14,7 @@ final class DefaultButton: UIButton {
         initEvent()
         backgroundColor = .purpleDark
         tintColor = .white
-        let font = CustomFont.font(type: .poppins700, size: 16)
+        let font = UIFont.font(type: .poppins700, size: 16)
         
         let shadow = NSShadow()
              shadow.shadowColor = UIColor.black

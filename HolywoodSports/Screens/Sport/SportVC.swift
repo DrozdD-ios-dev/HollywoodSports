@@ -49,7 +49,6 @@ final class SportVC: BaseController {
         view.backgroundColor = .background
         addSubviews()
         makeConstraints()
-        presenter.viewDidLoad()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -59,19 +58,6 @@ final class SportVC: BaseController {
         presenter.viewWillAppear()
         sportCollectionView.reloadData()
     }
-}
-
-// MARK: - Private Function
-
-private extension SportVC {
-    
-}
-
-// MARK: - Actions
-
-private extension SportVC {
-    
-    
 }
 
 // MARK: - Output

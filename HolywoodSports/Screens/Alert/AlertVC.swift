@@ -7,17 +7,13 @@
 
 import UIKit
 
-protocol AlertOutput: AnyObject {
-    
-}
-
 final class AlertVC: BaseController {
     
     // MARK: - Views
 
     private let upLabel: UILabel = {
         let label = UILabel()
-        label.font = CustomFont.font(type: .poppins800, size: 34)
+        label.font = .font(type: .poppins800, size: 34)
         label.text = "Congratulations!"
         label.textAlignment = .center
         return label
@@ -25,7 +21,7 @@ final class AlertVC: BaseController {
     
     private let leftSecondLabel: UILabel = {
         let label = UILabel()
-        label.font = CustomFont.font(type: .poppins400, size: 15)
+        label.font = .font(type: .poppins400, size: 15)
         label.textAlignment = .center
         label.text = "You got "
         label.textColor = .gray153
@@ -34,7 +30,7 @@ final class AlertVC: BaseController {
     
     private lazy var rightSecondLabel: UILabel = {
         let label = UILabel()
-        label.font = CustomFont.font(type: .poppins400, size: 15)
+        label.font = .font(type: .poppins400, size: 15)
         label.textAlignment = .center
         label.text = "  points to your rank"
         label.textColor = .gray153
@@ -43,7 +39,7 @@ final class AlertVC: BaseController {
     
     private let numberLabel: UILabel = {
         let label = UILabel()
-        label.font = CustomFont.font(type: .poppins600, size: 17)
+        label.font = .font(type: .poppins600, size: 17)
         label.text = "+50"
         label.textAlignment = .center
         return label
@@ -73,7 +69,7 @@ final class AlertVC: BaseController {
     
     private let doneImage: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "done-purple")
+        imageView.image = UIImage.Icons.donePurple
         return imageView
     }()
 
@@ -85,15 +81,8 @@ final class AlertVC: BaseController {
     
     // MARK: - Properties
     
-    private var presenter: AlertInput
-    
-    // MARK: - Init
-    
-    init(presenter: AlertInput) {
-        self.presenter = presenter
-        super.init()
-    }
-    
+    private var user = CacheService.loadCache(key: StringKeys.user.rawValue) ?? User.mock
+
     // MARK: - View Lifecycle
     
     override func viewDidLoad() {
@@ -102,13 +91,18 @@ final class AlertVC: BaseController {
         setupSettings()
         addSubviews()
         makeConstraints()
-        presenter.viewDidLoad()
+        updateUser()
     }
 }
 
 // MARK: - Private Function
 
 private extension AlertVC {
+    
+    func updateUser() {
+        user.points += 50
+        CacheService.saveCache(model: user, key: StringKeys.user.rawValue)
+    }
     
     func setupSettings() {
         let gest = UITapGestureRecognizer(target: self, action: #selector(doneButtonTapped))
@@ -123,12 +117,6 @@ private extension AlertVC {
     @objc func doneButtonTapped() {
         dismiss(animated: true)
     }
-}
-
-// MARK: - Output
-
-extension AlertVC: AlertOutput {
-    
 }
 
 // MARK: - Layout
@@ -166,5 +154,3 @@ private extension AlertVC {
         }
     }
 }
-
-

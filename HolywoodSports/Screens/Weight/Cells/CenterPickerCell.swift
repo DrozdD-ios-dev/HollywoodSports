@@ -8,14 +8,12 @@
 import UIKit
 
 final class CenterPickerCell: UICollectionViewCell {
-    
-    // MARK: - Properties
   
     // MARK: - Views
 
     private let numberLabel: UILabel = {
         let label = UILabel()
-        label.font = CustomFont.font(type: .poppins600, size: 19)
+        label.font = .font(type: .poppins600, size: 19)
         label.textAlignment = .center
         return label
     }()

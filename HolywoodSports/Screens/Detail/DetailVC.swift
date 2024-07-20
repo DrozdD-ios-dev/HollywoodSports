@@ -25,14 +25,14 @@ final class DetailVC: BaseController {
     
     private let titleLabel: UILabel = {
         let label = UILabel()
-        label.font = CustomFont.font(type: .poppins800, size: 24)
+        label.font = .font(type: .poppins800, size: 24)
         label.textAlignment = .left
         return label
     }()
     
     private let descriptionLabel: UILabel = {
         let label = UILabel()
-        label.font = CustomFont.font(type: .poppins400, size: 15)
+        label.font = .font(type: .poppins400, size: 15)
         label.textAlignment = .left
         label.numberOfLines = 5
         label.textColor = .gray153
@@ -70,21 +70,21 @@ final class DetailVC: BaseController {
     
     private let checkBoxDoneCircleImage: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "done")
+        imageView.image = UIImage.Icons.done
         imageView.isHidden = true
         return imageView
     }()
     
     private let checkBoxTitleLabel: UILabel = {
         let label = UILabel()
-        label.font = CustomFont.font(type: .poppins500, size: 16)
+        label.font = .font(type: .poppins500, size: 16)
         label.textAlignment = .left
         return label
     }()
     
     private let checkBoxDescriptionLabel: UILabel = {
         let label = UILabel()
-        label.font = CustomFont.font(type: .poppins400, size: 13)
+        label.font = .font(type: .poppins400, size: 13)
         label.textAlignment = .left
         label.numberOfLines = 5
         label.textColor = .gray153
@@ -148,6 +148,33 @@ final class DetailVC: BaseController {
     }
 }
 
+// MARK: - Output
+
+extension DetailVC: DetailOutput {
+    
+    func activateCheckBoxView() {
+        checkBoxCircleView.backgroundColor = .purpleBlue
+        checkBoxCircleView.layer.borderWidth = 0
+        checkBoxDoneCircleImage.isHidden = false
+        doneButton.isEnabled = true
+        doneButton.alpha = 1
+    }
+    
+    func deActivateCheckBoxView() {
+        checkBoxCircleView.backgroundColor = .white
+        checkBoxCircleView.layer.borderWidth = 2
+        checkBoxDoneCircleImage.isHidden = true
+        doneButton.isEnabled = false
+        doneButton.alpha = 0.3
+    }
+    
+    func callAlertVC() {
+        let genderVC = AlertVC()
+        genderVC.modalPresentationStyle = .custom
+        present(genderVC, animated: true)
+    }
+}
+
 // MARK: - Private Function
 
 private extension DetailVC {
@@ -187,33 +214,6 @@ private extension DetailVC {
         presenter.backToScreenFlag = true
         deActivateCheckBoxView()
         presenter.removeProgress()
-    }
-}
-
-// MARK: - Output
-
-extension DetailVC: DetailOutput {
-    
-    func activateCheckBoxView() {
-        checkBoxCircleView.backgroundColor = .purpleBlue
-        checkBoxCircleView.layer.borderWidth = 0
-        checkBoxDoneCircleImage.isHidden = false
-        doneButton.isEnabled = true
-        doneButton.alpha = 1
-    }
-    
-    func deActivateCheckBoxView() {
-        checkBoxCircleView.backgroundColor = .white
-        checkBoxCircleView.layer.borderWidth = 2
-        checkBoxDoneCircleImage.isHidden = true
-        doneButton.isEnabled = false
-        doneButton.alpha = 0.3
-    }
-    
-    func callAlertVC() {
-        let genderVC = AlertAssembly.build()
-        genderVC.modalPresentationStyle = .custom
-        present(genderVC, animated: true)
     }
 }
 
@@ -286,4 +286,3 @@ private extension DetailVC {
         }
     }
 }
-

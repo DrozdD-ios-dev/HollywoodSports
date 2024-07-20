@@ -10,15 +10,15 @@ import UIKit
 // MARK: - Protocol
 
 protocol WeightInput {
-    func viewDidLoad()
+    func updateView()
+    func nextAction()
     
-    var user: User { get set }
     var leftValueKg: [Int] { get set }
     var leftValueResult: [Int] { get }
     var centerValueKg: [Int] { get set }
     var centerValueResult: [Int] { get }
     var weightElements: [String] { get }
-    var weightIndex: Weight { get set }
+    var weightType: Weight { get set }
     var result: (Int, Int) { get set }
 }
 
@@ -27,26 +27,45 @@ final class WeightPresenter: WeightInput {
     // MARK: - Properties
     
     weak var view: WeightOutput?
-    var user = CacheService.loadCache(key: StringKeys.user.rawValue) ?? User.mock
+    private var flag: Bool
+    private var user = CacheService.loadCache(key: StringKeys.user.rawValue) ?? User.mock
+    private let indexConvertToLbs = 2.205
     let weightElements = ["kg", "lbs", ""]
-    var weightIndex = Weight.kg
-    var result: (Int, Int) = (50, 0)
+    var weightType = Weight.kg
+    var result: (Int, Int) = (30, 0)
     var leftValueKg = Array(30...120)
     var centerValueKg = Array(0...9)
-    let indexConvertToLbs = 2.205
     
     var leftValueResult: [Int] {
-        return weightIndex == .kg ? leftValueKg : leftValueKg.map { Int((Double($0) * indexConvertToLbs * 10).rounded() / 10) }
+        return weightType == .kg ? leftValueKg : leftValueKg.map { Int((Double($0) * indexConvertToLbs * 10).rounded() / 10) }
     }
-  
+    
     var centerValueResult: [Int] {
-        return weightIndex == .kg ? centerValueKg : centerValueKg.map { Int((Double($0) * indexConvertToLbs * 10).rounded() / 10) }
+        return weightType == .kg ? centerValueKg : centerValueKg.map { Int((Double($0) * indexConvertToLbs * 10).rounded() / 10) }
     }
-        
+    
+    // MARK: - Init
+    
+    init(flag: Bool) {
+        self.flag = flag
+    }
+    
     // MARK: - Public Functions
     
-    func viewDidLoad() {
-        
+    func updateView() {
+        if flag {
+            view?.updateView()
+        }
+    }
+    
+    func nextAction() {
+        if flag {
+            saveValue()
+            view?.nextVC()
+        } else {
+            saveValue()
+            view?.dismiss()
+        }
     }
 }
 
@@ -54,4 +73,10 @@ final class WeightPresenter: WeightInput {
 
 private extension WeightPresenter {
     
+    func saveValue() {
+        user.weight = Double(result.0) + (Double(result.1) / 10)
+        user.weightType = weightType
+        CacheService.saveCache(model: user, key: StringKeys.user.rawValue)
+        NotificationCenter.default.post(name: Notification.Name("UpdateUser"), object: nil)
+    }
 }

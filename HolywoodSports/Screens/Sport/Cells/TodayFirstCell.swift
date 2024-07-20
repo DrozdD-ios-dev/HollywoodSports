@@ -28,7 +28,7 @@ final class TodayFirstCell: UICollectionViewCell {
     
     private let nameTrainingLabel: UILabel = {
         let label = UILabel()
-        label.font = CustomFont.font(type: .poppins500, size: 16)
+        label.font = .font(type: .poppins500, size: 16)
         label.textAlignment = .left
         label.text = "Name Training"
         return label
@@ -36,7 +36,7 @@ final class TodayFirstCell: UICollectionViewCell {
     
     private let descriptionTrainingLabel: UILabel = {
         let label = UILabel()
-        label.font = CustomFont.font(type: .poppins400, size: 13)
+        label.font = .font(type: .poppins400, size: 13)
         label.textAlignment = .left
         label.textColor = .gray153
         label.text = "Desc Training"
@@ -60,7 +60,7 @@ final class TodayFirstCell: UICollectionViewCell {
     
     private let percentLabel: UILabel = {
         let label = UILabel()
-        label.font = CustomFont.font(type: .poppins700, size: 8)
+        label.font = .font(type: .poppins700, size: 8)
         label.textColor = .white
         label.textAlignment = .left
         return label
@@ -76,7 +76,7 @@ final class TodayFirstCell: UICollectionViewCell {
     
     private let todayPlanLabel: UILabel = {
         let label = UILabel()
-        label.font = CustomFont.font(type: .poppins700, size: 18)
+        label.font = .font(type: .poppins700, size: 18)
         label.textAlignment = .left
         label.text = "Today Plan"
         return label
@@ -172,4 +172,3 @@ extension TodayFirstCell {
         }
     }
 }
-

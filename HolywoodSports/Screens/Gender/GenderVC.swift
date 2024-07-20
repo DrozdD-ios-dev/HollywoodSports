@@ -8,7 +8,9 @@
 import UIKit
 
 protocol GenderOutput: AnyObject {
-    
+    func selectGenderView(index: Int)
+    func dismiss()
+    func nextVC()
 }
 
 final class GenderVC: BaseController {
@@ -17,7 +19,7 @@ final class GenderVC: BaseController {
     
     private let questionLabel: UILabel = {
         let label = UILabel()
-        label.font = CustomFont.font(type: .poppins600, size: 28)
+        label.font = .font(type: .poppins600, size: 28)
         label.textAlignment = .center
         label.text = "What’s your gender?"
         return label
@@ -26,14 +28,12 @@ final class GenderVC: BaseController {
     // MARK: - Properties
     
     private var presenter: GenderInput
-    private var flag: Bool
     private var buttons = [UIButton]()
     
     // MARK: - Init
     
-    init(presenter: GenderInput, flag: Bool) {
+    init(presenter: GenderInput) {
         self.presenter = presenter
-        self.flag = flag
         super.init()
     }
     
@@ -45,12 +45,34 @@ final class GenderVC: BaseController {
         setupButtons()
         addSubviews()
         makeConstraints()
-        presenter.viewDidLoad()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: true)
+    }
+}
+
+// MARK: - Output
+
+extension GenderVC: GenderOutput {
+    
+    func nextVC() {
+        let vc = WeightAssembly.build(flag: true)
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func dismiss() {
+        dismiss(animated: true)
+    }
+    
+    func selectGenderView(index: Int) {
+        buttons.forEach {
+            $0.backgroundColor = .gray51
+            $0.tintColor = .gray153
+        }
+        buttons[index].backgroundColor = .purpleDark
+        buttons[index].tintColor = .white
     }
 }
 
@@ -63,34 +85,15 @@ private extension GenderVC {
             let button = UIButton(type: .system)
             button.tintColor = .gray153
             button.backgroundColor = .gray51
-            let font = CustomFont.font(type: .poppins700, size: 16)
-            let attributes: [NSAttributedString.Key: Any] = [ .font: font as Any ]
+            let attributes: [NSAttributedString.Key: Any] = [ .font: UIFont.font(type: .poppins700, size: 16) ]
             let attributedString = NSAttributedString(string: value.rawValue, attributes: attributes)
             button.setAttributedTitle(attributedString, for: .normal)
             button.layer.cornerRadius = 25
             button.tag = index
-            button.addTarget(self, action: #selector(genderButtonTapped(_ :)), for: .touchUpInside)
+            button.addTarget(self, action: #selector(genderButtonTapped(_:)), for: .touchUpInside)
             buttons.append(button)
         }
     }
-    
-    func selectGenderView(index: Int) {
-        buttons.forEach { $0.backgroundColor = .gray51; $0.tintColor = .gray153 }
-        buttons[index].backgroundColor = .purpleDark
-        buttons[index].tintColor = .white
-
-        presenter.user.gender = Gender.allCases[index]
-        CacheService.saveCache(model: presenter.user, key: StringKeys.user.rawValue)
-        NotificationCenter.default.post(name: Notification.Name("UpdateUser"), object: nil)
-        
-        if flag {
-            let vc = WeightAssembly.build(flag: true)
-            navigationController?.pushViewController(vc, animated: true)
-        } else {
-            dismiss(animated: true)
-        }
-    }
-  
 }
 
 // MARK: - Actions
@@ -98,15 +101,8 @@ private extension GenderVC {
 extension GenderVC {
     
     @objc func genderButtonTapped(_ sender: UIButton) {
-        selectGenderView(index: sender.tag)
+        presenter.selectGenderView(index: sender.tag)
     }
-    
-}
-
-// MARK: - Output
-
-extension GenderVC: GenderOutput {
-    
 }
 
 // MARK: - Layout
@@ -119,7 +115,6 @@ private extension GenderVC {
     }
     
     func makeConstraints() {
-        
         questionLabel.snp.makeConstraints { make in
             let screen = UIScreen.main.bounds.height
             make.top.equalToSuperview().inset(screen > 851 ? 241 : 150)

@@ -9,6 +9,8 @@ import UIKit
 
 protocol EditPhotoOutput: AnyObject {
     func activateButton()
+    func updateViewForAddPhoto()
+    func updateViewForChangePhoto()
 }
 
 final class EditPhotoVC: BaseController {
@@ -36,7 +38,7 @@ final class EditPhotoVC: BaseController {
         let label = UILabel()
         label.textAlignment = .center
         label.numberOfLines = 2
-        label.font = CustomFont.font(type: .poppins600, size: 28)
+        label.font = .font(type: .poppins600, size: 28)
         return label
     }()
     
@@ -59,7 +61,7 @@ final class EditPhotoVC: BaseController {
     private lazy var skipButton: UIButton = {
         let button = UIButton(type: .system)
         button.addAction(UIAction { _ in self.nextButtonTapped() }, for: .touchUpInside)
-        let font = CustomFont.font(type: .poppins700, size: 16)
+        let font = UIFont.font(type: .poppins700, size: 16)
         let attributes: [NSAttributedString.Key: Any] = [ .font: font as Any ]
         let attributedString = NSAttributedString(string: "Skip", attributes: attributes)
         button.tintColor = .white
@@ -81,13 +83,11 @@ final class EditPhotoVC: BaseController {
     // MARK: - Properties
     
     private var presenter: EditPhotoInput
-    private var flag: Bool
     
     // MARK: - Init
     
-    init(presenter: EditPhotoInput, flag: Bool) {
+    init(presenter: EditPhotoInput) {
         self.presenter = presenter
-        self.flag = flag
         super.init()
     }
     
@@ -98,33 +98,42 @@ final class EditPhotoVC: BaseController {
         setupSettings()
         addSubviews()
         makeConstraints()
-        presenter.viewDidLoad()
         updateImage()
-        updateView()
+        presenter.updateView()
+    }
+}
+
+// MARK: - Output
+
+extension EditPhotoVC: EditPhotoOutput {
+    
+    func updateViewForAddPhoto() {
+        descriptionLabel.text = "Add your profile \nphoto"
+        nextButton.isHidden = false
+        skipButton.isHidden = false
+        trashButton.isHidden = false
+    }
+    
+    func updateViewForChangePhoto() {
+        descriptionLabel.text = "Change your profile \nphoto"
+        saveChangesButton.isHidden = false
+    }
+    
+    func activateButton() {
+        saveChangesButton.isEnabled = true
+        saveChangesButton.alpha = 1
     }
 }
 
 // MARK: - Private Function
 
 private extension EditPhotoVC {
- 
+    
     func setupSettings() {
         view.backgroundColor = .background
         tabBarController?.tabBar.isHidden = true
         let backBarButtonItem = UIBarButtonItem(customView: backButton)
         navigationItem.leftBarButtonItem = backBarButtonItem
-    }
-    
-    func updateView() {
-        if flag {
-            descriptionLabel.text = "Add your profile \nphoto"
-            nextButton.isHidden = false
-            skipButton.isHidden = false
-            trashButton.isHidden = false
-        } else {
-            descriptionLabel.text = "Change your profile \nphoto"
-            saveChangesButton.isHidden = false
-        }
     }
     
     func updateImage() {
@@ -135,7 +144,7 @@ private extension EditPhotoVC {
 // MARK: - Actions
 
 private extension EditPhotoVC {
-
+    
     @objc func saveChangesButtonTapped() {
         CacheService.saveCache(model: presenter.user, key: StringKeys.user.rawValue)
         navigationController?.popViewController(animated: true)
@@ -157,7 +166,7 @@ private extension EditPhotoVC {
     }
     
     @objc func trashButtonTapped() {
-        userImage.image = UIImage(named: "image")
+        userImage.image = UIImage(named: ImageKeys.defaultImage.rawValue)
         presenter.user.image = ""
     }
     
@@ -167,16 +176,6 @@ private extension EditPhotoVC {
         imagePickerController.sourceType = .photoLibrary
         imagePickerController.allowsEditing = true
         self.present(imagePickerController, animated: true, completion: nil)
-    }
-}
-
-// MARK: - Output
-
-extension EditPhotoVC: EditPhotoOutput {
-    
-    func activateButton() {
-        saveChangesButton.isEnabled = true
-        saveChangesButton.alpha = 1
     }
 }
 
@@ -230,7 +229,7 @@ private extension EditPhotoVC {
 
 extension EditPhotoVC: UIImagePickerControllerDelegate & UINavigationControllerDelegate {
     
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
         if let selectedImage = info[.editedImage] as? UIImage ?? info[.originalImage] as? UIImage {
             
             let imageBase64String = selectedImage.convertImageToString()

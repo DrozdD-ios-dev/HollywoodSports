@@ -12,4 +12,5 @@ enum StringKeys: String {
     case allTrainings = "all"
     case oneDayTrainings = "one"
     case currentWeek = "week"
+    case first = "first"
 }

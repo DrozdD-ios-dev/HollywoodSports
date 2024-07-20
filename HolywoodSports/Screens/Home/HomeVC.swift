@@ -18,14 +18,14 @@ final class HomeVC: BaseController {
     private let welcomeLabel: UILabel = {
         let label = UILabel()
         label.text = "Welcome in🔥"
-        label.font = CustomFont.font(type: .poppins600, size: 14)
+        label.font = .font(type: .poppins600, size: 14)
         return label
     }()
     
     private let hollywoodLabel: UILabel = {
         let label = UILabel()
         label.text = "Hollywood"
-        label.font = CustomFont.font(type: .poppins800, size: 24)
+        label.font = .font(type: .poppins800, size: 24)
         return label
     }()
     
@@ -33,7 +33,7 @@ final class HomeVC: BaseController {
         let label = UILabel()
         label.text = "Sports"
         label.textColor = .yellowMiddle
-        label.font = CustomFont.font(type: .poppins800, size: 24)
+        label.font = .font(type: .poppins800, size: 24)
         return label
     }()
     
@@ -61,7 +61,7 @@ final class HomeVC: BaseController {
     
     private let dateLabel: UILabel = {
         let label = UILabel()
-        label.font = CustomFont.font(type: .poppins700, size: 18)
+        label.font = .font(type: .poppins700, size: 18)
         return label
     }()
     
@@ -128,28 +128,21 @@ final class HomeVC: BaseController {
     }
 }
 
-// MARK: - Private Function
-
-private extension HomeVC {
-    
-    func setupSettings() {
-        dateLabel.text = CheckDateService.currentMonthYear()
-    }
-}
-
-// MARK: - Actions
-
-private extension HomeVC {
-    
-    
-}
-
 // MARK: - Output
 
 extension HomeVC: HomeOutput {
     
     func updateImage() {
         userImage.image = presenter.user.image.convertStringToImage()
+    }
+}
+
+// MARK: - Private Function
+
+private extension HomeVC {
+    
+    func setupSettings() {
+        dateLabel.text = DateService.currentMonthYear()
     }
 }
 
@@ -181,7 +174,7 @@ private extension HomeVC {
         }
         
         weekCollectionView.snp.makeConstraints { make in
-            make.horizontalEdges.equalToSuperview()
+            make.horizontalEdges.centerX.equalToSuperview()
             make.top.equalTo(dateLabel.snp.bottom).offset(12)
             make.height.equalTo(55)
         }
@@ -218,6 +211,7 @@ extension HomeVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         switch collectionView {
+            
         case weekCollectionView:
             let cell = collectionView.dequeueReusableCell(withClass: DayCell.self, for: indexPath)
             cell.configure(model: presenter.weekDays[indexPath.item])
@@ -225,58 +219,30 @@ extension HomeVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource
             
         case sportCollectionView:
             if presenter.user.showEvent {
-                switch indexPath.item {
-                case 0: let cell = collectionView.dequeueReusableCell(withClass: EventCell.self, for: indexPath)
-                    return cell
-                case 1: let cell = collectionView.dequeueReusableCell(withClass: TodayFirstCell.self, for: indexPath)
-                    cell.configure(model: presenter.trainingsOneDay[indexPath.item])
-                    return cell
-                case 2...3: let cell = collectionView.dequeueReusableCell(withClass: TrainingCell.self, for: indexPath)
-                    cell.configure(model: presenter.trainingsOneDay[indexPath.item])
-                    return cell
-                default:
-                    return UICollectionViewCell()
-                }
-                
+                return cellsOne(collectionView: collectionView, indexPath: indexPath)
             } else {
-                
-                switch indexPath.item {
-                case 0: let cell = collectionView.dequeueReusableCell(withClass: TodayFirstCell.self, for: indexPath)
-                    cell.configure(model: presenter.trainingsOneDay[indexPath.item])
-                    return cell
-                case 1...2: let cell = collectionView.dequeueReusableCell(withClass: TrainingCell.self, for: indexPath)
-                    cell.configure(model: presenter.trainingsOneDay[indexPath.item])
-                    return cell
-                default:
-                    return UICollectionViewCell()
-                }
+                return cellsTwo(collectionView: collectionView, indexPath: indexPath)
             }
+            
         default:
             return UICollectionViewCell()
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        
+
         switch collectionView {
+            
         case weekCollectionView:
             return CGSize(width: 43, height: 54)
             
         case sportCollectionView:
             if presenter.user.showEvent {
-                switch indexPath.item {
-                case 0: return CGSize(width: sportCollectionView.frame.width - 32, height: 180)
-                case 1: return CGSize(width: sportCollectionView.frame.width - 32, height: 160)
-                case 2...3: return CGSize(width: sportCollectionView.frame.width - 32, height: 120)
-                default: return CGSize(width: 50, height: 50)
-                }
+                return returnSizeOne(index: indexPath.item)
             } else {
-                switch indexPath.item {
-                case 0: return CGSize(width: sportCollectionView.frame.width - 32, height: 160)
-                case 1...2: return CGSize(width: sportCollectionView.frame.width - 32, height: 120)
-                default: return CGSize(width: 50, height: 50)
-                }
+                return returnSizeTwo(index: indexPath.item)
             }
+            
         default:
             return CGSize(width: 50, height: 50)
         }
@@ -286,6 +252,51 @@ extension HomeVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource
         if collectionView == sportCollectionView {
             let vc = DetailAssembly.build(training: presenter.trainingsOneDay[indexPath.item], index: indexPath.item)
             navigationController?.pushViewController(vc, animated: true)
+        }
+    }
+    
+    func cellsOne(collectionView: UICollectionView, indexPath: IndexPath) -> UICollectionViewCell {
+        switch indexPath.item {
+        case 0: let cell = collectionView.dequeueReusableCell(withClass: EventCell.self, for: indexPath)
+            return cell
+        case 1: let cell = collectionView.dequeueReusableCell(withClass: TodayFirstCell.self, for: indexPath)
+            cell.configure(model: presenter.trainingsOneDay[indexPath.item])
+            return cell
+        case 2...3: let cell = collectionView.dequeueReusableCell(withClass: TrainingCell.self, for: indexPath)
+            cell.configure(model: presenter.trainingsOneDay[indexPath.item])
+            return cell
+        default:
+            return UICollectionViewCell()
+        }
+    }
+    
+    func cellsTwo(collectionView: UICollectionView, indexPath: IndexPath) -> UICollectionViewCell {
+        switch indexPath.item {
+        case 0: let cell = collectionView.dequeueReusableCell(withClass: TodayFirstCell.self, for: indexPath)
+            cell.configure(model: presenter.trainingsOneDay[indexPath.item])
+            return cell
+        case 1...2: let cell = collectionView.dequeueReusableCell(withClass: TrainingCell.self, for: indexPath)
+            cell.configure(model: presenter.trainingsOneDay[indexPath.item])
+            return cell
+        default:
+            return UICollectionViewCell()
+        }
+    }
+    
+    func returnSizeOne(index: Int) -> CGSize {
+        switch index {
+        case 0: return CGSize(width: sportCollectionView.frame.width - 32, height: 180)
+        case 1: return CGSize(width: sportCollectionView.frame.width - 32, height: 160)
+        case 2...3: return CGSize(width: sportCollectionView.frame.width - 32, height: 120)
+        default: return CGSize(width: 50, height: 50)
+        }
+    }
+    
+    func returnSizeTwo(index: Int) -> CGSize {
+        switch index {
+        case 0: return CGSize(width: sportCollectionView.frame.width - 32, height: 160)
+        case 1...2: return CGSize(width: sportCollectionView.frame.width - 32, height: 120)
+        default: return CGSize(width: 50, height: 50)
         }
     }
 }

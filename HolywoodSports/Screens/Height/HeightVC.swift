@@ -8,7 +8,9 @@
 import UIKit
 
 protocol HeightOutput: AnyObject {
-    
+    func updateView()
+    func nextVC()
+    func dismiss()
 }
 
 final class HeightVC: BaseController {
@@ -29,7 +31,7 @@ final class HeightVC: BaseController {
     
     private let questionLabel: UILabel = {
         let label = UILabel()
-        label.font = CustomFont.font(type: .poppins600, size: 28)
+        label.font = .font(type: .poppins600, size: 28)
         label.textAlignment = .center
         label.numberOfLines = 2
         label.text = "What’s your \nheight?"
@@ -119,13 +121,11 @@ final class HeightVC: BaseController {
     // MARK: - Properties
     
     private var presenter: HeightInput
-    private var flag: Bool
     
     // MARK: - Init
     
-    init(presenter: HeightInput, flag: Bool) {
+    init(presenter: HeightInput) {
         self.presenter = presenter
-        self.flag = flag
         super.init()
     }
     
@@ -136,8 +136,7 @@ final class HeightVC: BaseController {
         setupSettings()
         addSubviews()
         makeConstraints()
-        presenter.viewDidLoad()
-        updateView()
+        presenter.updateView()
     }
 }
 
@@ -150,19 +149,6 @@ private extension HeightVC {
         let backBarButtonItem = UIBarButtonItem(customView: backButton)
         navigationItem.leftBarButtonItem = backBarButtonItem
     }
-    
-    func updateView() {
-        if flag {
-            navigationController?.setNavigationBarHidden(false, animated: true)
-        }
-    }
-    
-    func saveValue() {
-        presenter.user.height = Double(presenter.result.0) + (Double(presenter.result.1) / 10)
-        presenter.user.heightValue = presenter.heightIndex
-        CacheService.saveCache(model: presenter.user, key: StringKeys.user.rawValue)
-        NotificationCenter.default.post(name: Notification.Name("UpdateUser"), object: nil)
-    }
 }
 
 // MARK: - Actions
@@ -170,14 +156,7 @@ private extension HeightVC {
 extension HeightVC {
     
     func nextButtonTapped() {
-        if flag {
-            saveValue()
-            let vc = EditPhotoAssembly.build(flag: true)
-            navigationController?.pushViewController(vc, animated: true)
-        } else {
-            saveValue()
-            dismiss(animated: true)
-        }
+        presenter.nextAction()
     }
     
     @objc func backButtonTapped() {
@@ -189,6 +168,18 @@ extension HeightVC {
 
 extension HeightVC: HeightOutput {
     
+    func updateView() {
+        navigationController?.setNavigationBarHidden(false, animated: true)
+    }
+    
+    func nextVC() {
+        let vc = EditPhotoAssembly.build(flag: true)
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func dismiss() {
+        dismiss(animated: true)
+    }
 }
 
 // MARK: - Layout
@@ -274,17 +265,17 @@ extension HeightVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSour
         
         switch collectionView {
         case leftVerticalCollectionView:
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: LeftPickerCell.identifier, for: indexPath) as? LeftPickerCell else { return UICollectionViewCell() }
+            let cell = collectionView.dequeueReusableCell(withClass: LeftPickerCell.self, for: indexPath)
             cell.configure(text: "\(presenter.leftValueResult[indexPath.item])")
             return cell
             
         case centerVerticalCollectionView:
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CenterPickerCell.identifier, for: indexPath) as? CenterPickerCell else { return UICollectionViewCell() }
+            let cell = collectionView.dequeueReusableCell(withClass: CenterPickerCell.self, for: indexPath)
             cell.configure(text: "\(presenter.centerValueResult[indexPath.item])")
             return cell
             
         case rightVerticalCollectionView:
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RightPickerCell.identifier, for: indexPath) as? RightPickerCell else { return UICollectionViewCell() }
+            let cell = collectionView.dequeueReusableCell(withClass: RightPickerCell.self, for: indexPath)
             cell.configure(text: "\(presenter.heightElements[indexPath.item])")
             return cell
             
@@ -308,9 +299,9 @@ extension HeightVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSour
         case rightVerticalCollectionView:
             if let rightCellIndexPath = getCellIndexPath(collectionView: rightVerticalCollectionView) {
                 if rightCellIndexPath.item == 1 {
-                    presenter.heightIndex = .ft
+                    presenter.heightType = .ft
                 } else {
-                    presenter.heightIndex = .cm
+                    presenter.heightType = .cm
                 }
                 getLeftResult(collectionView: leftVerticalCollectionView, resultValue: presenter.leftValueResult)
                 getCenterResult(collectionView: centerVerticalCollectionView, resultValue: presenter.centerValueResult)

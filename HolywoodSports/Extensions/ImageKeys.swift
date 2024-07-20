@@ -8,6 +8,15 @@
 import Foundation
 
 enum ImageKeys: String {
+    
+    // Images
+    case onboardingFirst = "onboarding-first-image"
+    case onboardingSecond = "onboarding-second-image"
+    case defaultImage = "default-image"
+    case ball = "ball"
+    
+    // Training images
+    case training0 = "training0"
     case training1 = "training1"
     case training2 = "training2"
     case training3 = "training3"

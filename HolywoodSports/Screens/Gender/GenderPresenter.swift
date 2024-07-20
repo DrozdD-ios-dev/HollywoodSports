@@ -10,9 +10,7 @@ import UIKit
 // MARK: - Protocol
 
 protocol GenderInput {
-    func viewDidLoad()
-    
-    var user: User { get set }
+    func selectGenderView(index: Int)
 }
 
 final class GenderPresenter: GenderInput {
@@ -20,17 +18,30 @@ final class GenderPresenter: GenderInput {
     // MARK: - Properties
     
     weak var view: GenderOutput?
-    var user = CacheService.loadCache(key: StringKeys.user.rawValue) ?? User.mock
+    private var user = CacheService.loadCache(key: StringKeys.user.rawValue) ?? User.mock
+    private var flag: Bool
     
-    // MARK: - Public Functions
+    // MARK: - Init
     
-    func viewDidLoad() {
-        
+    init(flag: Bool) {
+        self.flag = flag
     }
 }
 
-// MARK: - Private Functions
+// MARK: - Public Function
 
-private extension GenderPresenter {
+extension GenderPresenter {
     
+    func selectGenderView(index: Int) {
+        view?.selectGenderView(index: index)
+        user.gender = Gender.allCases[index]
+        CacheService.saveCache(model: user, key: StringKeys.user.rawValue)
+        NotificationCenter.default.post(name: Notification.Name("UpdateUser"), object: nil)
+        
+        if flag {
+            view?.nextVC()
+        } else {
+            view?.dismiss()
+        }
+    }
 }

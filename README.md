@@ -5,7 +5,7 @@
 Хранение данных реализовано на основе UserDefaults при помощи Generic функции.
 
 Архитектура - MVP. 
-UIKit, SnapKit, SFSymbols.
+UIKit, SnapKit, SFSymbols, SwiftLint.
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -15,7 +15,7 @@ An application that motivates you to achieve success in sports. It displays the 
 Data storage is implemented based on UserDefaults using the Generic function.
 
 Architecture - MVP. 
-UIKit, SnapKit, SFSymbols.
+UIKit, SnapKit, SFSymbols, SwiftLint.
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------
 <div style="display: flex;">

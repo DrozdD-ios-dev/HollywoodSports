@@ -7,7 +7,7 @@
 
 import UIKit
 
-struct CustomFont {
+extension UIFont {
     enum FontType: String {
         case poppins400   = "Poppins-Regular"
         case poppins500   = "Poppins-Medium"
@@ -16,7 +16,7 @@ struct CustomFont {
         case poppins800   = "Poppins-ExtraBold"
     }
     
-    static func font(type: FontType, size: CGFloat) -> UIFont{
+    static func font(type: FontType, size: CGFloat) -> UIFont {
         return UIFont(name: type.rawValue, size: size)!
     }
 }

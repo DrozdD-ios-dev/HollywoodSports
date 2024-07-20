@@ -10,15 +10,15 @@ import UIKit
 // MARK: - Protocol
 
 protocol HeightInput {
-    func viewDidLoad()
+    func updateView()
+    func nextAction()
     
-    var user: User { get set }
     var leftValueKg: [Int] { get set }
     var leftValueResult: [Int] { get }
     var centerValueKg: [Int] { get set }
     var centerValueResult: [Int] { get }
     var heightElements: [String] { get }
-    var heightIndex: Height { get set }
+    var heightType: Height { get set }
     var result: (Int, Int) { get set }
 }
 
@@ -27,26 +27,45 @@ final class HeightPresenter: HeightInput {
     // MARK: - Properties
     
     weak var view: HeightOutput?
-    var user = CacheService.loadCache(key: StringKeys.user.rawValue) ?? User.mock
+    private var flag: Bool
+    private var user = CacheService.loadCache(key: StringKeys.user.rawValue) ?? User.mock
+    private let indexConvertToFoot = 30.48
     let heightElements = ["cm", "ft/in", ""]
-    var heightIndex = Height.cm
-    var result: (Int, Int) = (50, 0)
+    var heightType = Height.cm
+    var result: (Int, Int) = (140, 0)
     var leftValueKg = Array(140...220)
     var centerValueKg = Array(0...9)
-    let indexConvertToFoot = 30.48
     
     var leftValueResult: [Int] {
-        return heightIndex == .cm ? leftValueKg : leftValueKg.map { Int((Double($0) / indexConvertToFoot * 100).rounded() / 100) }
+        return heightType == .cm ? leftValueKg : leftValueKg.map { Int((Double($0) / indexConvertToFoot * 100).rounded() / 100) }
     }
-  
+    
     var centerValueResult: [Int] {
-        return heightIndex == .cm ? centerValueKg : centerValueKg.map { Int((Double($0) / indexConvertToFoot * 10).rounded() / 10) }
+        return heightType == .cm ? centerValueKg : centerValueKg.map { Int((Double($0) / indexConvertToFoot * 10).rounded() / 10) }
+    }
+    
+    // MARK: - Init
+    
+    init(flag: Bool) {
+        self.flag = flag
     }
     
     // MARK: - Public Functions
     
-    func viewDidLoad() {
-        
+    func updateView() {
+        if flag {
+            view?.updateView()
+        }
+    }
+    
+    func nextAction() {
+        if flag {
+            saveValue()
+            view?.nextVC()
+        } else {
+            saveValue()
+            view?.dismiss()
+        }
     }
 }
 
@@ -54,4 +73,10 @@ final class HeightPresenter: HeightInput {
 
 private extension HeightPresenter {
     
+    func saveValue() {
+        user.height = Double(result.0) + (Double(result.1) / 10)
+        user.heightType = heightType
+        CacheService.saveCache(model: user, key: StringKeys.user.rawValue)
+        NotificationCenter.default.post(name: Notification.Name("UpdateUser"), object: nil)
+    }
 }

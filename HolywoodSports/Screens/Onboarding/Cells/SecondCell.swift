@@ -8,14 +8,12 @@
 import UIKit
 
 final class SecondCell: UICollectionViewCell {
-    
-    // MARK: - Properties
 
     // MARK: - Views
     
     private let backgroundImage: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "onboardingPinkImage")
+        imageView.image = UIImage(named: ImageKeys.onboardingSecond.rawValue)
         return imageView
     }()
     
@@ -34,7 +32,7 @@ final class SecondCell: UICollectionViewCell {
     
     private let upLabel: UILabel = {
         let label = UILabel()
-        label.font = CustomFont.font(type: .poppins800, size: 24)
+        label.font = .font(type: .poppins800, size: 24)
         label.textAlignment = .center
         label.numberOfLines = 2
         label.text = "The Next Step To Your \nBest Physical Condition"
@@ -43,7 +41,7 @@ final class SecondCell: UICollectionViewCell {
     
     private let downLabel: UILabel = {
         let label = UILabel()
-        label.font = CustomFont.font(type: .poppins400, size: 15)
+        label.font = .font(type: .poppins400, size: 15)
         label.textColor = .gray153
         label.textAlignment = .center
         label.text = "Let’s GO!"
@@ -57,7 +55,6 @@ final class SecondCell: UICollectionViewCell {
         backgroundColor = .background
         addSubviews()
         makeConstraints()
-        
     }
     
     required init?(coder: NSCoder) {

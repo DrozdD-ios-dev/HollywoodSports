@@ -4,6 +4,7 @@
 //
 //  Created by Дрозд Денис on 17.07.2024.
 //
+//swiftlint: disable for_where
 
 import UIKit
 
@@ -15,7 +16,6 @@ protocol DetailInput {
     func removeProgress()
     
     var training: Training { get }
-    var user: User { get set }
     var backToScreenFlag: Bool { get set }
 }
 
@@ -24,13 +24,13 @@ final class DetailPresenter: DetailInput {
     // MARK: - Properties
     
     weak var view: DetailOutput?
-    var training: Training
-    var user = CacheService.loadCache(key: StringKeys.user.rawValue) ?? User.mock
-    var trainingAll = CacheService.loadCache(key: StringKeys.allTrainings.rawValue) ?? Training.mock
-    var currentWeek = CacheService.loadCache(key: StringKeys.currentWeek.rawValue) ?? Day.mock
-    var index: Int
-    var startTime: DispatchTime?
+    private var user = CacheService.loadCache(key: StringKeys.user.rawValue) ?? User.mock
+    private var trainingAll = CacheService.loadCache(key: StringKeys.allTrainings.rawValue) ?? Training.mock
+    private var currentWeek = CacheService.loadCache(key: StringKeys.currentWeek.rawValue) ?? Day.mock
+    private var index: Int
+    private var startTime: DispatchTime?
     var backToScreenFlag = true
+    var training: Training
     
     // MARK: - Init
     
@@ -88,7 +88,7 @@ private extension DetailPresenter {
     func updateEventData() {
         if index == 0, user.showEvent {
             user.showEvent = false
-            user.currentDay = CheckDateService.currentDay()
+            user.currentDay = Date.now
             CacheService.saveCache(model: user, key: StringKeys.user.rawValue)
             view?.callAlertVC()
         }
@@ -102,7 +102,7 @@ private extension DetailPresenter {
     }
     
     func updateWeek() {
-        let currentDay = CheckDateService.currentDay()
+        let currentDay = Date.now
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "d"
         for (index, value) in currentWeek.enumerated() {

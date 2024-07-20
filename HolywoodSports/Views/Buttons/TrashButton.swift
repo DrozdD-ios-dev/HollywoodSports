@@ -14,7 +14,7 @@ final class TrashButton: UIButton {
         
         let size = 34.0
         frame = CGRect(x: 0, y: 0, width: size, height: size)
-        let trashImage = UIImage(named: "trash")
+        let trashImage = UIImage.Icons.trash
         setImage(trashImage, for: .normal)
         backgroundColor = .background
         layer.cornerRadius = size / 2

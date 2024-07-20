@@ -9,6 +9,9 @@ import UIKit
 
 protocol ProfileOutput: AnyObject {
     func updateImage()
+    func openGenderVC()
+    func openWeightVC()
+    func openHeightVC()
 }
 
 final class ProfileVC: BaseController {
@@ -60,10 +63,9 @@ final class ProfileVC: BaseController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .background
+        createViews()
         addSubviews()
         makeConstraints()
-        createViews()
-        presenter.viewDidLoad()
         NotificationCenter.default.addObserver(self, selector: #selector(updateUserNotification), name: Notification.Name("UpdateUser"), object: nil)
     }
     
@@ -73,6 +75,31 @@ final class ProfileVC: BaseController {
         presenter.viewWillAppear()
         progressView.configure(with: presenter.user.points)
     }
+}
+
+// MARK: - Output
+
+extension ProfileVC: ProfileOutput {
+    
+    func openGenderVC() {
+        let vc = GenderAssembly.build(flag: false)
+        navigationController?.present(vc, animated: true)
+    }
+    
+    func openWeightVC() {
+        let vc = WeightAssembly.build(flag: false)
+        navigationController?.present(vc, animated: true)
+    }
+    
+    func openHeightVC() {
+        let vc = HeightAssembly.build(flag: false)
+        navigationController?.present(vc, animated: true)
+    }
+    
+    func updateImage() {
+        userImage.image = presenter.user.image.convertStringToImage()
+    }
+    
 }
 
 // MARK: - Private Function
@@ -96,20 +123,9 @@ private extension ProfileVC {
 private extension ProfileVC {
     
     @objc func changeValue(_ sender: UITapGestureRecognizer) {
-        switch sender.view?.tag {
-        case 0:
-            let vc = GenderAssembly.build(flag: false)
-            navigationController?.present(vc, animated: true)
-        case 1:
-            let vc = WeightAssembly.build(flag: false)
-            navigationController?.present(vc, animated: true)
-        case 2:
-            let vc = HeightAssembly.build(flag: false)
-            navigationController?.present(vc, animated: true)
-        default:
-            break
-        }
+        presenter.nextAction(index: sender.view?.tag ?? 0)
     }
+    
     @objc func editButtonTapped() {
         let vc = EditPhotoAssembly.build(flag: false)
         navigationController?.pushViewController(vc, animated: true)
@@ -122,16 +138,6 @@ private extension ProfileVC {
     @objc func updateUserNotification() {
         presenter.viewWillAppear()
     }
-}
-
-// MARK: - Output
-
-extension ProfileVC: ProfileOutput {
-    
-    func updateImage() {
-        userImage.image = presenter.user.image.convertStringToImage()
-    }
-    
 }
 
 // MARK: - Layout
@@ -174,4 +180,3 @@ private extension ProfileVC {
         }
     }
 }
-

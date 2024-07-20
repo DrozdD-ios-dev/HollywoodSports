@@ -8,14 +8,12 @@
 import UIKit
 
 final class EventCell: UICollectionViewCell {
-    
-    // MARK: - Properties
 
     // MARK: - Views
     
     private let eventImage: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "training0")
+        imageView.image = UIImage(named: ImageKeys.training0.rawValue)
         imageView.clipsToBounds = true
         imageView.layer.cornerRadius = 23
         return imageView
@@ -23,7 +21,7 @@ final class EventCell: UICollectionViewCell {
     
     private let startLabel: UILabel = {
         let label = UILabel()
-        label.font = CustomFont.font(type: .poppins700, size: 14)
+        label.font = .font(type: .poppins700, size: 14)
         label.textAlignment = .left
         label.textColor = .purpleDark
         label.text = "Start now"
@@ -32,7 +30,7 @@ final class EventCell: UICollectionViewCell {
     
     private let chevronImage: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "chevron.right")
+        imageView.image = UIImage.Icons.chevronRight
         imageView.tintColor = .purpleDark
         return imageView
     }()
@@ -48,7 +46,7 @@ final class EventCell: UICollectionViewCell {
     
     private let eventLabel: UILabel = {
         let label = UILabel()
-        label.font = CustomFont.font(type: .poppins700, size: 22)
+        label.font = .font(type: .poppins700, size: 22)
         label.textAlignment = .left
         label.numberOfLines = 2
         label.text = "Best Event in your \ndaily Workout"

@@ -13,13 +13,13 @@ final class DayCell: UICollectionViewCell {
     
     private let characterLabel: UILabel = {
         let label = UILabel()
-        label.font = CustomFont.font(type: .poppins600, size: 14)
+        label.font = .font(type: .poppins600, size: 14)
         return label
     }()
     
     private let numberLabel: UILabel = {
         let label = UILabel()
-        label.font = CustomFont.font(type: .poppins600, size: 14)
+        label.font = .font(type: .poppins600, size: 14)
         return label
     }()
     

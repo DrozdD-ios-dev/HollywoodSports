@@ -10,8 +10,8 @@ import UIKit
 // MARK: - Protocol
 
 protocol ProfileInput {
-    func viewDidLoad()
     func viewWillAppear()
+    func nextAction(index: Int)
     
     var rows: [String] { get }
     var user: User { get set }
@@ -26,25 +26,24 @@ final class ProfilePresenter: ProfileInput {
     var rows = ["Change your gender", "Change your weigth", "Change your height"]
     var user = CacheService.loadCache(key: StringKeys.user.rawValue) ?? User.mock
     var userViews = [UserDataView]()
-    
-    
-    
+ 
     // MARK: - Public Functions
-    
-    func viewDidLoad() {
-
-    }
     
     func viewWillAppear() {
         updateUserData()
     }
     
-    func updateUserData() {
-        user = CacheService.loadCache(key: StringKeys.user.rawValue) ?? User.mock
-        userViews[0].configure(with: user.gender.rawValue.firstUppercased)
-        userViews[1].configure(with: "\(user.weight) \(user.weightValue)")
-        userViews[2].configure(with: "\(user.height) \(user.heightValue)")
-        view?.updateImage()
+    func nextAction(index: Int) {
+        switch index {
+        case 0:
+            view?.openGenderVC()
+        case 1:
+            view?.openWeightVC()
+        case 2:
+            view?.openHeightVC()
+        default:
+            break
+        }
     }
 }
 
@@ -52,5 +51,12 @@ final class ProfilePresenter: ProfileInput {
 
 private extension ProfilePresenter {
     
+    func updateUserData() {
+        user = CacheService.loadCache(key: StringKeys.user.rawValue) ?? User.mock
+        userViews[0].configure(with: user.gender.rawValue.firstUppercased)
+        userViews[1].configure(with: "\(user.weight) \(user.weightType)")
+        userViews[2].configure(with: "\(user.height) \(user.heightType)")
+        view?.updateImage()
+    }
   
 }

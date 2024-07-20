@@ -28,20 +28,20 @@ final class TabBarController: UITabBarController {
     private func createTabBarItems() {
         let itemOne = TabBarItem(
             title: "Home",
-            image: UIImage(named: "home") ?? UIImage.actions,
-            selectImage:  UIImage(named: "home.select") ?? UIImage.actions
+            image: UIImage.Icons.TabBar.home,
+            selectImage: UIImage.Icons.TabBar.homeSelect
         )
         
         let itemTwo = TabBarItem(
             title: "Sport",
-            image: UIImage(named: "bolt") ?? UIImage.actions, 
-            selectImage: UIImage(named: "bolt.select") ?? UIImage.actions
+            image: UIImage.Icons.TabBar.bolt,
+            selectImage: UIImage.Icons.TabBar.boltSelect
         )
         
         let itemThree = TabBarItem(
             title: "Profile",
-            image: UIImage(named: "profile") ?? UIImage.actions,
-            selectImage: UIImage(named: "profile.select") ?? UIImage.actions
+            image: UIImage.Icons.TabBar.profile,
+            selectImage: UIImage.Icons.TabBar.profileSelect
         )
         
         homeVC.tabBarItem = itemOne
@@ -51,12 +51,12 @@ final class TabBarController: UITabBarController {
         viewControllers = [
             UINavigationController(rootViewController: homeVC),
             UINavigationController(rootViewController: sportVC),
-            UINavigationController(rootViewController: profileVC),
+            UINavigationController(rootViewController: profileVC)
         ]
     }
     
     private func setupAppearance() {
-        let appearance = CustomAppearance.settingsAppearance()
+        let appearance = UITabBarAppearance.setupSettings()
         appearance.configureWithOpaqueBackground()
         appearance.backgroundColor = .background
         tabBar.standardAppearance = appearance

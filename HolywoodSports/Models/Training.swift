@@ -5,7 +5,7 @@
 //  Created by Дрозд Денис on 17.07.2024.
 //
 
-import UIKit
+import Foundation
 
 struct Training: Codable {
     let title: String

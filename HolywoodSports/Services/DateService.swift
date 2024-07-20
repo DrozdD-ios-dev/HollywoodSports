@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class CheckDateService {
+final class DateService {
     
     static func currentMonthYear() -> String {
         let date = Date()
@@ -16,11 +16,7 @@ final class CheckDateService {
         let result = dateFormatter.string(from: date)
         return result
     }
-    
-    static func currentDay() -> Date {
-        return Date()
-    }
-    
+
     static func datesForCurrentWeek() -> [Date] {
         var dates: [Date] = []
         let calendar = Calendar.current
@@ -36,8 +32,8 @@ final class CheckDateService {
         
         guard let startDate = startOfWeek else { return dates }
         
-        for i in 0..<7 {
-            if let date = calendar.date(byAdding: .day, value: i, to: startDate) {
+        for index in 0..<7 {
+            if let date = calendar.date(byAdding: .day, value: index, to: startDate) {
                 dates.append(date)
             }
         }

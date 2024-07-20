@@ -9,13 +9,11 @@ import UIKit
 
 final class FirstCell: UICollectionViewCell {
     
-    // MARK: - Properties
-
     // MARK: - Views
     
     private let backgroundImage: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "onboardingYellowImage")
+        imageView.image = UIImage(named: ImageKeys.onboardingFirst.rawValue)
         return imageView
     }()
     
@@ -40,7 +38,7 @@ final class FirstCell: UICollectionViewCell {
     
     private let upLabel: UILabel = {
         let label = UILabel()
-        label.font = CustomFont.font(type: .poppins800, size: 24)
+        label.font = .font(type: .poppins800, size: 24)
         label.textAlignment = .center
         label.numberOfLines = 2
         label.text = "Wherever You Are \nHealth Is Number One"
@@ -49,7 +47,7 @@ final class FirstCell: UICollectionViewCell {
     
     private let downLabel: UILabel = {
         let label = UILabel()
-        label.font = CustomFont.font(type: .poppins400, size: 15)
+        label.font = .font(type: .poppins400, size: 15)
         label.textColor = .gray153
         label.textAlignment = .center
         label.text = "There is no instant way to a healthy life"
