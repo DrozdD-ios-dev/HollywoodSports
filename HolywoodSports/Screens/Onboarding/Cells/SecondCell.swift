@@ -13,7 +13,7 @@ final class SecondCell: UICollectionViewCell {
     
     private let backgroundImage: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: ImageKeys.onboardingSecond.rawValue)
+        imageView.image = .Images.onboardingSecond
         return imageView
     }()
     

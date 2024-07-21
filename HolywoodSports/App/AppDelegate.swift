@@ -16,28 +16,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         openVC()
-        updateCountApp()
         return true
-    }
-    
-    func updateCountApp() {
-        if UserDefaults.standard.integer(forKey: StringKeys.first.rawValue) == 0 {
-            UserDefaults.standard.set(1, forKey: StringKeys.first.rawValue)
-        } else {
-            if UserDefaults.standard.integer(forKey: StringKeys.first.rawValue) >= 1 {
-                var count = UserDefaults.standard.integer(forKey: StringKeys.first.rawValue)
-                count += 1
-                UserDefaults.standard.set("\(count)", forKey: StringKeys.first.rawValue)
-            }
-        }
     }
     
     private func openVC() {
         let vc: UIViewController
-        if UserDefaults.standard.integer(forKey: StringKeys.first.rawValue) == 0 {
-            vc = UINavigationController(rootViewController: StartVC())
-        } else {
+        if UserDefaults.standard.bool(forKey: DefaultKey.hasOpenedAppBefore) {
             vc = TabBarController()
+        } else {
+            let startVC = StartVC()
+            vc = UINavigationController(rootViewController: startVC)
         }
         
         let window = UIWindow(frame: UIScreen.main.bounds)

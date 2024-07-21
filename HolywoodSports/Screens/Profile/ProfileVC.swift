@@ -41,7 +41,7 @@ final class ProfileVC: BaseController {
     
     private lazy var saveChangesButton: DefaultButton = {
         let button = DefaultButton(text: "Save changes")
-        button.addAction(UIAction { _ in self.saveChangesButtonTapped() }, for: .touchUpInside)
+        button.addTarget(self, action: #selector(saveChangesButtonTapped), for: .touchUpInside)
         return button
     }()
     
@@ -97,7 +97,7 @@ extension ProfileVC: ProfileOutput {
     }
     
     func updateImage() {
-        userImage.image = presenter.user.image.convertStringToImage()
+        userImage.image = CacheService.loadImageFromURL(url: presenter.user.image)
     }
     
 }
@@ -120,7 +120,7 @@ private extension ProfileVC {
 
 // MARK: - Actions
 
-private extension ProfileVC {
+ extension ProfileVC {
     
     @objc func changeValue(_ sender: UITapGestureRecognizer) {
         presenter.nextAction(index: sender.view?.tag ?? 0)
@@ -132,7 +132,7 @@ private extension ProfileVC {
     }
     
     @objc func saveChangesButtonTapped() {
-        CacheService.saveCache(model: presenter.user, key: StringKeys.user.rawValue)
+        CacheService.saveCache(model: presenter.user, key: DefaultKey.user)
     }
     
     @objc func updateUserNotification() {

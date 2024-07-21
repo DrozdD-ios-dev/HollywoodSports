@@ -8,7 +8,7 @@
 import Foundation
 
 struct User: Codable {
-    var image: String
+    var image: URL?
     var gender: Gender
     var weight: Double
     var height: Double
@@ -37,7 +37,7 @@ enum Gender: String, Codable, CaseIterable {
 extension User {
     static let mock: User =
     User(
-        image: "",
+        image: nil,
         gender: .female,
         weight: 30,
         height: 140,

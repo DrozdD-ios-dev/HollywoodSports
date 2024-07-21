@@ -1,5 +1,5 @@
 //
-//  StringKeys.swift
+//  DefaultKey.swift
 //  HolywoodSports
 //
 //  Created by Дрозд Денис on 18.07.2024.
@@ -7,10 +7,10 @@
 
 import Foundation
 
-enum StringKeys: String {
-    case user = "user"
-    case allTrainings = "all"
-    case oneDayTrainings = "one"
-    case currentWeek = "week"
-    case first = "first"
+struct DefaultKey {
+    static let user = "user"
+    static let allTrainings = "all"
+    static let oneDayTrainings = "one"
+    static let currentWeek = "week"
+    static let hasOpenedAppBefore = "first"
 }

@@ -21,15 +21,15 @@ final class SportPresenter: SportInput {
     // MARK: - Properties
     
     weak var view: SportOutput?
-    private var trainingAll = CacheService.loadCache(key: StringKeys.allTrainings.rawValue) ?? Training.mock
-    var user = CacheService.loadCache(key: StringKeys.user.rawValue) ?? User.mock
-    var trainingsOneDay = CacheService.loadCache(key: StringKeys.oneDayTrainings.rawValue) ?? Training.mock
+    private var trainingAll = CacheService.loadCache(key: DefaultKey.allTrainings) ?? Training.mock
+    var user = CacheService.loadCache(key: DefaultKey.user) ?? User.mock
+    var trainingsOneDay = CacheService.loadCache(key: DefaultKey.oneDayTrainings) ?? Training.mock
     
     // MARK: - Public Functions
     
     func viewWillAppear() {
-        user = CacheService.loadCache(key: StringKeys.user.rawValue) ?? User.mock
-        trainingAll = CacheService.loadCache(key: StringKeys.allTrainings.rawValue) ?? Training.mock
+        user = CacheService.loadCache(key: DefaultKey.user) ?? User.mock
+        trainingAll = CacheService.loadCache(key: DefaultKey.allTrainings) ?? Training.mock
         var newTrainingsOneDay: [Training] = []
         for valueOne in trainingsOneDay {
             for valueAll in trainingAll where valueAll.title == valueOne.title {
@@ -37,6 +37,6 @@ final class SportPresenter: SportInput {
             }
         }
         trainingsOneDay = newTrainingsOneDay
-        CacheService.saveCache(model: trainingsOneDay, key: StringKeys.oneDayTrainings.rawValue)
+        CacheService.saveCache(model: trainingsOneDay, key: DefaultKey.oneDayTrainings)
     }
 }

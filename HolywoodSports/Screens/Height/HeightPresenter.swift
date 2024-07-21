@@ -28,7 +28,7 @@ final class HeightPresenter: HeightInput {
     
     weak var view: HeightOutput?
     private var flag: Bool
-    private var user = CacheService.loadCache(key: StringKeys.user.rawValue) ?? User.mock
+    private var user = CacheService.loadCache(key: DefaultKey.user) ?? User.mock
     private let indexConvertToFoot = 30.48
     let heightElements = ["cm", "ft/in", ""]
     var heightType = Height.cm
@@ -76,7 +76,7 @@ private extension HeightPresenter {
     func saveValue() {
         user.height = Double(result.0) + (Double(result.1) / 10)
         user.heightType = heightType
-        CacheService.saveCache(model: user, key: StringKeys.user.rawValue)
+        CacheService.saveCache(model: user, key: DefaultKey.user)
         NotificationCenter.default.post(name: Notification.Name("UpdateUser"), object: nil)
     }
 }

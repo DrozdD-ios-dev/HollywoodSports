@@ -13,7 +13,7 @@ final class EventCell: UICollectionViewCell {
     
     private let eventImage: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: ImageKeys.training0.rawValue)
+        imageView.image = .Images.Trainings.training0
         imageView.clipsToBounds = true
         imageView.layer.cornerRadius = 23
         return imageView
@@ -30,7 +30,7 @@ final class EventCell: UICollectionViewCell {
     
     private let chevronImage: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage.Icons.chevronRight
+        imageView.image = .Icons.chevronRight
         imageView.tintColor = .purpleDark
         return imageView
     }()
@@ -67,21 +67,6 @@ final class EventCell: UICollectionViewCell {
     }
 }
 
-// MARK: - Private Functions
-
-private extension EventCell {
-    
-}
-
-// MARK: - Public Functions
-
-extension EventCell {
-    
-//    func configure(text: String) {
-//        numberLabel.text = text
-//    }
-}
-
 // MARK: - Layout
 
 extension EventCell {
@@ -94,7 +79,6 @@ extension EventCell {
     }
     
     private func makeConstraints() {
-        
         eventImage.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }

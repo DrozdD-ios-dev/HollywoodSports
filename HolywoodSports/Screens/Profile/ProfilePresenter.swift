@@ -24,7 +24,7 @@ final class ProfilePresenter: ProfileInput {
     
     weak var view: ProfileOutput?
     var rows = ["Change your gender", "Change your weigth", "Change your height"]
-    var user = CacheService.loadCache(key: StringKeys.user.rawValue) ?? User.mock
+    var user = CacheService.loadCache(key: DefaultKey.user) ?? User.mock
     var userViews = [UserDataView]()
  
     // MARK: - Public Functions
@@ -52,7 +52,7 @@ final class ProfilePresenter: ProfileInput {
 private extension ProfilePresenter {
     
     func updateUserData() {
-        user = CacheService.loadCache(key: StringKeys.user.rawValue) ?? User.mock
+        user = CacheService.loadCache(key: DefaultKey.user) ?? User.mock
         userViews[0].configure(with: user.gender.rawValue.firstUppercased)
         userViews[1].configure(with: "\(user.weight) \(user.weightType)")
         userViews[2].configure(with: "\(user.height) \(user.heightType)")

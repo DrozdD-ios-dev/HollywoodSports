@@ -13,7 +13,7 @@ final class TrainingCell: UICollectionViewCell {
     
     private let trainingImage: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: ImageKeys.training0.rawValue)
+        imageView.image = .Images.Trainings.training0
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
         imageView.layer.cornerRadius = 15

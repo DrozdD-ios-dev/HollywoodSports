@@ -13,7 +13,7 @@ final class EditButton: UIView {
     
     private let editImage: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage.Icons.edit
+        imageView.image = .Icons.edit
         return imageView
     }()
     

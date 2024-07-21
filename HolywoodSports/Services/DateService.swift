@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class DateService {
+enum DateService {
     
     static func currentMonthYear() -> String {
         let date = Date()

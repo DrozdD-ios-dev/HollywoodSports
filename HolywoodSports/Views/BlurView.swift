@@ -20,11 +20,11 @@ final class BlurView: UIView {
     
     // MARK: - Properties
     
-    let blurEffect = UIBlurEffect(style: .prominent)
-    lazy var blurEffectView = UIVisualEffectView(effect: blurEffect)
-    let images = [UIImage.Icons.time, UIImage.Icons.burn]
-    let systemLabels = ["Time", "Burn"]
-    var labels = [UILabel]()
+    private let blurEffect = UIBlurEffect(style: .prominent)
+    private lazy var blurEffectView = UIVisualEffectView(effect: blurEffect)
+    private let images = [UIImage.Icons.time, UIImage.Icons.burn]
+    private let systemLabels = ["Time", "Burn"]
+    private var labels = [UILabel]()
     
     // MARK: - Init
     

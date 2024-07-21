@@ -70,7 +70,7 @@ final class DetailVC: BaseController {
     
     private let checkBoxDoneCircleImage: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage.Icons.done
+        imageView.image = .Icons.done
         imageView.isHidden = true
         return imageView
     }()
@@ -110,7 +110,7 @@ final class DetailVC: BaseController {
     
     private lazy var doneButton: DefaultButton = {
         let button = DefaultButton(text: "Done")
-        button.addAction(UIAction { _ in self.doneButtonTapped() }, for: .touchUpInside)
+        button.addTarget(self, action: #selector(doneButtonTapped), for: .touchUpInside)
         button.alpha = 0.3
         button.isEnabled = false
         return button
@@ -120,7 +120,7 @@ final class DetailVC: BaseController {
     
     private lazy var backButton: CircularBackButton = {
         let button = CircularBackButton()
-        button.addAction(UIAction { _ in self.backButtonTapped() }, for: .touchUpInside)
+        button.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
         return button
     }()
     

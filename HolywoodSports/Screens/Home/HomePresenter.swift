@@ -24,10 +24,10 @@ final class HomePresenter: HomeInput {
     // MARK: - Properties
     
     weak var view: HomeOutput?
-    var user = CacheService.loadCache(key: StringKeys.user.rawValue) ?? User.mock
-    var trainingAll = CacheService.loadCache(key: StringKeys.allTrainings.rawValue) ?? Training.mock
-    var trainingsOneDay = CacheService.loadCache(key: StringKeys.oneDayTrainings.rawValue) ?? Training.mock
-    var weekDays = CacheService.loadCache(key: StringKeys.currentWeek.rawValue) ?? Day.mock
+    var user = CacheService.loadCache(key: DefaultKey.user) ?? User.mock
+    var trainingAll = CacheService.loadCache(key: DefaultKey.allTrainings) ?? Training.mock
+    var trainingsOneDay = CacheService.loadCache(key: DefaultKey.oneDayTrainings) ?? Training.mock
+    var weekDays = CacheService.loadCache(key: DefaultKey.currentWeek) ?? Day.mock
     
     // MARK: - Public Functions
     
@@ -37,9 +37,9 @@ final class HomePresenter: HomeInput {
     }
     
     func viewWillAppear() {
-        user = CacheService.loadCache(key: StringKeys.user.rawValue) ?? User.mock
-        trainingAll = CacheService.loadCache(key: StringKeys.allTrainings.rawValue) ?? Training.mock
-        weekDays = CacheService.loadCache(key: StringKeys.currentWeek.rawValue) ?? Day.mock
+        user = CacheService.loadCache(key: DefaultKey.user) ?? User.mock
+        trainingAll = CacheService.loadCache(key: DefaultKey.allTrainings) ?? Training.mock
+        weekDays = CacheService.loadCache(key: DefaultKey.currentWeek) ?? Day.mock
         var newTrainingsOneDay: [Training] = []
         for valueOne in trainingsOneDay {
             for valueAll in trainingAll where valueAll.title == valueOne.title {
@@ -47,7 +47,7 @@ final class HomePresenter: HomeInput {
             }
         }
         trainingsOneDay = newTrainingsOneDay
-        CacheService.saveCache(model: trainingsOneDay, key: StringKeys.oneDayTrainings.rawValue)
+        CacheService.saveCache(model: trainingsOneDay, key: DefaultKey.oneDayTrainings)
         view?.updateImage()
     }
 }
@@ -66,7 +66,7 @@ private extension HomePresenter {
                 weekDays[index].color = "gray-51"
             }
         }
-        CacheService.saveCache(model: weekDays, key: StringKeys.currentWeek.rawValue)
+        CacheService.saveCache(model: weekDays, key: DefaultKey.currentWeek)
     }
     
     func updateDataForCurrentDay() {
@@ -77,12 +77,12 @@ private extension HomePresenter {
 
         if currentDay != savedDay {
             user.showEvent = true
-            CacheService.saveCache(model: user, key: StringKeys.user.rawValue)
+            CacheService.saveCache(model: user, key: DefaultKey.user)
             let trainingsOneDay: [Training] = {
                 return trainingAll.shuffled().dropLast(2)
             }()
             self.trainingsOneDay = trainingsOneDay
-            CacheService.saveCache(model: self.trainingsOneDay, key: StringKeys.oneDayTrainings.rawValue)
+            CacheService.saveCache(model: self.trainingsOneDay, key: DefaultKey.oneDayTrainings)
         }
     }
 }

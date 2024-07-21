@@ -24,9 +24,9 @@ final class DetailPresenter: DetailInput {
     // MARK: - Properties
     
     weak var view: DetailOutput?
-    private var user = CacheService.loadCache(key: StringKeys.user.rawValue) ?? User.mock
-    private var trainingAll = CacheService.loadCache(key: StringKeys.allTrainings.rawValue) ?? Training.mock
-    private var currentWeek = CacheService.loadCache(key: StringKeys.currentWeek.rawValue) ?? Day.mock
+    private var user = CacheService.loadCache(key: DefaultKey.user) ?? User.mock
+    private var trainingAll = CacheService.loadCache(key: DefaultKey.allTrainings) ?? Training.mock
+    private var currentWeek = CacheService.loadCache(key: DefaultKey.currentWeek) ?? Day.mock
     private var index: Int
     private var startTime: DispatchTime?
     var backToScreenFlag = true
@@ -53,7 +53,7 @@ final class DetailPresenter: DetailInput {
     
     func removeProgress() {
         trainingAll[training.index].progress = 0
-        CacheService.saveCache(model: trainingAll, key: StringKeys.allTrainings.rawValue)
+        CacheService.saveCache(model: trainingAll, key: DefaultKey.allTrainings)
     }
 }
 
@@ -81,7 +81,7 @@ private extension DetailPresenter {
             trainingAll[training.index].seconds = resultSeconds
         }
         
-        CacheService.saveCache(model: trainingAll, key: StringKeys.allTrainings.rawValue)
+        CacheService.saveCache(model: trainingAll, key: DefaultKey.allTrainings)
         self.startTime = nil
     }
     
@@ -89,7 +89,7 @@ private extension DetailPresenter {
         if index == 0, user.showEvent {
             user.showEvent = false
             user.currentDay = Date.now
-            CacheService.saveCache(model: user, key: StringKeys.user.rawValue)
+            CacheService.saveCache(model: user, key: DefaultKey.user)
             view?.callAlertVC()
         }
     }
@@ -111,6 +111,6 @@ private extension DetailPresenter {
                 currentWeek[index].opacity = 0
             }
         }
-        CacheService.saveCache(model: currentWeek, key: StringKeys.currentWeek.rawValue)
+        CacheService.saveCache(model: currentWeek, key: DefaultKey.currentWeek)
     }
 }

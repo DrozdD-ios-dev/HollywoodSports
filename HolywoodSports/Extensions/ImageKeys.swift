@@ -7,22 +7,14 @@
 
 import Foundation
 
-enum ImageKeys: String {
-    
-    // Images
-    case onboardingFirst = "onboarding-first-image"
-    case onboardingSecond = "onboarding-second-image"
-    case defaultImage = "default-image"
-    case ball = "ball"
-    
-    // Training images
-    case training0 = "training0"
-    case training1 = "training1"
-    case training2 = "training2"
-    case training3 = "training3"
-    case training4 = "training4"
-    case training5 = "training5"
-    case training6 = "training6"
-    case training7 = "training7"
-    case training8 = "training8"
+struct ImageKeys {
+    static let training0 = "Images/Trainings/training0"
+    static let training1 = "Images/Trainings/training1"
+    static let training2 = "Images/Trainings/training2"
+    static let training3 = "Images/Trainings/training3"
+    static let training4 = "Images/Trainings/training4"
+    static let training5 = "Images/Trainings/training5"
+    static let training6 = "Images/Trainings/training6"
+    static let training7 = "Images/Trainings/training7"
+    static let training8 = "Images/Trainings/training8"
 }

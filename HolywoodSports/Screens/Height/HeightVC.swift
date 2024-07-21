@@ -19,13 +19,13 @@ final class HeightVC: BaseController {
     
     private lazy var nextButton: DefaultButton = {
         let button = DefaultButton(text: "Next")
-        button.addAction(UIAction { _ in self.nextButtonTapped() }, for: .touchUpInside)
+        button.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
         return button
     }()
     
     private lazy var backButton: CircularBackButton = {
         let button = CircularBackButton()
-        button.addAction(UIAction { _ in self.backButtonTapped() }, for: .touchUpInside)
+        button.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
         return button
     }()
     
@@ -102,6 +102,7 @@ final class HeightVC: BaseController {
         gradient.startPoint = CGPoint(x: 0, y: 0.0)
         gradient.endPoint = CGPoint(x: 0, y: 1)
         view.layer.addSublayer(gradient)
+        view.isUserInteractionEnabled = false
         return view
     }()
     
@@ -115,6 +116,7 @@ final class HeightVC: BaseController {
         gradient.startPoint = CGPoint(x: 0, y: 0)
         gradient.endPoint = CGPoint(x: 0, y: 0.9)
         view.layer.addSublayer(gradient)
+        view.isUserInteractionEnabled = false
         return view
     }()
     
@@ -155,7 +157,7 @@ private extension HeightVC {
 
 extension HeightVC {
     
-    func nextButtonTapped() {
+    @objc func nextButtonTapped() {
         presenter.nextAction()
     }
     
@@ -196,7 +198,7 @@ private extension HeightVC {
             make.top.equalToSuperview().inset(screen > 851 ? 241 : 150)
             make.horizontalEdges.equalToSuperview()
         }
-
+        
         purpleView.snp.makeConstraints { make in
             make.horizontalEdges.equalToSuperview().inset(16)
             make.top.equalTo(questionLabel.snp.bottom).offset(120)
@@ -331,21 +333,21 @@ extension HeightVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSour
     }
     
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-            guard let layout = leftVerticalCollectionView.collectionViewLayout as? UICollectionViewFlowLayout else { return }
-            
-            let cellWidthIncludingSpacing = layout.itemSize.height + layout.minimumLineSpacing
-            let estimatedIndex = scrollView.contentOffset.y / cellWidthIncludingSpacing
-            var index: CGFloat
-            if velocity.y > 0 {
-                index = ceil(estimatedIndex)
-            } else if velocity.y < 0 {
-                index = floor(estimatedIndex)
-            } else {
-                index = round(estimatedIndex)
-            }
-            
-            targetContentOffset.pointee = CGPoint(
-                x: targetContentOffset.pointee.x,
-                y: index * cellWidthIncludingSpacing - scrollView.contentInset.top)
+        guard let layout = leftVerticalCollectionView.collectionViewLayout as? UICollectionViewFlowLayout else { return }
+        
+        let cellWidthIncludingSpacing = layout.itemSize.height + layout.minimumLineSpacing
+        let estimatedIndex = scrollView.contentOffset.y / cellWidthIncludingSpacing
+        var index: CGFloat
+        if velocity.y > 0 {
+            index = ceil(estimatedIndex)
+        } else if velocity.y < 0 {
+            index = floor(estimatedIndex)
+        } else {
+            index = round(estimatedIndex)
+        }
+        
+        targetContentOffset.pointee = CGPoint(
+            x: targetContentOffset.pointee.x,
+            y: index * cellWidthIncludingSpacing - scrollView.contentInset.top)
     }
 }

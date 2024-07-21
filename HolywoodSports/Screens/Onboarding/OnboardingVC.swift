@@ -36,7 +36,7 @@ final class OnboardingVC: BaseController {
     
     private lazy var nextButton: DefaultButton = {
         let button = DefaultButton(text: "Next")
-        button.addAction(UIAction { _ in self.nextButtonTapped() }, for: .touchUpInside)
+        button.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
         return button
     }()
 
@@ -51,40 +51,12 @@ final class OnboardingVC: BaseController {
     }
 }
 
-// MARK: - Private Function
+// MARK: - Actions
 
 private extension OnboardingVC {
     
-    func nextOnboardingCell(flag: Bool) {
-        guard onboardingCollectionView.collectionViewLayout is UICollectionViewFlowLayout else { return }
-        let visibleRect = CGRect(origin: onboardingCollectionView.contentOffset, size: onboardingCollectionView.bounds.size)
-        let visiblePoint = CGPoint(x: visibleRect.midX, y: visibleRect.midY)
-        guard let visibleIndexPath = onboardingCollectionView.indexPathForItem(at: visiblePoint) else { return }
-        
-        var targetIndex = max(visibleIndexPath.item + 1, 0)
-        if !flag { targetIndex -= 2 }
-        let indexPath = IndexPath(item: targetIndex, section: visibleIndexPath.section)
-
-        if targetIndex < 2 {
-            onboardingCollectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
-            progressBar.progress = 1
-        } else {
-            let vc = GenderAssembly.build(flag: true)
-            navigationController?.pushViewController(vc, animated: true)
-        }
-    }
-}
-
-// MARK: - Actions
-
-extension OnboardingVC {
-    
-    func nextButtonTapped() {
-        nextOnboardingCell(flag: true)
-    }
-    
-    @objc func backButtonTapped() {
-        nextOnboardingCell(flag: false)
+    @objc func nextButtonTapped() {
+        nextOnboardingCell()
     }
 }
 
@@ -144,5 +116,23 @@ extension OnboardingVC: UICollectionViewDelegateFlowLayout, UICollectionViewData
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: onboardingCollectionView.frame.width, height: onboardingCollectionView.frame.height)
+    }
+    
+    func nextOnboardingCell() {
+        guard onboardingCollectionView.collectionViewLayout is UICollectionViewFlowLayout else { return }
+        let visibleRect = CGRect(origin: onboardingCollectionView.contentOffset, size: onboardingCollectionView.bounds.size)
+        let visiblePoint = CGPoint(x: visibleRect.midX, y: visibleRect.midY)
+        guard let visibleIndexPath = onboardingCollectionView.indexPathForItem(at: visiblePoint) else { return }
+        
+        let targetIndex = max(visibleIndexPath.item + 1, 0)
+        let indexPath = IndexPath(item: targetIndex, section: visibleIndexPath.section)
+
+        if targetIndex < 2 {
+            onboardingCollectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
+            progressBar.progress = 1
+        } else {
+            let vc = GenderAssembly.build(flag: true)
+            navigationController?.pushViewController(vc, animated: true)
+        }
     }
 }

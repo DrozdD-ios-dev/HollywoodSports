@@ -18,7 +18,7 @@ final class GenderPresenter: GenderInput {
     // MARK: - Properties
     
     weak var view: GenderOutput?
-    private var user = CacheService.loadCache(key: StringKeys.user.rawValue) ?? User.mock
+    private var user = CacheService.loadCache(key: DefaultKey.user) ?? User.mock
     private var flag: Bool
     
     // MARK: - Init
@@ -35,7 +35,7 @@ extension GenderPresenter {
     func selectGenderView(index: Int) {
         view?.selectGenderView(index: index)
         user.gender = Gender.allCases[index]
-        CacheService.saveCache(model: user, key: StringKeys.user.rawValue)
+        CacheService.saveCache(model: user, key: DefaultKey.user)
         NotificationCenter.default.post(name: Notification.Name("UpdateUser"), object: nil)
         
         if flag {

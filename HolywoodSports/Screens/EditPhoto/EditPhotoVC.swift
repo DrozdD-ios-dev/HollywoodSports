@@ -19,7 +19,7 @@ final class EditPhotoVC: BaseController {
     
     private lazy var backButton: CircularBackButton = {
         let button = CircularBackButton()
-        button.addAction(UIAction { _ in self.backButtonTapped() }, for: .touchUpInside)
+        button.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
         return button
     }()
     
@@ -44,7 +44,7 @@ final class EditPhotoVC: BaseController {
     
     private lazy var saveChangesButton: DefaultButton = {
         let button = DefaultButton(text: "Save changes")
-        button.addAction(UIAction { _ in self.saveChangesButtonTapped() }, for: .touchUpInside)
+        button.addTarget(self, action: #selector(saveChangesButtonTapped), for: .touchUpInside)
         button.isEnabled = false
         button.isHidden = true
         button.alpha = 0.3
@@ -53,14 +53,14 @@ final class EditPhotoVC: BaseController {
     
     private lazy var nextButton: DefaultButton = {
         let button = DefaultButton(text: "Next")
-        button.addAction(UIAction { _ in self.nextButtonTapped() }, for: .touchUpInside)
+        button.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
         button.isHidden = true
         return button
     }()
     
     private lazy var skipButton: UIButton = {
         let button = UIButton(type: .system)
-        button.addAction(UIAction { _ in self.nextButtonTapped() }, for: .touchUpInside)
+        button.addTarget(self, action: #selector(skipButtonTapped), for: .touchUpInside)
         let font = UIFont.font(type: .poppins700, size: 16)
         let attributes: [NSAttributedString.Key: Any] = [ .font: font as Any ]
         let attributedString = NSAttributedString(string: "Skip", attributes: attributes)
@@ -73,7 +73,7 @@ final class EditPhotoVC: BaseController {
     private lazy var trashButton: TrashButton = {
         let button = TrashButton()
         button.tintColor = .redLight
-        button.addAction(UIAction { _ in self.trashButtonTapped() }, for: .touchUpInside)
+        button.addTarget(self, action: #selector(trashButtonTapped), for: .touchUpInside)
         button.isHidden = true
         return button
     }()
@@ -137,7 +137,7 @@ private extension EditPhotoVC {
     }
     
     func updateImage() {
-        userImage.image = presenter.user.image.convertStringToImage()
+        userImage.image = CacheService.loadImageFromURL(url: presenter.user.image)
     }
 }
 
@@ -146,7 +146,7 @@ private extension EditPhotoVC {
 private extension EditPhotoVC {
     
     @objc func saveChangesButtonTapped() {
-        CacheService.saveCache(model: presenter.user, key: StringKeys.user.rawValue)
+        CacheService.saveCache(model: presenter.user, key: DefaultKey.user)
         navigationController?.popViewController(animated: true)
     }
     
@@ -155,7 +155,8 @@ private extension EditPhotoVC {
     }
     
     @objc func nextButtonTapped() {
-        CacheService.saveCache(model: presenter.user, key: StringKeys.user.rawValue)
+        CacheService.saveCache(model: presenter.user, key: DefaultKey.user)
+        UserDefaults.standard.set(true, forKey: DefaultKey.hasOpenedAppBefore)
         skipButtonTapped()
     }
     
@@ -166,8 +167,8 @@ private extension EditPhotoVC {
     }
     
     @objc func trashButtonTapped() {
-        userImage.image = UIImage(named: ImageKeys.defaultImage.rawValue)
-        presenter.user.image = ""
+        userImage.image = .Images.imageDefault
+        presenter.user.image = nil
     }
     
     @objc private func addPhotoButtonTapped() {
@@ -232,8 +233,8 @@ extension EditPhotoVC: UIImagePickerControllerDelegate & UINavigationControllerD
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
         if let selectedImage = info[.editedImage] as? UIImage ?? info[.originalImage] as? UIImage {
             
-            let imageBase64String = selectedImage.convertImageToString()
-            presenter.user.image = imageBase64String ?? "error"
+            let urlImage = CacheService.saveImageToDirectory(image: selectedImage, fileName: "UserImage")
+            presenter.user.image = urlImage
             userImage.image = selectedImage
             presenter.isChangedPhoto = true
         }

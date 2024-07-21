@@ -13,7 +13,7 @@ final class StartVC: BaseController {
     
     private let ballImage: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: ImageKeys.ball.rawValue)
+        imageView.image = .Images.ball
         return imageView
     }()
     
@@ -44,7 +44,7 @@ final class StartVC: BaseController {
                                                   attributes: attributes)
         button.setAttributedTitle(attributedString, for: .normal)
         button.layer.cornerRadius = 28
-        button.addAction(UIAction { _ in self.startedButtonTapped() }, for: .touchUpInside)
+        button.addTarget(self, action: #selector(startedButtonTapped), for: .touchUpInside)
         return button
     }()
 
@@ -62,7 +62,7 @@ final class StartVC: BaseController {
 
 private extension StartVC {
     
-    func startedButtonTapped() {
+    @objc func startedButtonTapped() {
         let vc = OnboardingVC()
         navigationController?.pushViewController(vc, animated: true)
     }

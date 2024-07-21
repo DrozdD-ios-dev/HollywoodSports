@@ -69,19 +69,19 @@ final class AlertVC: BaseController {
     
     private let doneImage: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage.Icons.donePurple
+        imageView.image = .Icons.donePurple
         return imageView
     }()
 
     private lazy var doneButton: DefaultButton = {
         let button = DefaultButton(text: "Claim reward")
-        button.addAction(UIAction { _ in self.doneButtonTapped() }, for: .touchUpInside)
+        button.addTarget(self, action: #selector(doneButtonTapped), for: .touchUpInside)
         return button
     }()
     
     // MARK: - Properties
     
-    private var user = CacheService.loadCache(key: StringKeys.user.rawValue) ?? User.mock
+    private var user = CacheService.loadCache(key: DefaultKey.user) ?? User.mock
 
     // MARK: - View Lifecycle
     
@@ -101,7 +101,7 @@ private extension AlertVC {
     
     func updateUser() {
         user.points += 50
-        CacheService.saveCache(model: user, key: StringKeys.user.rawValue)
+        CacheService.saveCache(model: user, key: DefaultKey.user)
     }
     
     func setupSettings() {

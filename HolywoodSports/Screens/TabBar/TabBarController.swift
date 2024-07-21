@@ -28,20 +28,20 @@ final class TabBarController: UITabBarController {
     private func createTabBarItems() {
         let itemOne = TabBarItem(
             title: "Home",
-            image: UIImage.Icons.TabBar.home,
-            selectImage: UIImage.Icons.TabBar.homeSelect
+            image: .Icons.TabBar.home,
+            selectImage: .Icons.TabBar.homeSelect
         )
         
         let itemTwo = TabBarItem(
             title: "Sport",
-            image: UIImage.Icons.TabBar.bolt,
-            selectImage: UIImage.Icons.TabBar.boltSelect
+            image: .Icons.TabBar.bolt,
+            selectImage: .Icons.TabBar.boltSelect
         )
         
         let itemThree = TabBarItem(
             title: "Profile",
-            image: UIImage.Icons.TabBar.profile,
-            selectImage: UIImage.Icons.TabBar.profileSelect
+            image: .Icons.TabBar.profile,
+            selectImage: .Icons.TabBar.profileSelect
         )
         
         homeVC.tabBarItem = itemOne
