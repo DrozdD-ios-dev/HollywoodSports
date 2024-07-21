@@ -1,10 +1,3 @@
-//
-//  EditPhotoVC.swift
-//  HolywoodSports
-//
-//  Created by Дрозд Денис on 14.07.2024.
-//
-
 import UIKit
 
 protocol EditPhotoOutput: AnyObject {
@@ -156,11 +149,11 @@ private extension EditPhotoVC {
     
     @objc func nextButtonTapped() {
         CacheService.saveCache(model: presenter.user, key: DefaultKey.user)
-        UserDefaults.standard.set(true, forKey: DefaultKey.hasOpenedAppBefore)
         skipButtonTapped()
     }
     
     @objc func skipButtonTapped() {
+        UserDefaults.standard.set(true, forKey: DefaultKey.hasOpenedAppBefore)
         navigationController?.setNavigationBarHidden(true, animated: true)
         let vc = TabBarController()
         navigationController?.pushViewController(vc, animated: true)

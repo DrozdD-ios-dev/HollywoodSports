@@ -1,10 +1,3 @@
-//
-//  DefaultKey.swift
-//  HolywoodSports
-//
-//  Created by Дрозд Денис on 18.07.2024.
-//
-
 import Foundation
 
 struct DefaultKey {

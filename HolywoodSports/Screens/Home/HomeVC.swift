@@ -1,9 +1,4 @@
-//
-//  HomeVC.swift
-//  HolywoodSports
-//
-//  Created by Дрозд Денис on 12.07.2024.
-//
+//swiftlint: disable cyclomatic_complexity
 
 import UIKit
 
@@ -64,12 +59,11 @@ final class HomeVC: BaseController {
     private lazy var weekCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
-        layout.minimumLineSpacing = 10
+        layout.minimumLineSpacing = 12
         layout.sectionInset = .init(top: 0, left: 16, bottom: 0, right: 16)
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.backgroundColor = .clear
         collectionView.showsHorizontalScrollIndicator = false
-        collectionView.isScrollEnabled = false
         collectionView.register(DayCell.self, forCellWithReuseIdentifier: DayCell.identifier)
         collectionView.dataSource = self
         collectionView.delegate = self
@@ -250,7 +244,7 @@ extension HomeVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource
         switch collectionView {
             
         case weekCollectionView:
-            return CGSize(width: 43, height: 54)
+            return CGSize(width: 47, height: 54)
             
         case sportCollectionView:
             if presenter.user.showEvent {

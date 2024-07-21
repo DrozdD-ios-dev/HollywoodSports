@@ -1,10 +1,3 @@
-//
-//  AlertVC.swift
-//  HolywoodSports
-//
-//  Created by Дрозд Денис on 19.07.2024.
-//
-
 import UIKit
 
 final class AlertVC: BaseController {
@@ -23,7 +16,7 @@ final class AlertVC: BaseController {
         let label = UILabel()
         label.font = .font(type: .poppins400, size: 15)
         label.textAlignment = .center
-        label.text = "You got "
+        label.text = "You got  "
         label.textColor = .gray153
         return label
     }()

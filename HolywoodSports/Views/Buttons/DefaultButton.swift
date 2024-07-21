@@ -1,10 +1,3 @@
-//
-//  DefaultButton.swift
-//  HolywoodSports
-//
-//  Created by Дрозд Денис on 12.07.2024.
-//
-
 import UIKit
 
 final class DefaultButton: UIButton {

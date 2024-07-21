@@ -1,10 +1,3 @@
-//
-//  DetailVC.swift
-//  HolywoodSports
-//
-//  Created by Дрозд Денис on 17.07.2024.
-//
-
 import UIKit
 
 protocol DetailOutput: AnyObject {
@@ -53,10 +46,12 @@ final class DetailVC: BaseController {
         return line
     }()
     
-    private let checkBoxView: UIView = {
+    private lazy var checkBoxView: UIView = {
         let view = UIView()
         view.backgroundColor = .gray51
         view.layer.cornerRadius = 15
+        let gest = UITapGestureRecognizer(target: self, action: #selector(checkBoxViewTapped))
+        view.addGestureRecognizer(gest)
         return view
     }()
     
@@ -214,6 +209,10 @@ private extension DetailVC {
         presenter.backToScreenFlag = true
         deActivateCheckBoxView()
         presenter.removeProgress()
+    }
+    
+    @objc func checkBoxViewTapped() {
+        activateCheckBoxView()
     }
 }
 

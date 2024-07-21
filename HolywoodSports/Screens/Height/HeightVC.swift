@@ -1,10 +1,3 @@
-//
-//  HeightVC.swift
-//  HolywoodSports
-//
-//  Created by Дрозд Денис on 16.07.2024.
-//
-
 import UIKit
 
 protocol HeightOutput: AnyObject {

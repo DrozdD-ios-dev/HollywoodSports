@@ -1,10 +1,3 @@
-//
-//  DayCell.swift
-//  HolywoodSports
-//
-//  Created by Дрозд Денис on 18.07.2024.
-//
-
 import UIKit
 
 final class DayCell: UICollectionViewCell {

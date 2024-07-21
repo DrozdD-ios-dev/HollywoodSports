@@ -1,10 +1,3 @@
-//
-//  StartVC.swift
-//  HolywoodSports
-//
-//  Created by Дрозд Денис on 14.07.2024.
-//
-
 import UIKit
 
 final class StartVC: BaseController {
@@ -34,6 +27,14 @@ final class StartVC: BaseController {
         return label
     }()
     
+    private lazy var verticalStack: UIStackView = {
+        let stack = UIStackView(arrangedSubviews: [firstLabel, secondLabel])
+        stack.axis = .vertical
+        stack.alignment = .trailing
+        stack.distribution = .fill
+        return stack
+    }()
+    
     private lazy var startedButton: UIButton = {
         let button = UIButton(type: .system)
         button.backgroundColor = .white
@@ -56,6 +57,11 @@ final class StartVC: BaseController {
         addSubviews()
         makeConstraints()
     }
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        verticalStack.spacing = -firstLabel.frame.height/2
+    }
 }
 
 // MARK: - Actions
@@ -74,8 +80,7 @@ private extension StartVC {
     
     func addSubviews() {
         view.addSubview(ballImage)
-        view.addSubview(firstLabel)
-        view.addSubview(secondLabel)
+        view.addSubview(verticalStack)
         view.addSubview(startedButton)
     }
     
@@ -86,19 +91,14 @@ private extension StartVC {
             make.height.equalTo(144)
             make.width.equalTo(143)
         }
-        
-        firstLabel.snp.makeConstraints { make in
+ 
+        verticalStack.snp.makeConstraints { make in
             make.top.equalTo(ballImage.snp.bottom).offset(12)
-            make.horizontalEdges.equalToSuperview().inset(67)
+            make.centerX.equalToSuperview()
         }
         
-        secondLabel.snp.makeConstraints { make in
-            make.top.equalTo(firstLabel.snp.bottom).inset(20)
-            make.horizontalEdges.equalToSuperview().inset(67)
-        }
-
         startedButton.snp.makeConstraints { make in
-            make.bottom.equalTo(view.safeAreaLayoutGuide)
+            make.bottom.equalTo(view.safeAreaLayoutGuide).inset(16)
             make.horizontalEdges.equalToSuperview().inset(16)
             make.height.equalTo(56)
         }

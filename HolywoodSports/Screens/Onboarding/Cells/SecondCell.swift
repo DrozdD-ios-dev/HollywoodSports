@@ -1,10 +1,3 @@
-//
-//  SecondCell.swift
-//  HolywoodSports
-//
-//  Created by Дрозд Денис on 14.07.2024.
-//
-
 import UIKit
 
 final class SecondCell: UICollectionViewCell {
