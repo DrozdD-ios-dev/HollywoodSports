@@ -78,7 +78,7 @@ final class HeightVC: BaseController {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.showsVerticalScrollIndicator = false
         collectionView.isUserInteractionEnabled = true
-        collectionView.isScrollEnabled = false
+        collectionView.isScrollEnabled = true
         collectionView.register(RightPickerCell.self, forCellWithReuseIdentifier: RightPickerCell.identifier)
         collectionView.backgroundColor = .clear
         collectionView.dataSource = self

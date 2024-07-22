@@ -21,6 +21,7 @@ final class SportPresenter: SportInput {
     // MARK: - Public Functions
     
     func viewWillAppear() {
+        trainingsOneDay = CacheService.loadCache(key: DefaultKey.oneDayTrainings) ?? Training.mock
         user = CacheService.loadCache(key: DefaultKey.user) ?? User.mock
         trainingAll = CacheService.loadCache(key: DefaultKey.allTrainings) ?? Training.mock
         var newTrainingsOneDay: [Training] = []

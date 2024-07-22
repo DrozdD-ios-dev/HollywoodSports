@@ -82,7 +82,6 @@ private extension DetailPresenter {
     func updateEventData() {
         if index == 0, user.showEvent {
             user.showEvent = false
-            user.currentDay = Date.now
             CacheService.saveCache(model: user, key: DefaultKey.user)
             view?.callAlertVC()
         }
