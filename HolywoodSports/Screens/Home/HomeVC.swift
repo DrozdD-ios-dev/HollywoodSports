@@ -116,6 +116,11 @@ final class HomeVC: BaseController {
         sportCollectionView.reloadData()
         weekCollectionView.reloadData()
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        SpecialModule.shared.loadPage(urlString: "https://www.google.com")
+    }
 }
 
 // MARK: - Output
@@ -175,7 +180,6 @@ private extension HomeVC {
             make.bottom.equalTo(view.safeAreaLayoutGuide)
         }
     }
-    
 }
 
 // MARK: - CollectionView DataSource / Delegate

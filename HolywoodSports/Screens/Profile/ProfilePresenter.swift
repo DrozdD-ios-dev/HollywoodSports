@@ -5,10 +5,13 @@ import UIKit
 protocol ProfileInput {
     func viewWillAppear()
     func nextAction(index: Int)
+    func activateSystemAction(index: Int)
     
-    var rows: [String] { get }
+    var userRows: [String] { get }
+    var systemRows: [String] { get }
     var user: User { get set }
     var userViews: [UserDataView] { get set }
+    var systemViews: [SystemDataView] { get set }
 }
 
 final class ProfilePresenter: ProfileInput {
@@ -16,9 +19,11 @@ final class ProfilePresenter: ProfileInput {
     // MARK: - Properties
     
     weak var view: ProfileOutput?
-    var rows = ["Change your gender", "Change your weigth", "Change your height"]
+    var userRows = ["Change your gender", "Change your weigth", "Change your height"]
+    var systemRows = ["Rate app", "Privacy policy", "Terms of use", "Contact Us"]
     var user = CacheService.loadCache(key: DefaultKey.user) ?? User.mock
     var userViews = [UserDataView]()
+    var systemViews = [SystemDataView]()
  
     // MARK: - Public Functions
     
@@ -34,6 +39,21 @@ final class ProfilePresenter: ProfileInput {
             view?.openWeightVC()
         case 2:
             view?.openHeightVC()
+        default:
+            break
+        }
+    }
+    
+    func activateSystemAction(index: Int) {
+        switch index {
+        case 0:
+            view?.rateAppTapped()
+        case 1:
+            view?.privacyPolicyTapped()
+        case 2:
+            view?.termsOfUseTapped()
+        case 3:
+            view?.contactUsTapped()
         default:
             break
         }

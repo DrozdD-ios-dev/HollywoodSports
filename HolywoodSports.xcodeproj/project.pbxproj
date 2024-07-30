@@ -75,6 +75,9 @@
 		8AAE7D262C49647000536B7F /* DateService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AAE7D252C49647000536B7F /* DateService.swift */; };
 		8AAE7D2A2C4A6C1400536B7F /* AlertVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AAE7D292C4A6C1400536B7F /* AlertVC.swift */; };
 		8AAE7D392C4BA25B00536B7F /* ProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AAE7D382C4BA25B00536B7F /* ProgressView.swift */; };
+		8AD954E02C595422001C1C45 /* SpecialModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AD954DF2C595422001C1C45 /* SpecialModule.swift */; };
+		8AD954E22C595430001C1C45 /* SpecialController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AD954E12C595430001C1C45 /* SpecialController.swift */; };
+		8AD954E42C595C26001C1C45 /* SystemDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AD954E32C595C26001C1C45 /* SystemDataView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -146,6 +149,9 @@
 		8AAE7D252C49647000536B7F /* DateService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateService.swift; sourceTree = "<group>"; };
 		8AAE7D292C4A6C1400536B7F /* AlertVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertVC.swift; sourceTree = "<group>"; };
 		8AAE7D382C4BA25B00536B7F /* ProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressView.swift; sourceTree = "<group>"; };
+		8AD954DF2C595422001C1C45 /* SpecialModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpecialModule.swift; sourceTree = "<group>"; };
+		8AD954E12C595430001C1C45 /* SpecialController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpecialController.swift; sourceTree = "<group>"; };
+		8AD954E32C595C26001C1C45 /* SystemDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemDataView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -180,6 +186,7 @@
 		8AAE7C442C4193A100536B7F /* HolywoodSports */ = {
 			isa = PBXGroup;
 			children = (
+				8AD954DE2C5953F0001C1C45 /* Special */,
 				8AAE7C592C41953C00536B7F /* Screens */,
 				8AAE7C5E2C41956600536B7F /* Models */,
 				8AAE7C5D2C41956000536B7F /* Views */,
@@ -463,8 +470,18 @@
 			children = (
 				8AAE7CA02C41D8F100536B7F /* UserDataView.swift */,
 				8AAE7D382C4BA25B00536B7F /* ProgressView.swift */,
+				8AD954E32C595C26001C1C45 /* SystemDataView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		8AD954DE2C5953F0001C1C45 /* Special */ = {
+			isa = PBXGroup;
+			children = (
+				8AD954DF2C595422001C1C45 /* SpecialModule.swift */,
+				8AD954E12C595430001C1C45 /* SpecialController.swift */,
+			);
+			path = Special;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -580,8 +597,10 @@
 				8AAE7C812C41B87900536B7F /* ProfileVC.swift in Sources */,
 				8AAE7C4A2C4193A100536B7F /* TabBarController.swift in Sources */,
 				8AAE7CDD2C4522FA00536B7F /* RightPickerCell.swift in Sources */,
+				8AD954E42C595C26001C1C45 /* SystemDataView.swift in Sources */,
 				8AAE7CAE2C43E93200536B7F /* CircularBackButton.swift in Sources */,
 				8AAE7CC52C4416FC00536B7F /* OnboardingVC.swift in Sources */,
+				8AD954E02C595422001C1C45 /* SpecialModule.swift in Sources */,
 				8AAE7D142C4947BA00536B7F /* DayCell.swift in Sources */,
 				8AAE7D052C48254D00536B7F /* DetailVC.swift in Sources */,
 				8AAE7C662C41996A00536B7F /* HomeVC.swift in Sources */,
@@ -610,6 +629,7 @@
 				8AAE7CFC2C47E59800536B7F /* Cell+Ext.swift in Sources */,
 				8AAE7CB12C43F8CF00536B7F /* CacheService.swift in Sources */,
 				8AAE7C7F2C41B87200536B7F /* ProfileAssembly.swift in Sources */,
+				8AD954E22C595430001C1C45 /* SpecialController.swift in Sources */,
 				8AAE7CFA2C46A6D400536B7F /* TrainingCell.swift in Sources */,
 				8AAE7CF02C45CE1D00536B7F /* HeightVC.swift in Sources */,
 				8AAE7CFE2C47F20900536B7F /* Training.swift in Sources */,

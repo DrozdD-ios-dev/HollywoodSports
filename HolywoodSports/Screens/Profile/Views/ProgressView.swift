@@ -4,7 +4,13 @@ final class ProgressView: UIView {
     
     // MARK: - Views
     
-    private let horizontalLine: UIView = {
+    private let horizontalUpLine: UIView = {
+        let view = UIView()
+        view.backgroundColor = .gray51
+        return view
+    }()
+    
+    private let horizontalDownLine: UIView = {
         let view = UIView()
         view.backgroundColor = .gray51
         return view
@@ -135,15 +141,16 @@ private extension ProgressView {
     
     func addSubviews() {
         addSubview(horizontalStack)
-        addSubview(horizontalLine)
+        addSubview(horizontalUpLine)
         addSubview(backgroundProgressLine)
+        addSubview(horizontalDownLine)
         backgroundProgressLine.addSubview(currentProgressLine)
         currentProgressLine.addSubview(pointsCountLabel)
     }
     
     func makeConstraints() {
         snp.makeConstraints { make in
-            make.height.equalTo(83)
+            make.height.equalTo(107)
         }
         
         horizontalStack.snp.makeConstraints { make in
@@ -151,14 +158,20 @@ private extension ProgressView {
             make.top.equalToSuperview().inset(24)
         }
         
-        horizontalLine.snp.makeConstraints { make in
+        horizontalUpLine.snp.makeConstraints { make in
             make.top.horizontalEdges.equalToSuperview()
             make.height.equalTo(1)
         }
         
         backgroundProgressLine.snp.makeConstraints { make in
-            make.bottom.horizontalEdges.equalToSuperview()
+            make.horizontalEdges.equalToSuperview()
             make.height.equalTo(30)
+        }
+        
+        horizontalDownLine.snp.makeConstraints { make in
+            make.top.equalTo(backgroundProgressLine.snp.bottom).offset(24)
+            make.bottom.horizontalEdges.equalToSuperview()
+            make.height.equalTo(1)
         }
         
         currentProgressLine.snp.makeConstraints { make in
